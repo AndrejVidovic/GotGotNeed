@@ -1,6 +1,14 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  containerClasses,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import logo from "../../public/logoS.png";
 
 const pages = [
@@ -21,8 +29,13 @@ const styles = {
     borderRadius: "4px",
   },
   loginButton: {
-    backgroundColor: "rgba(255, 152, 0, 0.51)",
+    backgroundColor: "rgba(255, 152, 0, 0.51)", //51% boje umjesto 100%
     color: "black",
+    fontFamily: "'Epilogue', sans-serif",
+    fontSize: "14px",
+    fontWeight: 700,
+    boxShadow:
+      "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12)",
   },
   navbarButtons: {
     color: "white",
@@ -38,7 +51,7 @@ const styles = {
 function Navbar() {
   return (
     <>
-      <AppBar position="fixed" elevation={6}>
+      <AppBar position="fixed" elevation={10}>
         <Toolbar>
           <Box>
             <Link href="/" passHref>
@@ -55,7 +68,11 @@ function Navbar() {
           </Box>
           {pages.map((page) => (
             <Box ml={3} key={page}>
-              <Link href={{ pathname: "/[page]" }} as={`/${page}`} passHref>
+              <Link
+                href={{ pathname: "/[page]" }}
+                as={`/${page.replace(/\s+/g, "")}`}
+                passHref
+              >
                 <Button sx={styles.navbarButtons}>{page}</Button>
               </Link>
             </Box>
