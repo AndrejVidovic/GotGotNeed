@@ -78,7 +78,9 @@ function Navbar() {
             </Box>
           ))}
           <Box sx={styles.loginButtonBox}>
-            <Button sx={styles.loginButton}>Login</Button>
+            <Link href="/Login" passHref>
+              <Button sx={styles.loginButton}>Login</Button>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
