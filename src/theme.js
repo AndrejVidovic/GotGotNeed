@@ -1,19 +1,29 @@
 import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import { blue, orange } from "@mui/material/colors";
 import backgroundIMG from "../public/Background.png";
 
-// Create a theme instance.
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#1976D2",
+      main: blue[700],
     },
     secondary: {
-      main: "#19857b",
+      main: orange[400],
     },
-    error: {
-      main: red.A400,
+  },
+  typography: {
+    fontFamily: "'Epilogue', sans-serif",
+    fontSize: 14,
+    button: {
+      fontSize: 14,
     },
+  },
+  shape: {
+    borderRadius: 4,
+  },
+  shadows: {
+    1: "0px 0px 4px rgba(0, 0, 0, 0.25)",
+    2: "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12)",
   },
   components: {
     MuiCssBaseline: {
@@ -21,29 +31,10 @@ const theme = createTheme({
         a: {
           color: "black",
           textDecoration: "none",
-        } /*
-        li:{
-          listStyle:"none"
-        },*/,
+        },
         body: {
           marginTop: "15vh",
           backgroundImage: `url(${backgroundIMG.src})`,
-          /* "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
-            width: "1vh",
-            height: "1vh",
-	          backgroundColor: "#F5F5F5",
-          },
-          "&::-webkit-scrollbar-track, & *::-webkit-scrollbar-track": {
-            boxShadow: "inset 0 0 6px rgba(0,0,0,0.1)",
-          },
-          "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
-            backgroundColor: "#1976D2",
-	          backgroundImage: "linear-gradient(45deg,rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%,rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)",
-            borderRadius: "5px",
-          },
-          "&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#0066CC",
-          },*/
         },
       },
     },
