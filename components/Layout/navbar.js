@@ -1,14 +1,7 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  containerClasses,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Button, Toolbar, darken, useTheme } from "@mui/material";
+import { style } from "@mui/system";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import logo from "../../public/logoS.png";
 
 const pages = [
@@ -21,68 +14,70 @@ const pages = [
   "Swap",
 ];
 
-const styles = {
+const styles = (theme) => ({
   loginButtonBox: {
     marginLeft: "auto",
     marginRight: "0",
-    backgroundColor: "white", //stavljena bijela pozadina izad login button da dobijemo tocno željenu boju butuna
-    borderRadius: "4px",
   },
   loginButton: {
-    backgroundColor: "rgba(255, 152, 0, 0.51)", //51% boje umjesto 100%
+    backgroundColor: theme.palette.secondary.light,
     color: "black",
-    fontFamily: "'Epilogue', sans-serif",
-    fontSize: "14px",
     fontWeight: 700,
-    boxShadow:
-      "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12)",
+    boxShadow: theme.shadows[2],
+    width: "10vh",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   navbarButtons: {
     color: "white",
-    backgroundColor: "#0F6DCA",
+    backgroundColor: darken(theme.palette.primary.main, 0.1),
     width: "12vh",
-    fontSize: "14px",
-    fontFamily: "'Epilogue', sans-serif",
     textAlign: "center",
     textTransform: "none",
-    boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
+    boxShadow: theme.shadows[1],
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
   },
-};
-function Navbar() {
+  logoLink: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+const Navbar = () => {
+  const theme = useTheme(); //dohvaćamo temu zadanu ThemeProviderom iz _app.js
+
   return (
     <>
       <AppBar position="fixed" elevation={10}>
         <Toolbar>
           <Box>
             <Link href="/" passHref>
-              <a
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <a style={style(theme).logoLink}>
                 <Image src={logo} layout="intrinsic" alt="GGN"></Image>
               </a>
             </Link>
           </Box>
           {pages.map((page) => (
-            <Box ml={3} key={page}>
+            <Box ml={3} key={page} sx={styles(theme).navbarButtonBox}>
               <Link
                 href={{ pathname: "/[page]" }}
                 as={`/${page.replace(/\s+/g, "")}`}
                 passHref
               >
-                <Button sx={styles.navbarButtons}>{page}</Button>
+                <Button sx={styles(theme).navbarButtons}>{page}</Button>
               </Link>
             </Box>
           ))}
-          <Box sx={styles.loginButtonBox}>
-            <Button sx={styles.loginButton}>Login</Button>
+          <Box sx={styles(theme).loginButtonBox}>
+            <Button sx={styles(theme).loginButton}>Login</Button>
           </Box>
         </Toolbar>
       </AppBar>
     </>
   );
-}
+};
 export default Navbar;
