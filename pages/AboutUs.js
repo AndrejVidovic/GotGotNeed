@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import logo from "../public/GGNImage.png";
 import HeadshotGlass from "../public/HeadshotsGlass.png";
@@ -14,40 +14,56 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Footer from "../components/Layout/footer";
 
+const styles = (theme) => ({
+  gridContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: "8vh",
+  },
+  gridTitle: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    fontWeight: 700,
+    fontSize: "90px",
+  },
+  subtitle: {
+    fontWeight: 500,
+    fontSize: "44px",
+  },
+  text: {
+    fontWeight: 400,
+    fontSize: "20px",
+    textAlign: "justify",
+  },
+  backgroundGlass: {
+    paddingTop: "12vh",
+    paddingBottom: "6vh",
+  },
+  iconContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    padding: "2vh",
+  },
+});
+
 function AboutUs() {
+  const theme = useTheme();
   return (
     <>
-      <Grid
-        container
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-      >
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+      <Grid container sx={styles(theme).gridContainer}>
+        <Grid container sx={styles(theme).gridTitle}>
           <Grid item xl={3} l={2} md={5} sm={2}>
-            <Typography
-              variant="h1"
-              sx={{
-                fontFamily: "'Epilogue', sans-serif",
-                fontWeight: 700,
-                fontSize: "90px",
-              }}
-            >
+            <Typography variant="h1" sx={styles(theme).title}>
               About Us
             </Typography>
-            <Typography
-              variant="h2"
-              sx={{
-                fontFamily: "'Epilogue', sans-serif",
-                fontWeight: 500,
-                fontSize: "44px",
-              }}
-            >
+            <Typography variant="h2" sx={styles(theme).subtitle}>
               Find out who we are.
             </Typography>
           </Grid>
@@ -56,15 +72,7 @@ function AboutUs() {
           </Grid>
         </Grid>
         <Grid item xl={6} sx={{ paddingTop: "4vh" }}>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: "'Epilogue', sans-serif",
-              fontWeight: 400,
-              fontSize: "20px",
-              textAlign: "justify",
-            }}
-          >
+          <Typography variant="body1" sx={styles(theme).text}>
             Lorem ipsum dolor sit <b>swap</b>, consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
             enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
@@ -78,7 +86,7 @@ function AboutUs() {
             officia deserunt mollit anim id est laborum.
           </Typography>
         </Grid>
-        <Grid sx={{ paddingTop: "12vh", paddingBottom: "5vh" }}>
+        <Grid item sx={styles(theme).backgroundGlass}>
           <Image
             alt="backgroundGlass"
             src={HeadshotGlass}
@@ -88,22 +96,15 @@ function AboutUs() {
         <Grid item xl={5}>
           <Image alt="stayInTouch" src={StayInTouch} layout="intrinsic" />
         </Grid>
-        <Grid
-          container
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Grid sx={{ padding: "2vh" }}>
+        <Grid container sx={styles(theme).iconContainer}>
+          <Grid sx={styles(theme).icon}>
             <FontAwesomeIcon
               icon={faFacebookSquare}
               size="5x"
               color="#3b5998"
             />
           </Grid>
-          <Grid sx={{ padding: "2vh" }}>
+          <Grid sx={styles(theme).icon}>
             <FontAwesomeIcon
               icon={faTwitter}
               size="5x"
@@ -111,19 +112,17 @@ function AboutUs() {
               bacground="red"
             />
           </Grid>
-
-          <Grid sx={{ padding: "2vh" }}>
+          <Grid sx={styles(theme).icon}>
             <FontAwesomeIcon icon={faInstagramSquare} size="5x" />
           </Grid>
-
-          <Grid sx={{ padding: "2vh" }}>
+          <Grid sx={styles(theme).icon}>
             <FontAwesomeIcon icon={faLinkedin} size="5x" color="#007bb6" />
           </Grid>
         </Grid>
       </Grid>
+      <Footer></Footer>
     </>
   );
 }
 
 export default AboutUs;
-/*<Footer></Footer>*/
