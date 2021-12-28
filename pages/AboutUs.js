@@ -14,9 +14,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import Footer from "../components/Layout/footer";
 
-const instagram = {
-  padding: "1vh",
-};
 function AboutUs() {
   return (
     <>

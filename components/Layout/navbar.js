@@ -52,11 +52,11 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" elevation={10}>
+      <AppBar position="fixed" sx={{ boxShadow: theme.shadows[3] }}>
         <Toolbar>
           <Box>
             <Link href="/" passHref>
-              <a style={style(theme).logoLink}>
+              <a style={styles(theme).logoLink}>
                 <Image src={logo} layout="intrinsic" alt="GGN"></Image>
               </a>
             </Link>
@@ -73,7 +73,9 @@ const Navbar = () => {
             </Box>
           ))}
           <Box sx={styles(theme).loginButtonBox}>
-            <Button sx={styles(theme).loginButton}>Login</Button>
+            <Link href="/Login" passHref>
+              <Button sx={styles(theme).loginButton}>Login</Button>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>

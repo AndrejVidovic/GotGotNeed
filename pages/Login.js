@@ -1,6 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Button,
+  Divider,
   FilledInput,
   FormControl,
   Grid,
@@ -14,7 +15,82 @@ import {
 } from "@mui/material";
 import { style } from "@mui/system";
 import { useState } from "react";
-import theme from "../src/theme";
+
+const styles = (theme) => ({
+  loginButton: {
+    backgroundColor: theme.palette.secondary.light,
+    color: "black",
+    fontWeight: 700,
+    boxShadow: theme.shadows[2],
+    width: "13vh",
+    height: "5vh",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    margin: "1vh",
+    [theme.breakpoints.down("sm")]: {
+      height: "7vh",
+    },
+  },
+  signUpButton: {
+    backgroundColor: theme.palette.main,
+    color: "white",
+    fontWeight: 700,
+    boxShadow: theme.shadows[2],
+    width: "13vh",
+    height: "5vh",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+    marginTop: "1vh",
+    marginBottom: "4vh",
+    [theme.breakpoints.down("sm")]: {
+      height: "7vh",
+    },
+  },
+  gridBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+    boxShadow: theme.shadows[2],
+    width: "47vh",
+    height: "100%",
+  },
+  title: {
+    fontWeight: 700,
+    fontSize: "30px",
+    paddingTop: "6vh",
+    paddingBottom: "4vh",
+  },
+  divider: {
+    borderWidth: "2px",
+    width: "75%",
+    margin: "2vh",
+    alignText: "center",
+    "::before": {
+      top: 0,
+    },
+    "::after": {
+      top: 0,
+    },
+    fontSize: "10px",
+  },
+  textfield: {
+    marginTop: "1vh",
+    marginBottom: "3vh",
+    width: "75%",
+  },
+  caption: {
+    fontSize: "10px",
+    marginTop: "1.2vh",
+    textDecoration: "underline",
+  },
+});
 
 function Login() {
   const theme = useTheme();
@@ -23,6 +99,7 @@ function Login() {
     Password: "",
     ShowPassword: false,
   });
+
   const handleChange = (props) => (event) => {
     setUser({ ...user, [props]: event.target.value });
   };
@@ -32,16 +109,20 @@ function Login() {
   const HandleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   return (
-    <Grid container>
-      <Paper>
-        <Typography variant="body1">Welcome Back!</Typography>
+    <Grid container sx={styles(theme).gridBox}>
+      <Paper sx={styles(theme).paper}>
+        <Typography variant="body1" sx={styles(theme).title}>
+          Welcome Back!
+        </Typography>
         <TextField
           variant="filled"
           label="Username"
           onChange={handleChange("Username")}
-        ></TextField>
-        <FormControl variant="filled">
+          sx={styles(theme).textfield}
+        />
+        <FormControl variant="filled" sx={styles(theme).textfield}>
           <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
           <FilledInput
             id="filled-adornment-password"
@@ -62,8 +143,16 @@ function Login() {
             }
           ></FilledInput>
         </FormControl>
-        <Button variant="contained">LOGIN</Button>
-        <Button varaint="contained">SIGN UP</Button>
+        <Button variant="contained" sx={styles(theme).loginButton}>
+          LOGIN
+        </Button>
+        <Typography variant="caption" sx={styles(theme).caption}>
+          Forgot Your Password?
+        </Typography>
+        <Divider sx={styles(theme).divider}>OR</Divider>
+        <Button variant="contained" sx={styles(theme).signUpButton}>
+          SIGN UP
+        </Button>
       </Paper>
     </Grid>
   );
