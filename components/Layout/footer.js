@@ -59,14 +59,27 @@ const styles = (theme) => ({
   },
   toolbar: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
-    //
     paddingBottom: "2vh",
   },
   container: {
     backgroundColor: theme.palette.primary.main,
     paddingTop: "4vh",
+    width: "100%",
+  },
+  grid: {
+    display: "flex",
+    flexDirection: "column",
+    [theme.breakpoints.down("sm")]: {
+      alignItems: "flex-start",
+    },
+  },
+  gridSM: {
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
   },
 });
 
@@ -78,18 +91,23 @@ function Footer() {
       <Toolbar sx={styles(theme).toolbar}>
         <Grid
           container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
+          sx={styles(theme).grid}
           xl={3}
-          lg={3}
+          lg={4}
+          md={5}
+          sm={7}
+          xs={7}
         >
-          <Image src={logoFooter} alt="GGN" layout="intrinsic" />
-
-          <Grid sx={{ display: "flex" }}>
-            <Grid sx={styles(theme).socialNetworksGrid} xl={9} lg={9}>
+          <Image src={logoFooter} alt="GGN" layout="fixed" />
+          <Grid sx={styles(theme).gridSM}>
+            <Grid
+              sx={styles(theme).socialNetworksGrid}
+              xl={6}
+              lg={6}
+              md={7}
+              sm={9}
+              xs={12}
+            >
               <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                 <Icon>email_icon</Icon>
                 gotgotneed@fesb.hr
@@ -103,7 +121,14 @@ function Footer() {
                 @GotGotNeed
               </Typography>
             </Grid>
-            <Grid sx={styles(theme).socialNetworksGrid} xl={2} lg={2}>
+            <Grid
+              sx={styles(theme).socialNetworksGrid}
+              xl={4}
+              lg={3}
+              md={3}
+              sm={8}
+              xs={4}
+            >
               <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                 <FacebookIcon />
                 @GotGotNeed
@@ -121,9 +146,12 @@ function Footer() {
         </Grid>
         <Grid
           container
-          sx={{ display: "flex", flexDirection: "column" }}
+          sx={styles(theme).grid}
           xl={1}
-          lg={1}
+          lg={2}
+          md={2}
+          sm={2}
+          xs={5}
         >
           <Typography variant="h3" sx={styles(theme).exploreText}>
             Explore
