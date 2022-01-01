@@ -120,7 +120,7 @@ function AboutUs() {
           </Grid>
         </Grid>
       </Grid>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

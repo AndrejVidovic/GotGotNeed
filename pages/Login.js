@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { style } from "@mui/system";
 import { useState } from "react";
+import Footer from "../components/Layout/footer";
 
 const styles = (theme) => ({
   loginButton: {
@@ -111,50 +112,55 @@ function Login() {
   };
 
   return (
-    <Grid container sx={styles(theme).gridBox}>
-      <Paper sx={styles(theme).paper}>
-        <Typography variant="body1" sx={styles(theme).title}>
-          Welcome Back!
-        </Typography>
-        <TextField
-          variant="filled"
-          label="Username"
-          onChange={handleChange("Username")}
-          sx={styles(theme).textfield}
-        />
-        <FormControl variant="filled" sx={styles(theme).textfield}>
-          <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
-          <FilledInput
-            id="filled-adornment-password"
-            type={user.ShowPassword ? "text" : "password"}
-            value={user.Password}
-            onChange={handleChange("Password")}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="password visibility"
-                  onClick={HandleClickShowPassword}
-                  onMouseDown={HandleMouseDownPassword}
-                  edge="end"
-                >
-                  {user.ShowPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-          ></FilledInput>
-        </FormControl>
-        <Button variant="contained" sx={styles(theme).loginButton}>
-          LOGIN
-        </Button>
-        <Typography variant="caption" sx={styles(theme).caption}>
-          Forgot Your Password?
-        </Typography>
-        <Divider sx={styles(theme).divider}>OR</Divider>
-        <Button variant="contained" sx={styles(theme).signUpButton}>
-          SIGN UP
-        </Button>
-      </Paper>
-    </Grid>
+    <>
+      <Grid container sx={styles(theme).gridBox}>
+        <Paper sx={styles(theme).paper}>
+          <Typography variant="body1" sx={styles(theme).title}>
+            Welcome Back!
+          </Typography>
+          <TextField
+            variant="filled"
+            label="Username"
+            onChange={handleChange("Username")}
+            sx={styles(theme).textfield}
+          />
+          <FormControl variant="filled" sx={styles(theme).textfield}>
+            <InputLabel htmlFor="filled-adornment-password">
+              Password
+            </InputLabel>
+            <FilledInput
+              id="filled-adornment-password"
+              type={user.ShowPassword ? "text" : "password"}
+              value={user.Password}
+              onChange={handleChange("Password")}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="password visibility"
+                    onClick={HandleClickShowPassword}
+                    onMouseDown={HandleMouseDownPassword}
+                    edge="end"
+                  >
+                    {user.ShowPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            ></FilledInput>
+          </FormControl>
+          <Button variant="contained" sx={styles(theme).loginButton}>
+            LOGIN
+          </Button>
+          <Typography variant="caption" sx={styles(theme).caption}>
+            Forgot Your Password?
+          </Typography>
+          <Divider sx={styles(theme).divider}>OR</Divider>
+          <Button variant="contained" sx={styles(theme).signUpButton}>
+            SIGN UP
+          </Button>
+        </Paper>
+      </Grid>
+      <Footer />
+    </>
   );
 }
 export default Login;
