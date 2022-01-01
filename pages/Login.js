@@ -13,9 +13,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { style } from "@mui/system";
+import Link from "next/link";
 import { useState } from "react";
-import Footer from "../components/Layout/footer";
+import Head from "next/head";
 
 const styles = (theme) => ({
   loginButton: {
@@ -47,6 +47,7 @@ const styles = (theme) => ({
     marginBottom: "4vh",
     [theme.breakpoints.down("sm")]: {
       height: "7vh",
+      padding: 0,
     },
   },
   gridBox: {
@@ -113,12 +114,17 @@ function Login() {
 
   return (
     <>
+      <Head>
+        <title>Login</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Grid container sx={styles(theme).gridBox}>
         <Paper sx={styles(theme).paper}>
           <Typography variant="body1" sx={styles(theme).title}>
             Welcome Back!
           </Typography>
           <TextField
+            type="text"
             variant="filled"
             label="Username"
             onChange={handleChange("Username")}
@@ -147,19 +153,24 @@ function Login() {
               }
             ></FilledInput>
           </FormControl>
-          <Button variant="contained" sx={styles(theme).loginButton}>
+          <Button
+            variant="contained"
+            sx={styles(theme).loginButton}
+            type="submit"
+          >
             LOGIN
           </Button>
           <Typography variant="caption" sx={styles(theme).caption}>
             Forgot Your Password?
           </Typography>
           <Divider sx={styles(theme).divider}>OR</Divider>
-          <Button variant="contained" sx={styles(theme).signUpButton}>
-            SIGN UP
-          </Button>
+          <Link href="/Register" passHref>
+            <Button variant="contained" sx={styles(theme).signUpButton}>
+              SIGN UP
+            </Button>
+          </Link>
         </Paper>
       </Grid>
-      <Footer />
     </>
   );
 }
