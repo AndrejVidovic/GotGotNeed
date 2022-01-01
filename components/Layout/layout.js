@@ -3,7 +3,7 @@ import Navbar from "./navbar";
 function Layout({ children }) {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       {children}
     </>
   );
