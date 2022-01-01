@@ -17,14 +17,8 @@ export default function MyApp(props) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Got Got Need</title>
+        <title>GotGotNeed</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

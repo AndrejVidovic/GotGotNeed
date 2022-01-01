@@ -29,12 +29,13 @@ const styles = (theme) => ({
   },
   title: {
     fontWeight: 700,
-    fontSize: "10vh",
+    fontSize: "9vh",
   },
   subtitle: {
     fontWeight: 500,
-    fontSize: "5vh",
+    fontSize: "4vh",
     paddingBottom: "1vh",
+    color: "#616161",
   },
   text: {
     fontWeight: 400,
@@ -140,7 +141,7 @@ function AboutUs() {
               Find out who we are.
             </Typography>
           </Grid>
-          <Grid item xl={3} l={4} md={3} sm={5} sx={styles(theme).logo}>
+          <Grid item xl={3} lg={4} md={3} sm={5} sx={styles(theme).logo}>
             <Image src={logo} alt="GGN" layout="intrinsic" />
           </Grid>
         </Grid>

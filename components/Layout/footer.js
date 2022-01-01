@@ -89,18 +89,11 @@ function Footer() {
   return (
     <Grid sx={styles(theme).container}>
       <Toolbar sx={styles(theme).toolbar}>
-        <Grid
-          container
-          sx={styles(theme).grid}
-          xl={3}
-          lg={4}
-          md={5}
-          sm={7}
-          xs={7}
-        >
+        <Grid item sx={styles(theme).grid} xl={3} lg={4} md={5} sm={7} xs={7}>
           <Image src={logoFooter} alt="GGN" layout="fixed" />
           <Grid sx={styles(theme).gridSM}>
             <Grid
+              item
               sx={styles(theme).socialNetworksGrid}
               xl={6}
               lg={6}
@@ -122,6 +115,7 @@ function Footer() {
               </Typography>
             </Grid>
             <Grid
+              item
               sx={styles(theme).socialNetworksGrid}
               xl={4}
               lg={3}
@@ -144,15 +138,7 @@ function Footer() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          container
-          sx={styles(theme).grid}
-          xl={1}
-          lg={2}
-          md={2}
-          sm={2}
-          xs={5}
-        >
+        <Grid item sx={styles(theme).grid} xl={1} lg={2} md={2} sm={2} xs={5}>
           <Typography variant="h3" sx={styles(theme).exploreText}>
             Explore
           </Typography>
@@ -165,6 +151,7 @@ function Footer() {
                 href={{ pathname: "/[page]" }}
                 as={`/${page.replace(/\s+/g, "")}`}
                 passHref
+                key={page}
               >
                 <Typography sx={styles(theme).sites}>{page}</Typography>
               </Link>

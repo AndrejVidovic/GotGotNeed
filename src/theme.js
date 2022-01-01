@@ -36,6 +36,9 @@ const theme = createTheme({
         body: {
           marginTop: "15vh",
           backgroundImage: `url(${backgroundIMG.src})`,
+          /*display:"flex",
+          alignItems:"center", 
+          justifyContent:"center"*/
         },
       },
     },

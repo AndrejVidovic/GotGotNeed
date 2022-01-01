@@ -62,7 +62,7 @@ const Navbar = () => {
             </Link>
           </Box>
           {pages.map((page) => (
-            <Box ml={3} key={page} sx={styles(theme).navbarButtonBox}>
+            <Box ml={3} key={page}>
               <Link
                 href={{ pathname: "/[page]" }}
                 as={`/${page.replace(/\s+/g, "")}`}
