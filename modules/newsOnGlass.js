@@ -1,6 +1,7 @@
-import { useTheme } from "@mui/material";
+import { useTheme, Grid } from "@mui/material";
 import Glass from "../components/glass";
-import BlogCard from "../components/blogCard";
+import BlogCard from "../components/News/BlogCard";
+import newsData from "../fakeData/News/News.json";
 
 const styles = (theme) => ({
     moreLink: {
@@ -34,9 +35,30 @@ const NewsOnGlass = () => {
     return (
         <Glass color={0} styling={styles(theme).glass}>
             <h1 style={styles(theme).newsTitle}>NEWS</h1>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            <Grid
+                xs={11}
+                md={9}
+                lg={7}
+                xl={6}
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                {newsData.slice(0, 3).map((newsItem) => (
+                    <Grid item xs={12}>
+                        <BlogCard
+                            key={newsItem.id}
+                            id={newsItem.id}
+                            title={newsItem.title}
+                            type={newsItem.type}
+                            description={newsItem.description}
+                            date={newsItem.date}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
+
             <p style={styles(theme).moreLink}>More posts &gt;</p>
         </Glass>
     );

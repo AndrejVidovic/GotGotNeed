@@ -6,7 +6,7 @@ const theme = createTheme({
     breakpoints: {
         values: {
             xs: 0,
-            sm: 450,
+            sm: 500,
             md: 900,
             lg: 1100,
             xl: 1536,
@@ -44,13 +44,34 @@ const theme = createTheme({
                     textDecoration: "none",
                 },
                 body: {
-                    "@media (max-width: 1100px)": {
+                    "@media (max-width: 900px)": {
                         marginTop: "5vh",
                     },
-                    "@media (min-width: 1100px)": {
+                    "@media (min-width: 900px)": {
                         marginTop: "15vh",
                     },
                     backgroundImage: `url(${backgroundIMG.src})`,
+                },
+            },
+        },
+        MuiChip: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "6px",
+                    boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)",
+                    paddingLeft: "5px",
+                    paddingRight: "5px",
+                    background: "rgba(219, 219, 219, 0.08)" /*0 sivo*/,
+                    backdropFilter: "blur(10px)",
+                    "@media (min-width: 0px) and (max-width: 900px)": {
+                        fontSize: "0.75rem",
+                    },
+                    "@media (min-width: 900px) and (max-width: 1536px)": {
+                        fontSize: "0.875rem",
+                    },
+                    "@media (min-width: 1536px)": {
+                        fontSize: "1rem",
+                    },
                 },
             },
         },

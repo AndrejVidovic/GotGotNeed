@@ -1,40 +1,51 @@
-import { useTheme, Chip } from "@mui/material";
-import { useState } from "react";
-const styles = (theme) => ({
-    chip: {
-        margin: "1vh",
-    },
+import { Chip } from "@mui/material";
+
+const styles = () => ({
     chipActive: {
-        margin: "1vh",
-        backgroundColor: "rgba(64, 63, 63, 0.5)",
+        background: "rgba(64, 63, 63, 0.2)",
+        boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.45)",
+        backdropFilter: "blur(4px)",
     },
 });
-function Chips(props) {
-    const theme = useTheme();
-    const data = props.data;
-    const news = props.news;
 
-    const [active, setActive] = useState([]);
+const Chips = ({
+    chipName,
+    setFilteredNews,
+    allNews,
+    activeChips,
+    setActiveChips,
+}) => {
+    const handleClickChip = (chipName) => {
+        let tempNews = [];
+        let tempChips = activeChips;
 
-    const handleClickChip = (data) => {
-        console.log(data);
-        let temp = [];
-        setActive([...active, data]);
-        temp = news.filter((x) => x.type.some((r) => active.includes(r)));
-        //props.setFilteredNews(temp);
-        //props.setCurrentPage(1);
+        if (!activeChips.includes(chipName)) {
+            tempChips = [...activeChips, chipName];
+        } else {
+            tempChips = activeChips.filter((keyword) => keyword !== chipName);
+        }
+
+        if (tempChips.length > 0) {
+            tempNews = allNews.filter((blog) =>
+                blog.type.some((keyword) => tempChips.includes(keyword))
+            );
+        } else {
+            tempNews = allNews;
+        }
+
+        setActiveChips(tempChips);
+        setFilteredNews(tempNews);
     };
-    console.log(active);
+
     return (
         <Chip
-            label={data}
+            label={chipName}
             sx={
-                active.includes(data)
-                    ? styles(theme).chipActive
-                    : styles(theme).chip
+                activeChips.includes(chipName) ? styles(theme).chipActive : null
             }
-            onClick={() => handleClickChip(data)}
+            onClick={() => handleClickChip(chipName)}
         />
     );
-}
+};
+
 export default Chips;

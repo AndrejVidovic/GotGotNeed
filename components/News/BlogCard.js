@@ -7,17 +7,18 @@ import {
     useTheme,
     CardMedia,
     CardContent,
-    CardActions,
     IconButton,
     Avatar,
     Typography,
     MenuItem,
     Menu,
-    CardActionArea,
 } from "@mui/material";
 import { Share as ShareIcon } from "@mui/icons-material";
 import Image from "next/image";
-import image from "../public/article3.png";
+import ar1 from "../../public/article1.png";
+import ar2 from "../../public/article2.png";
+import ar3 from "../../public/article3.png";
+import avatarImg from "../../public/avatar.png";
 
 const styles = (theme) => ({
     root: {
@@ -25,28 +26,25 @@ const styles = (theme) => ({
         minHeight: "10rem",
         display: "flex",
         flexDirection: "column",
-        margin: "1rem",
+        marginBottom: "1rem",
+        minWidth: "100%",
         [theme.breakpoints.between("sm", "md")]: {
-            margin: "1.5rem",
-            width: "85%",
+            marginBottom: "2rem",
             flexDirection: "row",
         },
         [theme.breakpoints.between("md", "xl")]: {
-            margin: "2rem",
-            width: "60%",
+            marginBottom: "2.5rem",
             flexDirection: "row",
         },
         [theme.breakpoints.up("xl")]: {
             flexDirection: "row",
-            margin: "2.5rem",
-            width: "50%",
+            marginBottom: "3rem",
         },
     },
     media: {
         width: "fill-available",
-        maxWidth: "40%",
+        maxWidth: "33%",
         minWidth: "33%",
-        backgroundPositionY: "top",
         [theme.breakpoints.between("xs", "sm")]: {
             width: "100%",
             maxWidth: "none",
@@ -61,23 +59,34 @@ const styles = (theme) => ({
         width: "50px",
         [theme.breakpoints.between("xs", "md")]: {
             marginRight: "0",
-            height: "30px",
-            width: "30px",
+            height: "35px",
+            width: "35px",
+        },
+        [theme.breakpoints.between("md", "xl")]: {
+            marginRight: "6px",
+            height: "40px",
+            width: "40px",
         },
     },
     title: {
-        fontSize: "20px",
+        fontSize: "18px",
         margin: 0,
         fontWeight: 600,
         [theme.breakpoints.between("xs", "md")]: {
             fontSize: "14px",
         },
+        [theme.breakpoints.between("md", "xl")]: {
+            fontSize: "16px",
+        },
     },
     subtitle: {
-        fontSize: "16px",
+        fontSize: "14px",
         margin: 0,
         [theme.breakpoints.between("xs", "md")]: {
             fontSize: "10px",
+        },
+        [theme.breakpoints.between("md", "xl")]: {
+            fontSize: "12px",
         },
     },
     textPart: {
@@ -112,7 +121,7 @@ const styles = (theme) => ({
         marginBottom: "2rem",
         alignItems: "flex-start",
         [theme.breakpoints.between("xs", "md")]: {
-            marginBottom: "1rem",
+            marginBottom: "1.3rem",
         },
     },
     shareButton: {
@@ -125,7 +134,7 @@ const styles = (theme) => ({
             fontSize: "14px",
         },
     },
-    image: {
+    imageContainer: {
         position: "relative",
         width: "100%",
         height: "100%",
@@ -141,10 +150,12 @@ const styles = (theme) => ({
     },
 });
 
-const BlogCard = (props) => {
+const BlogCard = ({ id, title, type, description, date }) => {
     const theme = useTheme();
     const [anchor, setAnchor] = useState(null);
     const open = Boolean(anchor);
+
+    let images = [ar1, ar2, ar3];
 
     const shareMenuOpen = (event) => {
         setAnchor(event.currentTarget);
@@ -153,21 +164,18 @@ const BlogCard = (props) => {
         setAnchor(null);
     };
 
-    let articleDescription =
-        "Lorem ipsumsit dolo sitr sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur eiusmod . Lorem ipsumsit dolo sitr sit amet, consectetur adipiscing elit, sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur eiusmod .";
-    if (typeof window !== "undefined" && window.innerWidth < 1200) {
-        if (articleDescription.length > 120) {
-            articleDescription = articleDescription.slice(0, 120) + "...";
-        }
-    }
-
     return (
         <>
             <Card sx={styles(theme).root}>
                 {/* Link */}
-                <CardMedia sx={styles(theme).media} title="Opis slike">
-                    <div style={styles(theme).image}>
-                        <Image src={image} layout="fill" objectFit="cover" />
+                <CardMedia sx={styles(theme).media} title={title}>
+                    <div style={styles(theme).imageContainer}>
+                        <Image
+                            src={images[id % 3]}
+                            layout="fill"
+                            objectFit="cover"
+                            objectPosition="top"
+                        />
                     </div>
                 </CardMedia>
                 <div style={styles(theme).textPart}>
@@ -176,12 +184,12 @@ const BlogCard = (props) => {
                             sx={styles(theme).header}
                             title={
                                 <Typography sx={styles(theme).title}>
-                                    Headline
+                                    {title}
                                 </Typography>
                             }
                             subheader={
                                 <Typography sx={styles(theme).subtitle}>
-                                    Body 2
+                                    {date}
                                 </Typography>
                             }
                             avatar={
@@ -190,7 +198,7 @@ const BlogCard = (props) => {
                                     sx={styles(theme).avatar}
                                 >
                                     <Image
-                                        src={image}
+                                        src={avatarImg}
                                         layout="fill"
                                         objectFit="cover"
                                     />
@@ -214,24 +222,26 @@ const BlogCard = (props) => {
                             component="p"
                             sx={styles(theme).article}
                         >
-                            {articleDescription}
+                            {description}
                         </Typography>
                         <Grid
                             container
                             direction="row"
                             justifyContent="flex-start"
                             alignItems="center"
-                            spacing={0.5}
+                            spacing={1.3}
                             sx={styles(theme).chipsContainer}
                         >
-                            <Grid item>
-                                <Chip
-                                    sx={styles(theme).article}
-                                    size="small"
-                                    label="Clickable"
-                                    onClick={() => console.log("hehe")}
-                                />
-                            </Grid>
+                            {type.map((typeName) => (
+                                <Grid item>
+                                    <Chip
+                                        key={typeName}
+                                        size="small"
+                                        label={typeName}
+                                        onClick={() => console.log("hehe")}
+                                    />
+                                </Grid>
+                            ))}
                         </Grid>
                     </CardContent>
                 </div>
