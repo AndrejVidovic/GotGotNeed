@@ -1,6 +1,7 @@
 import homeBanner from "../public/homeBanner.png";
 import { Button, Grid, useTheme, Box } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -77,15 +78,17 @@ const BannerAndButton = () => {
                 </Box>
             </Grid>
             <Grid item>
-                <Button sx={styles(theme).tradeButton}>
-                    TRADE YOUR STICKERS
-                    <FontAwesomeIcon
-                        icon={faPlay}
-                        size="28px"
-                        color="white"
-                        style={styles(theme).playIcon}
-                    />
-                </Button>
+                <Link href="/Swap">
+                    <Button sx={styles(theme).tradeButton}>
+                        TRADE YOUR STICKERS
+                        <FontAwesomeIcon
+                            icon={faPlay}
+                            size="28px"
+                            color="white"
+                            style={styles(theme).playIcon}
+                        />
+                    </Button>
+                </Link>
             </Grid>
         </Grid>
     );
