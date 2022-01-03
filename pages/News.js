@@ -22,6 +22,7 @@ const styles = (theme) => ({
         justifyContent: "center",
         marginBottom: "7rem",
         flexDirection: "column",
+        boxShadow: theme.shadows[1],
     },
     searchGrid: {
         marginTop: "4vh",
@@ -57,7 +58,7 @@ const News = () => {
     let allUniqueKeywords = [...new Set(tempAllKeywords)]; //vrati samo niz jedinstvenih
 
     const getDisplayedNews = () => {
-        const startIndex = numberOfPages * currentPage - numberOfPages;
+        const startIndex = newsLimitPerPage * currentPage - newsLimitPerPage;
         let endIndex = newsLimitPerPage + startIndex;
         endIndex =
             endIndex > filteredNews.length ? filteredNews.length : endIndex;
