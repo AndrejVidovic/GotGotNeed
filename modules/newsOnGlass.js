@@ -67,7 +67,7 @@ const NewsOnGlass = () => {
             </Grid>
             <Grid item xs={7} sx={styles(theme).moreLink}>
                 {" "}
-                {/*7 jer ce uvik bit u zasebnom redu a da ima mista za transform*/}
+                {/*7 jer ce uvik bit u zasebnom redu a da ima mista za transformaciju tj. skaliranje*/}
                 <Link href="/News">More posts &gt;</Link>
             </Grid>
         </Glass>
