@@ -1,15 +1,23 @@
-import { useTheme } from "@mui/material";
+import { useTheme, Grid } from "@mui/material";
 import Glass from "../components/glass";
-import BlogCard from "../components/blogCard";
+import BlogCard from "../components/News/BlogCard";
+import newsData from "../fakeData/News/News.json";
+import Link from "next/link";
 
 const styles = (theme) => ({
     moreLink: {
-        width: "100%",
-        display: "block",
-        textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
+        fontSize: "1.2rem",
         margin: "6rem 0",
+        color: "grey",
         [theme.breakpoints.between("xs", "md")]: {
             margin: "3rem 0",
+        },
+        cursor: "pointer",
+        transition: "transform .2s",
+        "&:hover": {
+            transform: "scale(1.1)",
         },
     },
     newsTitle: {
@@ -34,10 +42,34 @@ const NewsOnGlass = () => {
     return (
         <Glass color={0} styling={styles(theme).glass}>
             <h1 style={styles(theme).newsTitle}>NEWS</h1>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <p style={styles(theme).moreLink}>More posts &gt;</p>
+            <Grid
+                xs={11}
+                md={9}
+                lg={7}
+                xl={6}
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+            >
+                {newsData.slice(0, 3).map((newsItem) => (
+                    <Grid item xs={12}>
+                        <BlogCard
+                            key={newsItem.id}
+                            id={newsItem.id}
+                            title={newsItem.title}
+                            type={newsItem.type}
+                            description={newsItem.description}
+                            date={newsItem.date}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
+            <Grid item xs={7} sx={styles(theme).moreLink}>
+                {" "}
+                {/*7 jer ce uvik bit u zasebnom redu a da ima mista za transformaciju tj. skaliranje*/}
+                <Link href="/News">More posts &gt;</Link>
+            </Grid>
         </Glass>
     );
 };
