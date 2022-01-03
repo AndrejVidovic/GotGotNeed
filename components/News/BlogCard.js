@@ -276,9 +276,9 @@ const BlogCard = ({ id, title, type, description, date }) => {
                         href="https://twitter.com/intent/tweet?button_hashtag=tweet&ref_src=twsrc%5Etfw"
                         class="twitter-hashtag-button"
                         data-size="large"
-                        data-text="Check out FootFeed, its great!"
+                        data-text="Check out GotGotNeed, its great!"
                         data-url="link"
-                        data-related="brunogrbavac,FootFeed"
+                        data-related="avidovic,brunogrbavac,GotGotNeed"
                         data-lang="en"
                         data-show-count="false"
                     >

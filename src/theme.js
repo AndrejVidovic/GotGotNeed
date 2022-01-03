@@ -75,6 +75,21 @@ const theme = createTheme({
                 },
             },
         },
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    width: "100vw",
+                    backgroundColor: blue[700],
+                },
+            },
+        },
+        MuiList: {
+            styleOverrides: {
+                root: {
+                    padding: 0,
+                },
+            },
+        },
     },
 });
 

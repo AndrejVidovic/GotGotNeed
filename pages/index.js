@@ -31,9 +31,14 @@ const styles = (theme) => ({
         height: "4rem",
         width: "4rem",
         margin: "10rem 0",
+        cursor: "pointer",
+        transition: "transform .2s",
         [theme.breakpoints.down("lg")]: {
             visibility: "hidden",
             margin: "5rem 0",
+        },
+        "&:hover": {
+            transform: "scale(1.2)",
         },
     },
 });
@@ -76,7 +81,17 @@ function Home() {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <Glass color={0} styling={styles(theme).glass}>
+                        <Glass
+                            color={0}
+                            styling={styles(theme).glass}
+                            onClickFunction={() => {
+                                var element =
+                                    document.getElementById(
+                                        "smoothScrollTarget"
+                                    );
+                                element.scrollIntoView({ behavior: "smooth" });
+                            }}
+                        >
                             <FontAwesomeIcon
                                 icon={faChevronDown}
                                 size="40px"
@@ -86,7 +101,7 @@ function Home() {
                         </Glass>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} id="smoothScrollTarget">
                     <NewsOnGlass />
                 </Grid>
             </Grid>

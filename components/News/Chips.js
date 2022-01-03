@@ -40,9 +40,7 @@ const Chips = ({
     return (
         <Chip
             label={chipName}
-            sx={
-                activeChips.includes(chipName) ? styles(theme).chipActive : null
-            }
+            sx={activeChips.includes(chipName) ? styles().chipActive : null}
             onClick={() => handleClickChip(chipName)}
         />
     );
