@@ -63,6 +63,7 @@ const styles = (theme) => ({
     },
     signUpName: {
         color: "black",
+        marginLeft: "35px",
     },
     pageButton: {
         height: "50px",

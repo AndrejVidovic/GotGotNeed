@@ -44,10 +44,10 @@ const theme = createTheme({
                     textDecoration: "none",
                 },
                 body: {
-                    "@media (max-width: 900px)": {
+                    "@media (max-width: 1100px)": {
                         marginTop: "5vh",
                     },
-                    "@media (min-width: 900px)": {
+                    "@media (min-width: 1100px)": {
                         marginTop: "15vh",
                     },
                     backgroundImage: `url(${backgroundIMG.src})`,

@@ -22,7 +22,6 @@ const styles = (theme) => ({
         justifyContent: "center",
         marginBottom: "7rem",
         flexDirection: "column",
-        boxShadow: theme.shadows[1],
     },
     searchGrid: {
         marginTop: "4vh",

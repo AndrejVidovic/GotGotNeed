@@ -29,7 +29,7 @@ const styles = (theme) => ({
     loginButtonBox: {
         marginLeft: "auto",
         marginRight: "0",
-        "@media (min-width: 1100px) and (max-width: 1150px)": {
+        "@media (min-width: 1100px) and (max-width: 1300px)": {
             marginLeft: "24px",
         },
     },
