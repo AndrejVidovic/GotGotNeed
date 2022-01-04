@@ -126,7 +126,7 @@ const News = () => {
                     xs={10}
                 >
                     {allUniqueKeywords.map((keyword, index) => (
-                        <Grid item>
+                        <Grid item key={index}>
                             <Chips
                                 chipName={keyword}
                                 setFilteredNews={setFilteredNews}

@@ -121,6 +121,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                         <Image
                             src={images[publisher.id % 3]}
                             layout="responsive"
+                            alt={publisher.title}
                         />
                     </Grid>
                 </CardMedia>
