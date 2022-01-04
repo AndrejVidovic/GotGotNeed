@@ -3,48 +3,72 @@
         "id": 1,
         "title": "Panini",
         "country": "Italy",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1961,
+        "collections": 100,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 2,
         "title": "Topps",
         "country": "UK",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1938,
+        "collections": 50,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 3,
         "title": "Kraš",
         "country": "Croatia",
-        "types": ["Comics"]
+        "types": ["Comics"],
+        "founded": 1911,
+        "collections": 20,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 4,
         "title": "Panini",
         "country": "Italy",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1961,
+        "collections": 100,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 5,
         "title": "Topps",
         "country": "UK",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1938,
+        "collections": 50,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 6,
         "title": "Kraš",
         "country": "Croatia",
-        "types": ["Comics"]
+        "types": ["Comics"],
+        "founded": 1911,
+        "collections": 20,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 7,
         "title": "Panini",
         "country": "Italy",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1961,
+        "collections": 100,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     },
     {
         "id": 8,
         "title": "Topps",
         "country": "UK",
-        "types": ["Football", "Other"]
+        "types": ["Football", "Other"],
+        "founded": 1938,
+        "collections": 50,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     }
 ]
