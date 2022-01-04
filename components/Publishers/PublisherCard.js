@@ -92,7 +92,11 @@ function PublisherCard({ id, title, country, types, favorite, setFavorite }) {
         <Card sx={styles(theme).root}>
             <CardMedia sx={styles(theme).media}>
                 <Grid sx={styles(theme).imageContainer}>
-                    <Image src={images[id % 3]} layout="responsive" />
+                    <Image
+                        src={images[id % 3]}
+                        layout="responsive"
+                        alt={title}
+                    />
                 </Grid>
             </CardMedia>
             <CardContent sx={styles(theme).content}>

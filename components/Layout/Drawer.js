@@ -100,27 +100,23 @@ const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
             <Divider sx={styles(theme).divider} />
             <List>
                 {pages.map((page) => (
-                    <>
+                    <div key={page}>
                         <Link
                             href={{ pathname: "/[page]" }}
                             as={`/${page.replace(/\s+/g, "")}`}
                             passHref
                         >
-                            <ListItem
-                                button
-                                key={page}
-                                sx={styles(theme).pageButton}
-                            >
+                            <ListItem button sx={styles(theme).pageButton}>
                                 <span style={styles(theme).pageName}>
                                     {page}
                                 </span>
                             </ListItem>
                         </Link>
                         <Divider sx={styles(theme).divider} />
-                    </>
+                    </div>
                 ))}
             </List>
-            <Link href="/Register">
+            <Link href="/Register" passHref>
                 <ButtonBase sx={styles(theme).signUpButton}>
                     <span
                         style={{

@@ -1,7 +1,7 @@
 import { Grid, Icon, Toolbar, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import logoFooter from "../../public/LogoS.png";
+import logoFooter from "../../public/logoS.png";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -83,6 +83,7 @@ function Footer() {
         <Grid sx={styles(theme).container}>
             <Toolbar sx={styles(theme).toolbar}>
                 <Grid
+                    item
                     container
                     sx={styles(theme).grid}
                     xl={3}
@@ -94,6 +95,7 @@ function Footer() {
                     <Image src={logoFooter} alt="GGN" layout="fixed" />
                     <Grid sx={styles(theme).gridSM}>
                         <Grid
+                            item
                             sx={styles(theme).socialNetworksGrid}
                             xl={6}
                             lg={6}
@@ -124,6 +126,7 @@ function Footer() {
                             </Typography>
                         </Grid>
                         <Grid
+                            item
                             sx={styles(theme).socialNetworksGrid}
                             xl={4}
                             lg={3}
@@ -156,6 +159,7 @@ function Footer() {
                     </Grid>
                 </Grid>
                 <Grid
+                    item
                     container
                     sx={styles(theme).grid}
                     xl={1}
@@ -173,11 +177,12 @@ function Footer() {
                                 Home
                             </Typography>
                         </Link>
-                        {pages.map((page) => (
+                        {pages.map((page, index) => (
                             <Link
                                 href={{ pathname: "/[page]" }}
                                 as={`/${page.replace(/\s+/g, "")}`}
                                 passHref
+                                key={index}
                             >
                                 <Typography sx={styles(theme).sites}>
                                     {page}

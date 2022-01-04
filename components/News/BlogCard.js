@@ -175,6 +175,7 @@ const BlogCard = ({ id, title, type, description, date }) => {
                             layout="fill"
                             objectFit="cover"
                             objectPosition="top"
+                            alt={title}
                         />
                     </div>
                 </CardMedia>
@@ -201,6 +202,7 @@ const BlogCard = ({ id, title, type, description, date }) => {
                                         src={avatarImg}
                                         layout="fill"
                                         objectFit="cover"
+                                        alt=""
                                     />
                                 </Avatar>
                             }
@@ -233,9 +235,8 @@ const BlogCard = ({ id, title, type, description, date }) => {
                             sx={styles(theme).chipsContainer}
                         >
                             {type.map((typeName) => (
-                                <Grid item>
+                                <Grid item key={typeName}>
                                     <Chip
-                                        key={typeName}
                                         size="small"
                                         label={typeName}
                                         onClick={() => console.log("hehe")}
@@ -257,15 +258,16 @@ const BlogCard = ({ id, title, type, description, date }) => {
             >
                 <MenuItem onClick={shareMenuClose}>
                     <div
-                        class="fb-share-button"
+                        className="fb-share-button"
                         data-href="link"
                         data-layout="button"
                         data-size="large"
                     >
                         <a
                             target="_blank"
+                            rel="noreferrer"
                             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                            class="fb-xfbml-parse-ignore"
+                            className="fb-xfbml-parse-ignore"
                         >
                             Share
                         </a>
@@ -274,7 +276,7 @@ const BlogCard = ({ id, title, type, description, date }) => {
                 <MenuItem onClick={shareMenuClose}>
                     <a
                         href="https://twitter.com/intent/tweet?button_hashtag=tweet&ref_src=twsrc%5Etfw"
-                        class="twitter-hashtag-button"
+                        className="twitter-hashtag-button"
                         data-size="large"
                         data-text="Check out GotGotNeed, its great!"
                         data-url="link"
