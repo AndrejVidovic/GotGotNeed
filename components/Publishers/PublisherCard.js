@@ -114,6 +114,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                 },
             }}
             as={`/Publishers/${publisher.title}`}
+            passHref
         >
             <Card sx={styles(theme).root}>
                 <CardMedia sx={styles(theme).media}>

@@ -65,6 +65,7 @@ function PublisherCollection({ collection }) {
                         layout="fill"
                         objectFit="cover"
                         objectPosition="top"
+                        alt={collection.id}
                     />
                 </Grid>
             </CardMedia>

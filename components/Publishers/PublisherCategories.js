@@ -35,7 +35,8 @@ function Categories({ categories }) {
                 {collections.map((collection) => (
                     <PublisherCollection
                         collection={collection}
-                    ></PublisherCollection>
+                        key={collection.id}
+                    />
                 ))}
             </Paper>
         </Grid>

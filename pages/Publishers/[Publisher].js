@@ -95,6 +95,7 @@ function Publisher(props) {
                             layout="responsive"
                             width={100}
                             height={60}
+                            alt={title}
                         />
                     </Grid>
                     <Grid item lg={4} xl={3} md={5} sm={4} xs={10}>
