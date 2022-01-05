@@ -1,5 +1,5 @@
 import { Box, Button, Grid, useTheme } from "@mui/material";
-import Glass from "../components/glass.js";
+import Glass from "../components/Glass.js";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
     FormControl,

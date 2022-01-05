@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import mobileHomeBanner from "../public/mobileHomeBanner.png";
 import SmallLogin from "../modules/SmallLogin";
-import Glass from "../components/glass";
+import Glass from "../components/Glass";
 import BannerAndButton from "../modules/BannerAndButton";
 import Footer from "../components/Layout/footer";
 import NewsOnGlass from "../modules/NewsOnGlass";

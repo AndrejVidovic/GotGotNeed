@@ -92,10 +92,10 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
 
     const HandleClick = () => {
         let tempFavorite = [];
-        if (!favorite.includes(id)) {
-            tempFavorite = [...favorite, id];
+        if (!favorite.includes(publisher.id)) {
+            tempFavorite = [...favorite, publisher.id];
         } else {
-            tempFavorite = favorite.filter((fav) => fav !== id);
+            tempFavorite = favorite.filter((fav) => fav !== publisher.id);
         }
         setFavorite(tempFavorite);
     };
