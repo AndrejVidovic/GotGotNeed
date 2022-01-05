@@ -21,6 +21,7 @@ const styles = (theme) => ({
         width: "1.3rem",
     },
     backBanner: {
+        maxWidth: "100%",
         [theme.breakpoints.down("lg")]: {
             paddingTop: "5vh",
             backgroundImage: `url(${mobileHomeBanner.src})`,
@@ -90,7 +91,6 @@ function Home() {
                                         "smoothScrollTarget"
                                     );
                                 element.scrollIntoView({ behavior: "smooth" });
-                                console.log("klikkk");
                             }}
                         >
                             <FontAwesomeIcon
