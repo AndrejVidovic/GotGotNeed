@@ -21,7 +21,7 @@ const styles = (theme) => ({
         width: "1.3rem",
     },
     backBanner: {
-        maxWidth: "100%",
+        maxWidth: "100% !important",
         [theme.breakpoints.down("lg")]: {
             paddingTop: "5vh",
             backgroundImage: `url(${mobileHomeBanner.src})`,

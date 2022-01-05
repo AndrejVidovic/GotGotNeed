@@ -66,10 +66,6 @@ const styles = (theme) => ({
         [theme.breakpoints.up("lg")]: {
             display: "none",
         },
-        // transition:"transform .2s",
-        // "&:hover":{
-        //   transform: "scale(1.1)"
-        // }
     },
     pageBox: {
         [theme.breakpoints.down("lg")]: {
@@ -85,7 +81,10 @@ const Navbar = ({ openDrawer }) => {
         <>
             <AppBar position="fixed" sx={styles(theme).appBar}>
                 <Toolbar>
-                    <IconButton onClick={() => openDrawer()}>
+                    <IconButton
+                        onClick={() => openDrawer()}
+                        sx={styles(theme).menuButton}
+                    >
                         <MenuRounded sx={styles(theme).menuButton} />
                     </IconButton>
                     <Box>

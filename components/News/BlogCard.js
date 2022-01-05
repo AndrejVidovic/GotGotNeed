@@ -254,15 +254,16 @@ const BlogCard = ({ id, title, type, description, date }) => {
             >
                 <MenuItem onClick={shareMenuClose}>
                     <div
-                        class="fb-share-button"
+                        className="fb-share-button"
                         data-href="https://gotgotneed-lpce94hu6-andrejvidovic.vercel.app/"
                         data-layout="button"
                         data-size="large"
                     >
                         <a
                             target="_blank"
+                            rel="noreferrer"
                             href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgotgotneed-lpce94hu6-andrejvidovic.vercel.app%2F&amp;src=sdkpreparse"
-                            class="fb-xfbml-parse-ignore"
+                            className="fb-xfbml-parse-ignore"
                         >
                             Share on Facebook
                         </a>

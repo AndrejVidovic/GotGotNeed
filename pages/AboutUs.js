@@ -35,7 +35,7 @@ const styles = (theme) => ({
         fontWeight: 700,
         fontSize: "80px",
         [theme.breakpoints.down("md")]: {
-            fontSize: "40px",
+            fontSize: "50px",
         },
     },
     subtitle: {
@@ -45,6 +45,7 @@ const styles = (theme) => ({
         paddingBottom: "4vh",
         [theme.breakpoints.down("md")]: {
             fontSize: "25px",
+            paddingBottom: "6vh",
         },
     },
     text: {
@@ -99,7 +100,7 @@ const styles = (theme) => ({
         fontWeight: 400,
         fontSize: "20px",
         marginBottom: "4vh",
-        width: "220px",
+        width: "250px",
         textAlign: "justify",
         [theme.breakpoints.down("md")]: {
             fontSize: "12px",
@@ -109,13 +110,13 @@ const styles = (theme) => ({
     GGNImage: {
         alignItems: "center",
         justifyContent: "center",
-        padding: "5vh 0",
-        [theme.breakpoints.up("md")]: {
+        padding: "4vh 0",
+        [theme.breakpoints.up("sm")]: {
             display: "none",
         },
     },
     logo: {
-        [theme.breakpoints.down("md")]: {
+        [theme.breakpoints.down("sm")]: {
             display: "none",
         },
     },
@@ -179,7 +180,7 @@ function AboutUs() {
                                 src={GGNWhole}
                                 alt="GotGotNeed"
                                 width={700}
-                                height={150}
+                                height={140}
                             />
                         </Grid>
                         Duis aute irure dolor in reprehenderit in{" "}
