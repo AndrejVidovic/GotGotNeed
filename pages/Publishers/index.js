@@ -26,6 +26,7 @@ const styles = (theme) => ({
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
+        width: "100%",
     },
     pagination: {
         marginTop: "5vh",
@@ -85,8 +86,6 @@ function Publishers() {
         setCurrentPage(value);
     };
 
-    console.log("lista favorita:" + favorite);
-
     return (
         <>
             <Head>
@@ -114,22 +113,19 @@ function Publishers() {
                 </Grid>
                 <Grid
                     container
-                    xl={6}
-                    lg={8}
+                    xl={8}
+                    lg={9}
                     md={8}
                     sm={10}
                     xs={10}
-                    spacing={5.6}
+                    spacing={6}
                     sx={styles(theme).cardGrid}
                 >
                     {getFilteredPublishers().map((publisher) => (
                         <Grid item key={publisher.id}>
                             <PublisherCard
                                 key={publisher.id}
-                                id={publisher.id}
-                                title={publisher.title}
-                                country={publisher.country}
-                                types={publisher.types}
+                                publisher={publisher}
                                 favorite={favorite}
                                 setFavorite={setFavorite}
                             />

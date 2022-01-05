@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "FIFA 2022",
+        "category": "Football",
+        "releaseYear": 2022,
+        "numberOfSticker": 545,
+        "publisher": "Panini"
+    },
+    {
+        "id": 2,
+        "title": "UEFA 2020",
+        "category": "Football",
+        "releaseYear": 2020,
+        "numberOfSticker": 575,
+        "publisher": "Panini"
+    },
+    {
+        "id": 3,
+        "title": "FIFA 2022",
+        "category": "Football",
+        "releaseYear": 2022,
+        "numberOfSticker": 545,
+        "publisher": "Panini"
+    }
+]
