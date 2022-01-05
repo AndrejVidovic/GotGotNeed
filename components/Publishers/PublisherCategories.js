@@ -31,13 +31,23 @@ function Categories({ categories }) {
                     {categories}
                 </Typography>
             </Paper>
-            <Paper sx={{ display: "flex" }}>
-                {collections.map((collection) => (
-                    <PublisherCollection
-                        collection={collection}
-                        key={collection.id}
-                    />
-                ))}
+            <Paper>
+                <Grid
+                    container
+                    sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    {collections.map((collection) => (
+                        <PublisherCollection
+                            collection={collection}
+                            key={collection.id}
+                        />
+                    ))}{" "}
+                </Grid>
             </Paper>
         </Grid>
     );

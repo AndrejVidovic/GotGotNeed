@@ -65,7 +65,8 @@ function Publishers() {
     };
 
     const searchFilter = (event) => {
-        let searchWord = event.target.value;
+        let temp = event.target.value;
+        let searchWord = temp.toLowerCase();
         let tempFilteredPublishers = [];
 
         if (searchWord != "") {

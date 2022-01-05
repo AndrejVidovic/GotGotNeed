@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const styles = (theme) => ({
     bluePaper: {
-        padding: "20px",
+        padding: "15px", //bilo 20px
         backgroundColor: theme.palette.primary.main,
         borderRadius: theme.shape.borderRadius + "px",
         [theme.breakpoints.between("xs", "lg")]: {
@@ -15,7 +15,7 @@ const styles = (theme) => ({
     },
     inputPaper: {
         borderRadius: theme.shape.borderRadius + "px",
-        height: "40px",
+        height: "44px", //bilo 40px
         width: "100%",
         display: "flex",
         alignItems: "center",

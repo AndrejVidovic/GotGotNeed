@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "title": "Panini",
+        "category": ["Football", "Hockey", "Other"]
+    },
+    {
+        "id": 2,
+        "title": "Topps",
+        "category": ["Football", "Other"]
+    },
+    {
+        "id": 3,
+        "title": "Kraš",
+        "category": ["Other"]
+    }
+]
