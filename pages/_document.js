@@ -41,7 +41,7 @@ export default class MyDocument extends Document {
                     <script
                         async
                         defer
-                        crossorigin="anonymous"
+                        crossOrigin="anonymous"
                         src="https://connect.facebook.net/hr_HR/sdk.js#xfbml=1&version=v12.0"
                         nonce="CcJfqhpC"
                     ></script>
