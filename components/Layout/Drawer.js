@@ -29,7 +29,10 @@ const styles = (theme) => ({
         boxShadow: theme.shadows[3],
     },
     logo: {
-        margin: "10px auto auto 0",
+        height: "40px",
+        width: "100px",
+        margin: "0 auto 0 0",
+        position: "relative",
     },
     divider: {
         backgroundColor: darken(theme.palette.primary.main, 0.1),
@@ -64,6 +67,7 @@ const styles = (theme) => ({
     signUpName: {
         color: "black",
         marginLeft: "35px",
+        height: "80px",
     },
     pageButton: {
         height: "50px",
@@ -91,7 +95,12 @@ const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
         >
             <div style={styles(theme).header}>
                 <div style={styles(theme).logo}>
-                    <Image src={logo} layout="intrinsic" alt="GGN" />
+                    <Image
+                        src={logo}
+                        layout="fill"
+                        alt="GGN"
+                        objectFit="contain"
+                    />
                 </div>
                 <IconButton onClick={() => closeDrawer()}>
                     <CloseRounded sx={styles(theme).closeIcon} />
@@ -118,14 +127,15 @@ const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
             </List>
             <Link href="/Register" passHref>
                 <ButtonBase sx={styles(theme).signUpButton}>
-                    <span
+                    <div
                         style={{
                             ...styles(theme).pageName,
                             ...styles(theme).signUpName,
+                            ...styles(theme).signUpButton,
                         }}
                     >
                         SIGN UP
-                    </span>
+                    </div>
                 </ButtonBase>
             </Link>
             <Footer />

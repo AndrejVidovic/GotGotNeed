@@ -236,11 +236,7 @@ const BlogCard = ({ id, title, type, description, date }) => {
                         >
                             {type.map((typeName) => (
                                 <Grid item key={typeName}>
-                                    <Chip
-                                        size="small"
-                                        label={typeName}
-                                        onClick={() => console.log("hehe")}
-                                    />
+                                    <Chip size="small" label={typeName} />
                                 </Grid>
                             ))}
                         </Grid>
@@ -258,24 +254,23 @@ const BlogCard = ({ id, title, type, description, date }) => {
             >
                 <MenuItem onClick={shareMenuClose}>
                     <div
-                        className="fb-share-button"
-                        data-href="link"
+                        class="fb-share-button"
+                        data-href="https://gotgotneed-lpce94hu6-andrejvidovic.vercel.app/"
                         data-layout="button"
                         data-size="large"
                     >
                         <a
                             target="_blank"
-                            rel="noreferrer"
-                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
-                            className="fb-xfbml-parse-ignore"
+                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgotgotneed-lpce94hu6-andrejvidovic.vercel.app%2F&amp;src=sdkpreparse"
+                            class="fb-xfbml-parse-ignore"
                         >
-                            Share
+                            Share on Facebook
                         </a>
                     </div>
                 </MenuItem>
                 <MenuItem onClick={shareMenuClose}>
                     <a
-                        href="https://twitter.com/intent/tweet?button_hashtag=tweet&ref_src=twsrc%5Etfw"
+                        href="https://twitter.com/intent/tweet?text=Checkout%20this%20amazing%20blog%20piece%20on%20%23GotGotNeed%20!"
                         className="twitter-hashtag-button"
                         data-size="large"
                         data-text="Check out GotGotNeed, its great!"
@@ -284,7 +279,7 @@ const BlogCard = ({ id, title, type, description, date }) => {
                         data-lang="en"
                         data-show-count="false"
                     >
-                        Tweet{" "}
+                        Tweet #GotGotNeed
                     </a>
                 </MenuItem>
             </Menu>

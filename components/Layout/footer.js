@@ -1,7 +1,7 @@
-import { Grid, Icon, Toolbar, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Icon, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import logoFooter from "../../public/logoS.png";
+import logoFooter from "../../public/GGNImage.png";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -11,17 +11,29 @@ const pages = ["About Us", "Collectors", "Collections", "Publishers", "Blog"];
 const styles = (theme) => ({
     exploreText: {
         fontWeight: 700,
-        fontSize: "40px",
+        fontSize: "50px",
         color: "white",
+        marginBottom: "15px",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "40px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "30px",
+            marginBottom: "35px",
+        },
     },
     sites: {
         fontWeight: 600,
-        fontSize: "1.7vh",
-        ":hover": {
+        fontSize: "14px",
+        paddingRight: "10px",
+        color: "white",
+        marginBottom: "15px",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "20px",
+        },
+        "&:hover": {
             cursor: "pointer",
         },
-        padding: "2px 0 2px 10px",
-        color: "white",
     },
     socialNetworksGrid: {
         display: "flex",
@@ -30,16 +42,19 @@ const styles = (theme) => ({
     },
     socialNetworksText: {
         fontWeight: 400,
-        fontSize: "1.4vh",
+        fontSize: "14px",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "center",
-        padding: "0.5vh",
         color: "white",
+        marginBottom: "20px",
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "10px",
+        },
     },
     copyright: {
         fontWeight: 400,
-        fontSize: "1vh",
+        fontSize: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -49,17 +64,14 @@ const styles = (theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        marginTop: "50px",
     },
-    toolbar: {
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        paddingBottom: "2vh",
-    },
+
     container: {
         backgroundColor: theme.palette.primary.main,
-        paddingTop: "4vh",
+        paddingTop: "40px",
         width: "100%",
+        padding: "40px",
     },
     grid: {
         display: "flex",
@@ -68,10 +80,24 @@ const styles = (theme) => ({
             alignItems: "flex-start",
         },
     },
-    gridSM: {
-        display: "flex",
+
+    socialMediaIcon: {
+        marginRight: "7px",
+    },
+    logo: {
+        position: "relative",
+        marginTop: 0,
+        marginBottom: "55px",
+        height: "130px",
+        width: "220px",
+        [theme.breakpoints.down("md")]: {
+            height: "110px",
+            width: "170px",
+            marginBottom: "20px",
+        },
         [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
+            height: "80px",
+            width: "130px",
         },
     },
 });
@@ -80,119 +106,115 @@ function Footer() {
     const theme = useTheme();
     const date = new Date().getFullYear();
     return (
-        <Grid sx={styles(theme).container}>
-            <Toolbar sx={styles(theme).toolbar}>
-                <Grid
-                    item
-                    container
-                    sx={styles(theme).grid}
-                    xl={3}
-                    lg={4}
-                    md={5}
-                    sm={7}
-                    xs={7}
-                >
-                    <Image src={logoFooter} alt="GGN" layout="fixed" />
-                    <Grid sx={styles(theme).gridSM}>
-                        <Grid
-                            item
-                            sx={styles(theme).socialNetworksGrid}
-                            xl={6}
-                            lg={6}
-                            md={7}
-                            sm={9}
-                            xs={12}
+        <Grid
+            sx={styles(theme).container}
+            container
+            justifyContent="center"
+            alignItems="flex-end"
+        >
+            <Grid //prvi lijevi blok
+                item
+                container
+                sx={styles(theme).grid}
+                xl={3}
+                lg={4}
+                sm={5}
+                xs={7}
+            >
+                <Box sx={styles(theme).logo}>
+                    <Image
+                        src={logoFooter}
+                        alt="GGN"
+                        layout="fill"
+                        objectFit="contain"
+                    />
+                </Box>
+                <Grid container direction="row">
+                    <Grid
+                        item
+                        sx={styles(theme).socialNetworksGrid}
+                        md={6}
+                        xs={12}
+                    >
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
                         >
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <Icon>email_icon</Icon>
-                                gotgotneed@fesb.hr
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <Icon>call_icon</Icon>
-                                +385 021 508 302
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <TwitterIcon />
-                                @GotGotNeed
-                            </Typography>
-                        </Grid>
-                        <Grid
-                            item
-                            sx={styles(theme).socialNetworksGrid}
-                            xl={4}
-                            lg={3}
-                            md={3}
-                            sm={8}
-                            xs={4}
+                            <Icon sx={styles(theme).socialMediaIcon}>
+                                email_icon
+                            </Icon>
+                            gotgotneed@fesb.hr
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
                         >
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <FacebookIcon />
-                                @GotGotNeed
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <InstagramIcon />
-                                @GotGotNeed
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={styles(theme).socialNetworksText}
-                            >
-                                <LinkedInIcon />
-                                @GotGotNeed
-                            </Typography>
-                        </Grid>
+                            <Icon sx={styles(theme).socialMediaIcon}>
+                                call_icon
+                            </Icon>
+                            +385 21 508 302
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
+                        >
+                            <TwitterIcon sx={styles(theme).socialMediaIcon} />
+                            @GotGotNeed
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        sx={styles(theme).socialNetworksGrid}
+                        md={6}
+                        xs={12}
+                    >
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
+                        >
+                            <FacebookIcon sx={styles(theme).socialMediaIcon} />
+                            @GotGotNeed
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
+                        >
+                            <InstagramIcon sx={styles(theme).socialMediaIcon} />
+                            @GotGotNeed
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={styles(theme).socialNetworksText}
+                        >
+                            <LinkedInIcon sx={styles(theme).socialMediaIcon} />
+                            @GotGotNeed
+                        </Typography>
                     </Grid>
                 </Grid>
-                <Grid
-                    item
-                    container
-                    sx={styles(theme).grid}
-                    xl={1}
-                    lg={2}
-                    md={2}
-                    sm={2}
-                    xs={5}
-                >
-                    <Typography variant="h3" sx={styles(theme).exploreText}>
-                        Explore
-                    </Typography>
-                    <Grid>
-                        <Link href={{ pathname: "/" }} passHref>
+            </Grid>
+            <Grid item container sx={styles(theme).grid} xl={1} md={2} xs={4}>
+                <Typography variant="h3" sx={styles(theme).exploreText}>
+                    Explore
+                </Typography>
+                <Grid>
+                    <Link href={{ pathname: "/" }} passHref>
+                        <Typography sx={styles(theme).sites}>Home</Typography>
+                    </Link>
+                    {pages.map((page, index) => (
+                        <Link
+                            href={{ pathname: "/[page]" }}
+                            as={`/${page.replace(/\s+/g, "")}`}
+                            passHref
+                            key={index}
+                        >
                             <Typography sx={styles(theme).sites}>
-                                Home
+                                {page}
                             </Typography>
                         </Link>
-                        {pages.map((page, index) => (
-                            <Link
-                                href={{ pathname: "/[page]" }}
-                                as={`/${page.replace(/\s+/g, "")}`}
-                                passHref
-                                key={index}
-                            >
-                                <Typography sx={styles(theme).sites}>
-                                    {page}
-                                </Typography>
-                            </Link>
-                        ))}
-                    </Grid>
+                    ))}
                 </Grid>
-            </Toolbar>
-            <Grid sx={styles(theme).copyrightGrid}>
+            </Grid>
+            <Grid item xs={12} sx={styles(theme).copyrightGrid}>
                 <Typography variant="caption" sx={styles(theme).copyright}>
                     Copyright @ {date} GotGotNeed. All rights reserved.
                 </Typography>

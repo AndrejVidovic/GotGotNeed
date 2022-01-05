@@ -90,6 +90,7 @@ function Home() {
                                         "smoothScrollTarget"
                                     );
                                 element.scrollIntoView({ behavior: "smooth" });
+                                console.log("klikkk");
                             }}
                         >
                             <FontAwesomeIcon
