@@ -65,10 +65,10 @@ const Search = ({
                 return indicator;
             });
         } else {
-            tempFilteredNews = itemsToFilter;
+            tempFilteredItems = itemsToFilter;
         }
 
-        setFilteredItems(tempFilteredNews);
+        setFilteredItems(tempFilteredItems);
     };
 
     return (
