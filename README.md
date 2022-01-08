@@ -1,3 +1,3 @@
 # GotGotNeed
 
-## Preview Link: https://gotgotneed-pkhuhf0j8-andrejvidovic.vercel.app
+## Preview Link: https://gotgotneed-rejfrzif0-andrejvidovic.vercel.app
