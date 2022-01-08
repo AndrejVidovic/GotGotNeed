@@ -1,12 +1,14 @@
 import { Grid, useTheme } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Head from "next/head";
 import mobileHomeBanner from "../public/mobileHomeBanner.png";
 import SmallLogin from "../modules/SmallLogin";
 import Glass from "../components/glass";
 import BannerAndButton from "../modules/BannerAndButton";
 import Footer from "../components/Layout/footer";
 import NewsOnGlass from "../modules/NewsOnGlass";
+import { getNewsForHomePage } from "../helper";
 
 const styles = (theme) => ({
     gridContainer: {
@@ -44,11 +46,19 @@ const styles = (theme) => ({
     },
 });
 
-function Home() {
+const Home = ({ newsData }) => {
     const theme = useTheme();
 
     return (
         <>
+            <Head>
+                <title>GGN | Home</title>
+                <meta
+                    name="viewport"
+                    content="initial-scale=1.0, width=device-width"
+                />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Grid
                 container
                 direction="column"
@@ -103,12 +113,22 @@ function Home() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} id="smoothScrollTarget">
-                    <NewsOnGlass />
+                    <NewsOnGlass newsData={newsData} />
                 </Grid>
             </Grid>
             <Footer />
         </>
     );
-}
+};
 
 export default Home;
+
+export async function getStaticProps() {
+    const newsData = getNewsForHomePage();
+
+    return {
+        props: {
+            newsData,
+        },
+    };
+}

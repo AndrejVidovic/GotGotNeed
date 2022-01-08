@@ -14,6 +14,7 @@ import Search from "../components/Search";
 import BlogCard from "../components/News/BlogCard";
 import Chips from "../components/News/Chips";
 import Title from "../components/Title";
+import { fontGrid } from "@mui/material/styles/cssUtils";
 
 const styles = (theme) => ({
     container: {
@@ -38,7 +39,9 @@ const News = () => {
     const allNews = dummyNewsData;
     const newsLimitPerPage = 3;
 
-    const [filteredNews, setFilteredNews] = useState(() => dummyNewsData);
+    const [chipsNews, setChipsNews] = useState(() => dummyNewsData);
+    const [searchNews, setSearchNews] = useState(() => dummyNewsData);
+
     const [activeChips, setActiveChips] = useState(() => []);
     const [numberOfPages, setNumberOfPages] = useState(
         Math.ceil(filteredNews.length / newsLimitPerPage)
@@ -47,8 +50,16 @@ const News = () => {
 
     useEffect(() => {
         setCurrentPage(1);
+        let filteredNews = [];
+        for (let chipBlog in chipsNews) {
+            for (let searchBlog in searchNews) {
+                if (chipBlog.id === searchBlog.id) {
+                    filteredNews.push(chipBlog);
+                }
+            }
+        }
         setNumberOfPages(Math.ceil(filteredNews.length / newsLimitPerPage));
-    }, [filteredNews]);
+    }, [searchNews, chipsNews]);
 
     let tempAllKeywords = [];
     for (let i = 0; i < allNews.length; i++) {
@@ -61,30 +72,22 @@ const News = () => {
         let endIndex = newsLimitPerPage + startIndex;
         endIndex =
             endIndex > filteredNews.length ? filteredNews.length : endIndex;
+
+        let filteredNews = [];
+        for (let chipBlog in chipsNews) {
+            for (let searchBlog in searchNews) {
+                if (chipBlog.id === searchBlog.id) {
+                    filteredNews.push(chipBlog);
+                }
+            }
+        }
+
         return filteredNews.slice(startIndex, endIndex);
     };
 
     const handlePageChange = (event, value) => {
         event.preventDefault();
         setCurrentPage(value);
-    };
-
-    const searchFilter = (event) => {
-        let searchWord = event.target.value;
-        let tempFilteredNews = [];
-
-        if (searchWord != "") {
-            tempFilteredNews = allNews.filter(
-                (blog) =>
-                    blog.title.toLowerCase().includes(searchWord) ||
-                    blog.description.toLowerCase().includes(searchWord) ||
-                    blog.date.toLowerCase().includes(searchWord)
-            );
-        } else {
-            tempFilteredNews = allNews;
-        }
-
-        setFilteredNews(tempFilteredNews);
     };
 
     return (
@@ -110,7 +113,11 @@ const News = () => {
                     xs={10}
                     sx={styles(theme).searchGrid}
                 >
-                    <Search searchTriggeredFunction={searchFilter} />
+                    <Search
+                        itemsToFilter={allNews}
+                        setFilteredItems={setSearchNews}
+                        propertiesToSearch={["title", "description", "date"]}
+                    />
                 </Grid>
                 <Grid
                     item
@@ -129,7 +136,7 @@ const News = () => {
                         <Grid item key={index}>
                             <Chips
                                 chipName={keyword}
-                                setFilteredNews={setFilteredNews}
+                                setFilteredNews={setChipsNews}
                                 allNews={allNews}
                                 activeChips={activeChips}
                                 setActiveChips={setActiveChips}

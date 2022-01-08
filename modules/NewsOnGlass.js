@@ -1,7 +1,6 @@
 import { useTheme, Grid } from "@mui/material";
 import Glass from "../components/glass";
 import BlogCard from "../components/News/BlogCard";
-import newsData from "../fakeData/News/News.json";
 import Link from "next/link";
 
 const styles = (theme) => ({
@@ -36,7 +35,7 @@ const styles = (theme) => ({
     },
 });
 
-const NewsOnGlass = () => {
+const NewsOnGlass = ({ newsData }) => {
     const theme = useTheme();
 
     return (
