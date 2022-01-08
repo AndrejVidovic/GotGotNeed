@@ -21,6 +21,13 @@ const styles = (theme) => ({
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "row",
+        width: "100%",
+        [theme.breakpoints.between("xs", "sm")]: {
+            marginTop: "4rem",
+        },
+        [theme.breakpoints.between("sm", "lg")]: {
+            marginTop: "4rem",
+        },
     },
     info: {
         fontWeight: 700,
@@ -32,6 +39,18 @@ const styles = (theme) => ({
         fontSize: "16px",
         textAlign: "justify",
         marginTop: "1rem",
+        [theme.breakpoints.down("md")]: {
+            display: "none",
+        },
+    },
+    descriptionSmall: {
+        fontWeight: 400,
+        fontSize: "15px",
+        textAlign: "justify",
+        marginTop: "1rem",
+        [theme.breakpoints.up("md")]: {
+            display: "none",
+        },
     },
     title: {
         fontWeight: 700,
@@ -50,8 +69,8 @@ const styles = (theme) => ({
         width: "100%",
         height: "100%",
         marginRight: "4rem",
-        [theme.breakpoints.down("sm")]: {
-            marginRight: 0,
+        [theme.breakpoints.down("md")]: {
+            marginRight: "1.3rem",
         },
     },
     categoriesGrid: {
@@ -80,25 +99,23 @@ function Publisher(props) {
                 />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Grid item sx={styles(theme).infoGrid}>
+                <Grid container sx={styles(theme).infoGrid}>
                     <Grid
                         item
                         lg={3}
                         xl={2}
                         md={3}
                         sm={4}
-                        xs={10}
+                        xs={4}
                         sx={styles(theme).imageGrid}
                     >
                         <Image
                             src={images[id % 3]}
-                            layout="responsive"
-                            width={100}
-                            height={60}
+                            layout="intrinsic"
                             alt={title}
                         />
                     </Grid>
-                    <Grid item lg={4} xl={3} md={5} sm={4} xs={10}>
+                    <Grid item lg={3} xl={2} md={4} sm={4} xs={5}>
                         <Typography variant="h1" sx={styles(theme).title}>
                             {title}
                         </Typography>
@@ -120,16 +137,35 @@ function Publisher(props) {
                     </Grid>
                 </Grid>
                 <Grid
+                    item
+                    md={9}
+                    sm={9}
+                    xs={10}
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                    }}
+                >
+                    <Typography
+                        variant="body1"
+                        sx={styles(theme).descriptionSmall}
+                    >
+                        {description}
+                    </Typography>
+                </Grid>
+
+                <Grid
                     sx={styles(theme).categoriesGrid}
                     item
-                    xl={6}
+                    xl={7}
                     lg={9}
                     md={9}
                     sm={10}
                     xs={10}
                 >
                     {types.map((categories) => (
-                        <Grid key={categories.id}>
+                        <Grid key={categories.id} sx={{ width: "100%" }}>
                             <Categories categories={categories}></Categories>
                         </Grid>
                     ))}

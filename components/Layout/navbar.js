@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import { MenuRounded } from "@mui/icons-material";
 import Link from "next/link";
-import logo from "../../public/logoS.png";
+import logo from "../../public/LogoS.png";
 
 const pages = [
     "About Us",

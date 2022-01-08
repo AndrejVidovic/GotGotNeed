@@ -14,9 +14,15 @@ const styles = (theme) => ({
         flexDirection: "row",
         backgroundColor: "rgba(219, 219, 219, 0.08)",
         padding: 0,
-        margin: "3rem 0.5rem 3rem 0.5rem",
+        margin: "3rem 0.6rem 3rem 0.6rem",
+        [theme.breakpoints.down("lg")]: {
+            margin: "1rem 0.4rem 1rem 0.4rem",
+        },
+        [theme.breakpoints.down("xl")]: {
+            margin: "1rem 0.6rem 1rem 0.6rem",
+        },
         boxShadow: theme.shadows[4],
-        width: "100rem",
+        width: "auto",
     },
     title: {
         fontWeight: 700,
@@ -52,6 +58,7 @@ const styles = (theme) => ({
     },
     content: {
         padding: "16px 0 16px 20px",
+        width: "16rem",
     },
 });
 function PublisherCollection({ collection }) {

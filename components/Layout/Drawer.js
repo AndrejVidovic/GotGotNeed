@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import Footer from "./footer";
-import logo from "../../public/logoS.png";
+import logo from "../../public/LogoS.png";
 import Image from "next/image";
 import Link from "next/link";
 

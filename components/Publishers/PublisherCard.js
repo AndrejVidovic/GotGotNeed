@@ -45,7 +45,7 @@ const styles = (theme) => ({
     },
     title: {
         fontWeight: 700,
-        fontSize: "1.7rem",
+        fontSize: "1.5rem",
     },
     publisherCountry: {
         display: "flex",
@@ -90,12 +90,13 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
 
     const images = [publ1, publ2, publ3];
 
-    const HandleClick = () => {
+    const HandleClick = (e) => {
+        e.preventDefault();
         let tempFavorite = [];
-        if (!favorite.includes(id)) {
-            tempFavorite = [...favorite, id];
+        if (!favorite.includes(publisher.id)) {
+            tempFavorite = [...favorite, publisher.id];
         } else {
-            tempFavorite = favorite.filter((fav) => fav !== id);
+            tempFavorite = favorite.filter((fav) => fav !== publisher.id);
         }
         setFavorite(tempFavorite);
     };
@@ -144,7 +145,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                                 style={{
                                     filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.4))",
                                 }}
-                                onClick={() => HandleClick(publisher.id)}
+                                onClick={(e) => HandleClick(e)}
                             />
                         </Grid>
                         <Grid item sx={{ margin: "0.7rem" }}>

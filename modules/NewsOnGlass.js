@@ -1,5 +1,5 @@
 import { useTheme, Grid } from "@mui/material";
-import Glass from "../components/glass";
+import Glass from "../components/Glass";
 import BlogCard from "../components/News/BlogCard";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ const styles = (theme) => ({
         },
     },
     newsTitle: {
-        fontSize: "80px",
+        fontSize: "65px", //prije 80px
         fontWeight: "700",
         textShadow: theme.shadows[2],
         display: "block",
