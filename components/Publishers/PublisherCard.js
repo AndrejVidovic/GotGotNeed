@@ -45,7 +45,7 @@ const styles = (theme) => ({
     },
     title: {
         fontWeight: 700,
-        fontSize: "1.7rem",
+        fontSize: "1.5rem",
     },
     publisherCountry: {
         display: "flex",

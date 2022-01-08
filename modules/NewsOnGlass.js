@@ -21,7 +21,7 @@ const styles = (theme) => ({
         },
     },
     newsTitle: {
-        fontSize: "80px",
+        fontSize: "65px", //prije 80px
         fontWeight: "700",
         textShadow: theme.shadows[2],
         display: "block",
