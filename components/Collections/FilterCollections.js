@@ -1,6 +1,7 @@
 import {
     Button,
     Checkbox,
+    Collapse,
     FormControl,
     Grid,
     IconButton,
@@ -167,7 +168,7 @@ function FilterCollections({
                     />
                 </Grid>
             </Grid>
-            {expand ? (
+            <Collapse in={expand} sx={{ width: "100%" }}>
                 <Grid container sx={styles(theme).container}>
                     <Grid sx={styles(theme).searchGrid}>
                         <Search />
@@ -251,7 +252,7 @@ function FilterCollections({
                         />
                     </Grid>
                 </Grid>
-            ) : null}
+            </Collapse>
             <Grid sx={styles(theme).expandGrid}>
                 {expand ? (
                     <IconButton onClick={() => setExpand(false)}>

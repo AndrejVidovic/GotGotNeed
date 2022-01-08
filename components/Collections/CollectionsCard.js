@@ -14,6 +14,7 @@ import PublisherCollection from "../../public/PublisherCollection.png";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as faStarSharp } from "@fortawesome/free-solid-svg-icons";
 import { ExpandCircleDown } from "@mui/icons-material";
+import { useState } from "react";
 
 const styles = (theme) => ({
     root: {
@@ -97,6 +98,7 @@ const styles = (theme) => ({
 function CollectionsCard({ collection, favorite, setFavorite }) {
     const theme = useTheme();
     const image = PublisherCollection;
+    const [checked, setChecked] = useState(false);
 
     const HandleClickFavorite = (e) => {
         e.preventDefault();
@@ -107,6 +109,9 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
             tempFavorite = favorite.filter((fav) => fav !== collection.id);
         }
         setFavorite(tempFavorite);
+    };
+    const handleChange = () => {
+        setChecked((prev) => !prev);
     };
     return (
         <Card sx={styles(theme).root}>
@@ -140,7 +145,10 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
                             onClick={(e) => HandleClickFavorite(e)}
                         />
                     </Grid>
-                    <IconButton sx={styles(theme).iconButton}>
+                    <IconButton
+                        sx={styles(theme).iconButton}
+                        onClick={handleChange}
+                    >
                         <ExpandCircleDown
                             sx={styles(theme).expandIcon}
                         ></ExpandCircleDown>
