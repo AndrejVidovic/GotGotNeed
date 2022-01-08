@@ -31,7 +31,7 @@ const styles = (theme) => ({
         },
     },
     glass: {
-        width: "100vw",
+        width: "100%",
     },
 });
 

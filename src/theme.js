@@ -49,6 +49,7 @@ const theme = createTheme({
                         marginTop: "5vh",
                     },
                     "@media (min-width: 1100px)": {
+                        zoom: "85%",
                         marginTop: "15vh",
                     },
                     backgroundImage: `url(${backgroundIMG.src})`,
@@ -79,7 +80,7 @@ const theme = createTheme({
         MuiDrawer: {
             styleOverrides: {
                 paper: {
-                    width: "100vw",
+                    width: "100%",
                     backgroundColor: blue[700],
                 },
             },

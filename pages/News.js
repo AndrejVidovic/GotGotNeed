@@ -14,7 +14,6 @@ import Search from "../components/Search";
 import BlogCard from "../components/News/BlogCard";
 import Chips from "../components/News/Chips";
 import Title from "../components/Title";
-import { fontGrid } from "@mui/material/styles/cssUtils";
 
 const styles = (theme) => ({
     container: {
@@ -44,7 +43,7 @@ const News = () => {
 
     const [activeChips, setActiveChips] = useState(() => []);
     const [numberOfPages, setNumberOfPages] = useState(
-        Math.ceil(filteredNews.length / newsLimitPerPage)
+        Math.ceil(allNews.length / newsLimitPerPage)
     );
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -70,17 +69,18 @@ const News = () => {
     const getDisplayedNews = () => {
         const startIndex = newsLimitPerPage * currentPage - newsLimitPerPage;
         let endIndex = newsLimitPerPage + startIndex;
-        endIndex =
-            endIndex > filteredNews.length ? filteredNews.length : endIndex;
 
         let filteredNews = [];
-        for (let chipBlog in chipsNews) {
-            for (let searchBlog in searchNews) {
-                if (chipBlog.id === searchBlog.id) {
-                    filteredNews.push(chipBlog);
+        for (let i in chipsNews) {
+            for (let j in searchNews) {
+                if (chipsNews[i].id === searchNews[j].id) {
+                    filteredNews.push(chipsNews[i]);
                 }
             }
         }
+
+        endIndex =
+            endIndex > filteredNews.length ? filteredNews.length : endIndex;
 
         return filteredNews.slice(startIndex, endIndex);
     };

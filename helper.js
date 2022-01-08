@@ -1,3 +1,8 @@
-import newsData from "../fakeData/News/News.json";
+import axios from "axios";
 
-export const getNewsForHomePage = () => newsData.slice(0, 3);
+const instance = axios.create({
+    baseURL: "https://api.npoint.io",
+});
+
+export const getNewsForHomePage = () =>
+    instance.get("/a9192f26afbee177f219").then((response) => response.data);

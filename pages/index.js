@@ -124,8 +124,7 @@ const Home = ({ newsData }) => {
 export default Home;
 
 export async function getStaticProps() {
-    const newsData = getNewsForHomePage();
-
+    const newsData = await getNewsForHomePage();
     return {
         props: {
             newsData,

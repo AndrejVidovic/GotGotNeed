@@ -30,7 +30,9 @@ const Glass = ({ children, styling, color, onClickFunction }) => {
             container
             alignItems="center"
             justifyContent="center"
-            onClick={() => onClickFunction()}
+            onClick={() =>
+                typeof onClickFunction === "function" ? onClickFunction() : null
+            }
         >
             {children}
         </Grid>
