@@ -1,19 +1,11 @@
-import {
-    Grid,
-    Typography,
-    useTheme,
-    Chip,
-    Pagination,
-    ListItem,
-} from "@mui/material";
+import { Grid, Pagination, useTheme, Button } from "@mui/material";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import dummyNewsData from "../fakeData/News/News.json";
-import Footer from "../components/Layout/footer";
-import Search from "../components/Search";
-import BlogCard from "../components/News/BlogCard";
-import Chips from "../components/News/Chips";
-import Title from "../components/Title";
+import Footer from "../../components/Layout/footer";
+import Search from "../../components/Search";
+import Title from "../../components/Title";
+import allCollectors from "../../fakeData/Profiles/Profiles.json";
+import CollectorCard from "../../modules/Collectors/CollectorCard";
 
 const styles = (theme) => ({
     container: {
@@ -25,67 +17,59 @@ const styles = (theme) => ({
     },
     searchGrid: {
         marginTop: "4vh",
-        marginBottom: "6vh",
+        marginBottom: "10vh",
         width: "100%",
     },
     pagination: {
         marginTop: "5vh",
     },
+    card: {
+        borderRadius: theme.shape.borderRadius + "px",
+        overflow: "hidden",
+        boxShadow: theme.shadows[1],
+        position: "relative",
+        height: "350px",
+        width: "100%",
+    },
+    cardImage: {
+        position: "relative",
+        width: "100%",
+        height: "60%",
+    },
+    searchButtons: {
+        margin: "0 0 0 15px",
+        fontWeight: 600,
+    },
 });
 
-const News = () => {
+const Collectors = () => {
     const theme = useTheme();
-    const allNews = dummyNewsData;
-    const newsLimitPerPage = 3;
+    const allUsers = allCollectors;
+    const cardsPerPage = 6;
 
-    const [chipsNews, setChipsNews] = useState(() => dummyNewsData);
-
+    const [currentPage, setCurrentPage] = useState(() => 1);
+    const [filteredUsers, setFilteredUsers] = useState(() => allUsers);
     const [numberOfPages, setNumberOfPages] = useState(
-        Math.ceil(allNews.length / newsLimitPerPage)
+        Math.ceil(allUsers.length / cardsPerPage)
     );
-    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         setCurrentPage(1);
-        let filteredNews = [];
-        for (let chipBlog in chipsNews) {
-            for (let searchBlog in searchNews) {
-                if (chipBlog.id === searchBlog.id) {
-                    filteredNews.push(chipBlog);
-                }
-            }
-        }
-        setNumberOfPages(Math.ceil(filteredNews.length / newsLimitPerPage));
-    }, [searchNews, chipsNews]);
-
-    let tempAllKeywords = [];
-    for (let i = 0; i < allNews.length; i++) {
-        tempAllKeywords = [...tempAllKeywords, ...allNews[i].type];
-    }
-    let allUniqueKeywords = [...new Set(tempAllKeywords)]; //vrati samo niz jedinstvenih
-
-    const getDisplayedNews = () => {
-        const startIndex = newsLimitPerPage * currentPage - newsLimitPerPage;
-        let endIndex = newsLimitPerPage + startIndex;
-
-        let filteredNews = [];
-        for (let i in chipsNews) {
-            for (let j in searchNews) {
-                if (chipsNews[i].id === searchNews[j].id) {
-                    filteredNews.push(chipsNews[i]);
-                }
-            }
-        }
-
-        endIndex =
-            endIndex > filteredNews.length ? filteredNews.length : endIndex;
-
-        return filteredNews.slice(startIndex, endIndex);
-    };
+        setNumberOfPages(Math.ceil(filteredUsers.length / cardsPerPage));
+    }, [filteredUsers]);
 
     const handlePageChange = (event, value) => {
         event.preventDefault();
         setCurrentPage(value);
+    };
+
+    const getDisplayedUsers = () => {
+        const startIndex = cardsPerPage * currentPage - cardsPerPage;
+        let endIndex = cardsPerPage + startIndex;
+        endIndex =
+            endIndex > filteredUsers.length ? filteredUsers.length : endIndex;
+
+        return filteredUsers.slice(startIndex, endIndex);
     };
 
     return (
@@ -98,9 +82,31 @@ const News = () => {
                     title="Collectors"
                     subtitle="Your fellow sticker enthusiasts."
                 />
+                <Grid item xl={6} md={8} xs={10} sx={styles(theme).searchGrid}>
+                    <Search
+                        itemsToFilter={allUsers}
+                        setFilteredItems={setFilteredUsers}
+                        propertiesToSearch={["username", "location", "name"]}
+                    >
+                        {/* <Button variant="contained" color="secondary" sx={styles(theme).searchButtons}>Split</Button>
+                        <Button variant="contained" color="secondary" sx={styles(theme).searchButtons}>Croatia</Button> */}
+                    </Search>
+                </Grid>
+                <Grid container item xl={6} md={8} xs={10} spacing={6}>
+                    {getDisplayedUsers().map((user) => (
+                        <CollectorCard user={user} key={user.username} />
+                    ))}
+                </Grid>
+                <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
+                    <Pagination
+                        page={currentPage}
+                        count={numberOfPages}
+                        onChange={handlePageChange}
+                    />
+                </Grid>
             </Grid>
             <Footer />
         </>
     );
 };
-export default News;
+export default Collectors;

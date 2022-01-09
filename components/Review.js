@@ -2,6 +2,7 @@ import { Box, Grid, Typography, useTheme } from "@mui/material";
 import Glass from "./Glass";
 import Image from "next/image";
 import avatarImg from "../public/maradonaAvatar.jpg";
+import Link from "next/link";
 
 const styles = (theme) => ({
     glassReview: {
@@ -29,6 +30,11 @@ const styles = (theme) => ({
         textShadow: theme.shadows[4],
         display: "inline",
         margin: 0,
+        transition: "all 0.2s ease",
+        "&:hover": {
+            transform: "scale(1.03)",
+            cursor: "pointer",
+        },
         [theme.breakpoints.between("sm", "md")]: {
             fontSize: "13px",
         },
@@ -76,6 +82,10 @@ const styles = (theme) => ({
         width: "100px",
         height: "100px",
         boxShadow: theme.shadows[4],
+        overflow: "hidden",
+        "&:hover": {
+            cursor: "pointer",
+        },
         [theme.breakpoints.between("sm", "md")]: {
             left: "-40px",
             width: "80px",
@@ -94,20 +104,32 @@ const Review = ({ review }) => {
 
     return (
         <Glass color={review.positive + 3} styling={styles(theme).glassReview}>
-            <Box sx={styles(theme).reviewProfilePictureContainer}>
-                <Image
-                    src={avatarImg}
-                    alt={review.username + "'s profile picture."}
-                    layout="fill"
-                    objectFit="cover"
-                />
-            </Box>
+            <Link
+                href={`/Collectors/${review.username}`}
+                passHref
+                style={{ textDecoration: "none", color: "black" }}
+            >
+                <Box sx={styles(theme).reviewProfilePictureContainer}>
+                    <Image
+                        src={avatarImg}
+                        alt={review.username + "'s profile picture."}
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                </Box>
+            </Link>
             <Grid container>
                 <Grid item xs={12} container>
                     <Grid item xs={12} container>
-                        <Typography sx={styles(theme).reviewUsername}>
-                            {review.username}
-                        </Typography>
+                        <Link
+                            href={`/Collectors/${review.username}`}
+                            passHref
+                            style={{ textDecoration: "none", color: "black" }}
+                        >
+                            <Typography sx={styles(theme).reviewUsername}>
+                                {review.username}
+                            </Typography>
+                        </Link>
                         <Typography sx={styles(theme).reviewDate}>
                             {review.date}
                         </Typography>

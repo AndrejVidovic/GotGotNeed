@@ -107,7 +107,7 @@
         "reviews": [
             {
                 "id": 10,
-                "positive": 0,
+                "positive": 1,
                 "location": "Split, Croatia",
                 "username": "ivjak23",
                 "date": "26/02/2021",

@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const styles = (theme) => ({
     bluePaper: {
         padding: "15px", //bilo 20px
+        display: "flex",
         backgroundColor: theme.palette.primary.main,
         borderRadius: theme.shape.borderRadius + "px",
         [theme.breakpoints.between("xs", "lg")]: {
@@ -26,6 +27,7 @@ const styles = (theme) => ({
     input: {
         display: "flex",
         alignItems: "center",
+        width: "100%",
         fontSize: "1.2rem",
         [theme.breakpoints.between("xs", "lg")]: {
             fontSize: "0.9rem",
@@ -58,7 +60,7 @@ const Search = ({
                     if (
                         itemOfSearch[propertiesToSearch[i]]
                             .toLowerCase()
-                            .includes(searchWord)
+                            .includes(searchWord.toLowerCase())
                     )
                         indicator = true;
                 }

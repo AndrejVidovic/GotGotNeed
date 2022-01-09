@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import ProfileHeader from "../../modules/Profile/ProfileHeader";
 import Reviews from "../../modules/Profile/Reviews";
 import fakeProfiles from "../../fakeData/Profiles/Profiles.json";
+import Error from "next/error";
 
 const styles = (theme) => ({
     container: {
@@ -20,13 +21,22 @@ const styles = (theme) => ({
     },
 });
 
+const findUser = (username) => {
+    for (let i = 0; i < fakeProfiles.length; i++) {
+        if (fakeProfiles[i].username === username) {
+            return fakeProfiles[i];
+        }
+    }
+    return null;
+};
+
 const Profile = () => {
     const theme = useTheme();
     const router = useRouter();
     const username = router.query.username;
-    const user = fakeProfiles[0];
+    const user = findUser(username);
 
-    return (
+    return user !== null ? (
         <>
             <Head>
                 <title>Profile | {router.query.username}</title>
@@ -39,6 +49,8 @@ const Profile = () => {
             </Grid>
             <Footer />
         </>
+    ) : (
+        <Error statusCode={404} />
     );
 };
 
