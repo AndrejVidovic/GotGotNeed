@@ -61,6 +61,17 @@ function Collections() {
         event.preventDefault();
         setCurrentPage(value);
     };
+
+    const getFilteredCollections = () => {
+        const startIndex =
+            CollectionsLimitPerPage * currentPage - CollectionsLimitPerPage;
+        let endIndex = CollectionsLimitPerPage + startIndex;
+        endIndex =
+            endIndex > filteredCollections.length
+                ? filteredCollections.length
+                : endIndex;
+        return filteredCollections.slice(startIndex, endIndex);
+    };
     return (
         <>
             <Head>
@@ -92,6 +103,7 @@ function Collections() {
                                 publisher={publisher}
                                 category={category}
                                 collections={collections}
+                                setFilteredCollections={setFilteredCollections}
                             />
                         </Grid>
                     </Glass>
@@ -105,7 +117,7 @@ function Collections() {
                     xs={10}
                     sx={styles(theme).cardGrid}
                 >
-                    {collections.map((data) => (
+                    {getFilteredCollections().map((data) => (
                         <CollectionsCard
                             collection={data}
                             key={data.id}

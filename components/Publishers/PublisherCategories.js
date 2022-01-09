@@ -34,12 +34,18 @@ const styles = (theme) => ({
         padding: 0,
         alignItems: "center",
         justifyContent: "center",
+        position: "relative",
     },
     collectionsGrid: {
         display: "flex",
         flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "space-evenly",
+    },
+    iconButton: {
+        margin: 0,
+        padding: 0,
+        bottom: "-17px",
     },
 });
 
@@ -80,7 +86,7 @@ function Categories({ categories }) {
                 </Collapse>
                 <Grid sx={styles(theme).expandIconGrid}>
                     <IconButton
-                        sx={{ margin: 0, padding: 0 }}
+                        sx={styles(theme).iconButton}
                         onClick={handleCollapse}
                     >
                         {collapse ? (
@@ -88,11 +94,15 @@ function Categories({ categories }) {
                                 sx={{
                                     transform: "rotate(180deg)",
                                     color: theme.palette.primary.main,
+                                    fontSize: "2.2rem",
                                 }}
                             />
                         ) : (
                             <ExpandCircleDown
-                                sx={{ color: theme.palette.primary.main }}
+                                sx={{
+                                    color: theme.palette.primary.main,
+                                    fontSize: "2.2rem",
+                                }}
                             />
                         )}
                     </IconButton>
