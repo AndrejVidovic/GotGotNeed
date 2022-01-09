@@ -112,7 +112,6 @@ const styles = (theme) => ({
         marginLeft: "auto",
         marginRight: "15px",
         height: "fit-content",
-        filter: "drop-shadow" + theme.shadows[4],
         [theme.breakpoints.between("sm", "md")]: {
             marginRight: "7px",
         },
@@ -121,14 +120,13 @@ const styles = (theme) => ({
         },
     },
     mainHeaderMail: {
-        filter: "drop-shadow" + theme.shadows[4],
         height: "fit-content",
     },
     mainHeaderSvg: {
         color: "black",
         fontSize: "40px",
         fontWeight: "700",
-        textShadow: theme.shadows[4],
+        filter: "drop-shadow(" + theme.shadows[4] + ")",
         [theme.breakpoints.between("sm", "md")]: {
             fontSize: "30px",
         },
