@@ -64,24 +64,6 @@ function Publishers() {
         return filteredPublishers.slice(startIndex, endIndex);
     };
 
-    const searchFilter = (event) => {
-        let temp = event.target.value;
-        let searchWord = temp.toLowerCase();
-        let tempFilteredPublishers = [];
-
-        if (searchWord != "") {
-            tempFilteredPublishers = allPublishers.filter(
-                (publisher) =>
-                    publisher.title.toLowerCase().includes(searchWord) ||
-                    publisher.country.toLowerCase().includes(searchWord)
-            );
-        } else {
-            tempFilteredPublishers = allPublishers;
-        }
-
-        setFilteredPublishers(tempFilteredPublishers);
-    };
-
     const handlePageChange = (event, value) => {
         event.preventDefault();
         setCurrentPage(value);
@@ -110,7 +92,11 @@ function Publishers() {
                     xs={10}
                     sx={styles(theme).searchGrid}
                 >
-                    <Search searchTriggeredFunction={searchFilter}></Search>
+                    <Search
+                        itemsToFilter={allPublishers}
+                        setFilteredItems={setFilteredPublishers}
+                        propertiesToSearch={["title", "country"]}
+                    />
                 </Grid>
                 <Grid
                     container

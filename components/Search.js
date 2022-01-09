@@ -39,8 +39,37 @@ const styles = (theme) => ({
     },
 });
 
-const Search = ({ searchTriggeredFunction }) => {
+const Search = ({
+    itemsToFilter,
+    setFilteredItems,
+    propertiesToSearch,
+    children,
+}) => {
     const theme = useTheme();
+
+    const searchFilter = (event) => {
+        let searchWord = event.target.value;
+        let tempFilteredItems = [];
+
+        if (searchWord != "") {
+            tempFilteredItems = itemsToFilter.filter((itemOfSearch) => {
+                let indicator = false;
+                for (let i = 0; i < propertiesToSearch.length; i++) {
+                    if (
+                        itemOfSearch[propertiesToSearch[i]]
+                            .toLowerCase()
+                            .includes(searchWord)
+                    )
+                        indicator = true;
+                }
+                return indicator;
+            });
+        } else {
+            tempFilteredItems = itemsToFilter;
+        }
+
+        setFilteredItems(tempFilteredItems);
+    };
 
     return (
         <Paper sx={styles(theme).bluePaper}>
@@ -49,9 +78,10 @@ const Search = ({ searchTriggeredFunction }) => {
                 <InputBase
                     sx={styles(theme).input}
                     placeholder="Search"
-                    onChange={(e) => searchTriggeredFunction(e)}
+                    onChange={(e) => searchFilter(e)}
                 />
             </Paper>
+            {children}
         </Paper>
     );
 };
