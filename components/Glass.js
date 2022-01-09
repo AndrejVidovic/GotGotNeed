@@ -14,6 +14,8 @@ const Glass = ({ children, styling, color, onClickFunction }) => {
         "rgba(219, 219, 219, 0.08)" /*0 sivo*/,
         "rgba(255, 255, 255, 0.42)" /*1 svijetlo bijela*/,
         "rgba(255, 255, 255, 0.7)" /*2 bijela*/,
+        "rgba(255, 152, 0, 0.3)" /*3 zuta*/,
+        "rgba(15, 109, 202, 0.3)" /*4 plava*/,
     ];
 
     const allStyles = {

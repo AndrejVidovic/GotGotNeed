@@ -1,18 +1,10 @@
-import { Box, Grid, useTheme, IconButton, Button } from "@mui/material";
+import { Grid, useTheme, IconButton, Button } from "@mui/material";
 import Head from "next/head";
 import Footer from "../../components/Layout/footer";
 import { useRouter } from "next/router";
 import ProfileHeader from "../../modules/Profile/ProfileHeader";
-import {
-    StarHalfRounded,
-    StarRounded,
-    StarBorderRounded,
-    KeyboardArrowDownRounded,
-} from "@mui/icons-material";
-import Glass from "../../components/Glass";
-import Image from "next/image";
-import avatarImg from "../../public/avatar.png";
 import Reviews from "../../modules/Profile/Reviews";
+import fakeProfiles from "../../fakeData/Profiles/Profiles.json";
 
 const styles = (theme) => ({
     container: {
@@ -31,21 +23,18 @@ const styles = (theme) => ({
 const Profile = () => {
     const theme = useTheme();
     const router = useRouter();
-    const username = router.query.Profile;
+    const username = router.query.username;
+    const user = fakeProfiles[0];
 
     return (
         <>
             <Head>
-                <title>Profile</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
+                <title>Profile | {router.query.username}</title>
             </Head>
             <Grid container sx={styles(theme).container}>
                 <Grid item container xs={10} lg={7}>
-                    <ProfileHeader user={{ username: username }} />
-                    <Reviews />
+                    <ProfileHeader user={user} />
+                    <Reviews reviews={user.reviews} />
                 </Grid>
             </Grid>
             <Footer />

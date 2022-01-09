@@ -8,7 +8,7 @@ import {
     PersonAdd,
 } from "@mui/icons-material";
 import Image from "next/image";
-import avatarImg from "../../public/avatar.png";
+import avatarImg from "../../public/maradonaAvatar.jpg";
 
 const styles = (theme) => ({
     textField: {
@@ -112,6 +112,7 @@ const styles = (theme) => ({
         marginLeft: "auto",
         marginRight: "15px",
         height: "fit-content",
+        filter: "drop-shadow" + theme.shadows[4],
         [theme.breakpoints.between("sm", "md")]: {
             marginRight: "7px",
         },
@@ -120,6 +121,7 @@ const styles = (theme) => ({
         },
     },
     mainHeaderMail: {
+        filter: "drop-shadow" + theme.shadows[4],
         height: "fit-content",
     },
     mainHeaderSvg: {
@@ -143,16 +145,21 @@ const ProfileHeader = ({ user }) => {
         <Glass color={0} styling={styles(theme).glass}>
             <Box sx={styles(theme).profilePictureContainer}>
                 <Box
-                    sx={{
-                        ...styles(theme).statusBlob,
-                        ...styles(theme).statusBlobOffline,
-                    }}
+                    sx={
+                        user.online > 0
+                            ? {
+                                  ...styles(theme).statusBlob,
+                                  ...styles(theme).statusBlobOffline,
+                              }
+                            : styles(theme).statusBlob
+                    }
                 ></Box>
                 <Box sx={styles(theme).profilePicture}>
                     <Image
                         src={avatarImg}
                         alt={user.username + "'s profile picture."}
                         layout="fill"
+                        objectFit="cover"
                     />
                 </Box>
             </Box>
@@ -177,8 +184,7 @@ const ProfileHeader = ({ user }) => {
                 >
                     <Person sx={styles(theme).headerIcon} />
                     <Typography sx={styles(theme).textField}>
-                        {" "}
-                        Mate Matić
+                        {user.name}
                     </Typography>
                 </Grid>
                 <Grid
@@ -190,8 +196,7 @@ const ProfileHeader = ({ user }) => {
                 >
                     <LocationOn sx={styles(theme).headerIcon} />
                     <Typography sx={styles(theme).textField}>
-                        {" "}
-                        Split, Croatia
+                        {user.location}
                     </Typography>
                 </Grid>
                 <Grid
@@ -203,7 +208,7 @@ const ProfileHeader = ({ user }) => {
                 >
                     <Badge sx={styles(theme).headerIcon} />
                     <Typography sx={styles(theme).textField}>
-                        27/07/2021
+                        {user.joined}
                     </Typography>
                 </Grid>
             </Grid>

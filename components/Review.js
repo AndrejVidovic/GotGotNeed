@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import Glass from "./Glass";
 import Image from "next/image";
-import avatarImg from "../public/avatar.png";
+import avatarImg from "../public/maradonaAvatar.jpg";
 
 const styles = (theme) => ({
     glassReview: {
@@ -49,7 +49,7 @@ const styles = (theme) => ({
     reviewLocation: {
         fontSize: "14px",
         margin: "5px 0 15px 0",
-        color: theme.palette.grey[500],
+        color: theme.palette.grey[700],
         fontWeight: 500,
         [theme.breakpoints.between("sm", "md")]: {
             fontSize: "11px",
@@ -89,41 +89,38 @@ const styles = (theme) => ({
     },
 });
 
-const Review = () => {
+const Review = ({ review }) => {
     const theme = useTheme();
 
     return (
-        <Glass color={0} styling={styles(theme).glassReview}>
+        <Glass color={review.positive + 3} styling={styles(theme).glassReview}>
             <Box sx={styles(theme).reviewProfilePictureContainer}>
                 <Image
                     src={avatarImg}
-                    alt={"'s profile picture."}
+                    alt={review.username + "'s profile picture."}
                     layout="fill"
+                    objectFit="cover"
                 />
             </Box>
             <Grid container>
                 <Grid item xs={12} container>
                     <Grid item xs={12} container>
                         <Typography sx={styles(theme).reviewUsername}>
-                            Mate Matić
+                            {review.username}
                         </Typography>
                         <Typography sx={styles(theme).reviewDate}>
-                            27. lipnja 2021.
+                            {review.date}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography sx={styles(theme).reviewLocation}>
-                            Split, Croatia{" "}
+                            {review.location}
                         </Typography>
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography sx={styles(theme).reviewText}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris. t enim ad minim veniam,
-                        quis nostrud.
+                        {review.description}
                     </Typography>
                 </Grid>
             </Grid>

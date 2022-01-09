@@ -39,9 +39,7 @@ const News = () => {
     const newsLimitPerPage = 3;
 
     const [chipsNews, setChipsNews] = useState(() => dummyNewsData);
-    const [searchNews, setSearchNews] = useState(() => dummyNewsData);
 
-    const [activeChips, setActiveChips] = useState(() => []);
     const [numberOfPages, setNumberOfPages] = useState(
         Math.ceil(allNews.length / newsLimitPerPage)
     );
@@ -93,66 +91,13 @@ const News = () => {
     return (
         <>
             <Head>
-                <title>News</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
+                <title>Collectors</title>
             </Head>
             <Grid container sx={styles(theme).container}>
                 <Title
-                    title="News"
-                    subtitle="News from the world of stickers."
+                    title="Collectors"
+                    subtitle="Your fellow sticker enthusiasts."
                 />
-                <Grid item xl={6} md={8} xs={10} sx={styles(theme).searchGrid}>
-                    <Search
-                        itemsToFilter={allNews}
-                        setFilteredItems={setSearchNews}
-                        propertiesToSearch={["title", "description", "date"]}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                    spacing={1.5}
-                    xl={6}
-                    md={8}
-                    xs={10}
-                >
-                    {allUniqueKeywords.map((keyword, index) => (
-                        <Grid item key={index}>
-                            <Chips
-                                chipName={keyword}
-                                setFilteredNews={setChipsNews}
-                                allNews={allNews}
-                                activeChips={activeChips}
-                                setActiveChips={setActiveChips}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-                <Grid item xl={6} md={8} xs={10} sx={{ marginTop: "7rem" }}>
-                    {getDisplayedNews().map((blog) => (
-                        <BlogCard
-                            key={blog.id}
-                            id={blog.id}
-                            title={blog.title}
-                            type={blog.type}
-                            description={blog.description}
-                            date={blog.date}
-                        />
-                    ))}
-                </Grid>
-                <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
-                    <Pagination
-                        page={currentPage}
-                        count={numberOfPages}
-                        onChange={handlePageChange}
-                    />
-                </Grid>
             </Grid>
             <Footer />
         </>
