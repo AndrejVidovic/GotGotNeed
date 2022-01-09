@@ -45,7 +45,7 @@ const News = () => {
     );
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
+    /* useEffect(() => {
         setCurrentPage(1);
         let filteredNews = [];
         for (let chipBlog in chipsNews) {
@@ -86,7 +86,7 @@ const News = () => {
     const handlePageChange = (event, value) => {
         event.preventDefault();
         setCurrentPage(value);
-    };
+    };*/
 
     return (
         <>
