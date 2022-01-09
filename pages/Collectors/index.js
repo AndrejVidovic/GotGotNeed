@@ -8,12 +8,12 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import dummyNewsData from "../fakeData/News/News.json";
-import Footer from "../components/Layout/footer";
-import Search from "../components/Search";
-import BlogCard from "../components/News/BlogCard";
-import Chips from "../components/News/Chips";
-import Title from "../components/Title";
+import dummyNewsData from "../../fakeData/News/News.json";
+import Footer from "../../components/Layout/footer";
+import Search from "../../components/Search";
+import BlogCard from "../../components/News/BlogCard";
+import Chips from "../../components/News/Chips";
+import Title from "../../components/Title";
 
 const styles = (theme) => ({
     container: {
