@@ -29,7 +29,6 @@ const styles = (theme) => ({
         height: "65%",
     },
     imageContainer: {
-        position: "relative",
         width: "100%",
         height: "100%",
     },
@@ -88,17 +87,19 @@ const styles = (theme) => ({
         zIndex: 0,
     },
     iconButton: {
+        zIndex: 10,
+        paddingBottom: 0,
+    },
+    iconButtonGrid: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 10,
-        paddingBottom: 0,
     },
 });
 function CollectionsCard({ collection, favorite, setFavorite }) {
     const theme = useTheme();
     const image = PublisherCollection;
-    const [checked, setChecked] = useState(false);
+    const [collapse, setCollapse] = useState(false);
 
     const HandleClickFavorite = (e) => {
         e.preventDefault();
@@ -110,14 +111,14 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
         }
         setFavorite(tempFavorite);
     };
-    const handleChange = () => {
-        setChecked((prev) => !prev);
+    const handleCollapse = () => {
+        setCollapse(!collapse);
     };
     return (
         <Card sx={styles(theme).root}>
             <CardMedia sx={styles(theme).media}>
                 <Grid sx={styles(theme).imageContainer}>
-                    <Image src={image} alt="collection" layout="fill" />
+                    <Image src={image} alt="collection" layout="responsive" />
                 </Grid>
             </CardMedia>
             <CardContent sx={styles(theme).content}>
@@ -145,14 +146,15 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
                             onClick={(e) => HandleClickFavorite(e)}
                         />
                     </Grid>
-                    <IconButton
-                        sx={styles(theme).iconButton}
-                        onClick={handleChange}
-                    >
-                        <ExpandCircleDown
-                            sx={styles(theme).expandIcon}
-                        ></ExpandCircleDown>
-                    </IconButton>
+                    <Grid sx={styles(theme).iconButtonGrid}>
+                        <IconButton
+                            sx={styles(theme).iconButton}
+                            onClick={handleCollapse}
+                        >
+                            <ExpandCircleDown sx={styles(theme).expandIcon} />
+                        </IconButton>
+                    </Grid>
+
                     <Grid container sx={styles(theme).halfCircle}>
                         <Image
                             src="/Circle.png"
