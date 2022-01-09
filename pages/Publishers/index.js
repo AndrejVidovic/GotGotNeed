@@ -100,7 +100,7 @@ function Publishers() {
                 </Grid>
                 <Grid
                     container
-                    xl={7}
+                    xl={6}
                     lg={9}
                     md={8}
                     sm={10}

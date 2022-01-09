@@ -3,15 +3,15 @@
         "id": 1,
         "publisher": "Panini",
         "title": "F1 2020",
-        "category": ["Football", "Formula 1", "Other"],
+        "category": "Formula 1",
         "releaseYear": 2020,
         "numberOfStickers": 322
     },
     {
         "id": 2,
         "publisher": "Topps",
-        "title": "WorldCup 2022",
-        "category": ["Football", "Other"],
+        "title": "World Cup 2022",
+        "category": "Football",
         "releaseYear": 2022,
         "numberOfStickers": 545
     },
@@ -19,7 +19,15 @@
         "id": 3,
         "publisher": "Kraš",
         "title": "Životinjsko carstvo",
-        "category": ["Other"],
+        "category": "Other",
+        "releaseYear": 2012,
+        "numberOfStickers": 545
+    },
+    {
+        "id": 4,
+        "publisher": "Panini",
+        "title": "EURO 2012",
+        "category": "Other",
         "releaseYear": 2012,
         "numberOfStickers": 545
     }

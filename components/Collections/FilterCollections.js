@@ -64,6 +64,7 @@ const styles = (theme) => ({
         [theme.breakpoints.down("md")]: {
             margin: "1rem 1rem 0rem 1rem",
         },
+        zIndex: 100,
     },
     expandGrid: {
         marginBottom: "0.7rem",
@@ -106,6 +107,7 @@ const styles = (theme) => ({
             left: 40,
             bottom: -60,
         },
+        zIndex: 0,
     },
 });
 function FilterCollections({
@@ -114,6 +116,7 @@ function FilterCollections({
     publisher,
     category,
     collections,
+    setFilteredCollections,
 }) {
     const theme = useTheme();
     const allData = collections;
@@ -134,10 +137,39 @@ function FilterCollections({
         let tempCategory = []; // iz odabranih uzimamo samo kategorije
         temp = allData.filter((x) => publisher.includes(x.publisher));
         for (let i = 0; i < temp.length; i++) {
-            tempCategory = [...tempCategory, ...temp[i].category];
+            tempCategory.push(temp[i].category);
         }
         let allUniqueCategory = [...new Set(tempCategory)]; // samo jedinstvene vrijednosti
         return allUniqueCategory;
+    };
+    const getPublisher = () => {
+        let temp = allData;
+        let tempPublisher = [];
+        for (let i = 0; i < temp.length; i++) {
+            tempPublisher.push(temp[i].publisher);
+        }
+        let allUniquePublisher = [...new Set(tempPublisher)]; // samo jedinstvene vrijednosti
+        return allUniquePublisher;
+    };
+
+    const handleFilter = () => {
+        let tempPublisher = [];
+        let tempCategory = [];
+        if (publisher.length != 0) {
+            tempPublisher = allData.filter((x) =>
+                publisher.includes(x.publisher)
+            );
+            if (category.length != 0) {
+                tempCategory = tempPublisher.filter((x) =>
+                    category.includes(x.category)
+                );
+                setFilteredCollections(tempCategory);
+            } else {
+                setFilteredCollections(tempPublisher);
+            }
+        } else {
+            setFilteredCollections(allData);
+        }
     };
     return (
         <>
@@ -171,7 +203,15 @@ function FilterCollections({
             <Collapse in={expand} sx={{ width: "100%" }}>
                 <Grid container sx={styles(theme).container}>
                     <Grid sx={styles(theme).searchGrid}>
-                        <Search />
+                        <Search
+                            itemsToFilter={allData}
+                            setFilteredItems={setFilteredCollections}
+                            propertiesToSearch={[
+                                "title",
+                                "publisher",
+                                "category",
+                            ]}
+                        />
                     </Grid>
                     <Grid sx={styles(theme).formControlGrid}>
                         <FormControl sx={styles(theme).select}>
@@ -188,21 +228,14 @@ function FilterCollections({
                                 input={<OutlinedInput label="Publisher" />}
                                 renderValue={(selected) => selected.join(", ")}
                             >
-                                {allData.map((data) => (
-                                    <MenuItem
-                                        key={data.id}
-                                        value={data.publisher}
-                                    >
+                                {getPublisher().map((data) => (
+                                    <MenuItem key={data} value={data}>
                                         <Checkbox
                                             checked={
-                                                publisher.indexOf(
-                                                    data.publisher
-                                                ) > -1
+                                                publisher.indexOf(data) > -1
                                             }
                                         />
-                                        <ListItemText
-                                            primary={data.publisher}
-                                        />
+                                        <ListItemText primary={data} />
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -239,6 +272,7 @@ function FilterCollections({
                             variant="contained"
                             type="button"
                             sx={styles(theme).filterButton}
+                            onClick={handleFilter}
                         >
                             Filter
                         </Button>

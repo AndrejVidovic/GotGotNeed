@@ -50,7 +50,8 @@ const Search = ({
     const theme = useTheme();
 
     const searchFilter = (event) => {
-        let searchWord = event.target.value;
+        let tempSearchWord = event.target.value;
+        let searchWord = tempSearchWord.toLowerCase();
         let tempFilteredItems = [];
 
         if (searchWord != "") {
