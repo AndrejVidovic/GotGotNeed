@@ -20,14 +20,6 @@ const styles = (theme) => ({
         marginBottom: "6vh",
         width: "100%",
     },
-    cardGrid: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        width: "100%",
-    },
     pagination: {
         marginTop: "5vh",
     },
@@ -98,25 +90,14 @@ function Publishers() {
                         propertiesToSearch={["title", "country"]}
                     />
                 </Grid>
-                <Grid
-                    container
-                    xl={6}
-                    lg={9}
-                    md={8}
-                    sm={10}
-                    xs={10}
-                    spacing={6}
-                    sx={styles(theme).cardGrid}
-                >
+                <Grid container item xl={6} md={8} xs={10} spacing={6}>
                     {getFilteredPublishers().map((publisher) => (
-                        <Grid item key={publisher.id}>
-                            <PublisherCard
-                                key={publisher.id}
-                                publisher={publisher}
-                                favorite={favorite}
-                                setFavorite={setFavorite}
-                            />
-                        </Grid>
+                        <PublisherCard
+                            key={publisher.id}
+                            publisher={publisher}
+                            favorite={favorite}
+                            setFavorite={setFavorite}
+                        />
                     ))}
                 </Grid>
                 <Grid

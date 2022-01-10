@@ -30,14 +30,6 @@ const styles = (theme) => ({
     pagination: {
         marginTop: "5vh",
     },
-    cardGrid: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        width: "100%",
-    },
 });
 function Collections() {
     const theme = useTheme();
@@ -108,15 +100,7 @@ function Collections() {
                         </Grid>
                     </Glass>
                 </Grid>
-                <Grid
-                    item
-                    xl={6}
-                    lg={8}
-                    md={8}
-                    sm={10}
-                    xs={10}
-                    sx={styles(theme).cardGrid}
-                >
+                <Grid container item xl={6} md={8} xs={10} spacing={6}>
                     {getFilteredCollections().map((data) => (
                         <CollectionsCard
                             collection={data}

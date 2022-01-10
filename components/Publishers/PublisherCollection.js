@@ -68,7 +68,7 @@ function PublisherCollection({ collection }) {
             <CardMedia sx={styles(theme).media}>
                 <Grid sx={styles(theme).imageContainer}>
                     <Image
-                        src="/PublisherCollection.png"
+                        src="/CollectionSmall.png"
                         layout="fill"
                         objectFit="cover"
                         objectPosition="top"

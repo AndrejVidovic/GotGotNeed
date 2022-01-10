@@ -57,6 +57,7 @@ const styles = (theme) => ({
         marginBottom: "1rem",
         marginTop: "1rem",
         position: "relative",
+        overflow: "hidden",
     },
     filterButton: {
         padding: "0.5rem 4rem",
@@ -80,20 +81,21 @@ const styles = (theme) => ({
     },
     halfCircle: {
         position: "absolute",
-        top: 0,
-        right: 0,
+        top: 5,
+        right: -45,
         left: "auto",
         display: "flex",
         justifyContent: "flex-end",
     },
-    triangle2: {
+    triangleTop: {
         position: "absolute",
-        top: 0,
+        top: -15,
         left: 90,
         display: "flex",
         justifyContent: "flex-start",
         [theme.breakpoints.down("md")]: {
             left: 40,
+            top: -25,
         },
     },
     fullCircle: {
@@ -104,10 +106,18 @@ const styles = (theme) => ({
         display: "flex",
         justifyContent: "flex-start",
         [theme.breakpoints.down("md")]: {
-            left: 40,
-            bottom: -60,
+            left: 10,
+            bottom: 10,
         },
         zIndex: 0,
+    },
+    titleGrid: {
+        position: "relative",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        overflow: "hidden",
     },
 });
 function FilterCollections({
@@ -173,29 +183,21 @@ function FilterCollections({
     };
     return (
         <>
-            <Grid
-                sx={{
-                    position: "relative",
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                }}
-            >
+            <Grid sx={styles(theme).titleGrid}>
                 <Typography sx={styles(theme).title}>FILTER</Typography>
                 <Grid container sx={styles(theme).halfCircle}>
                     <Image
-                        src="/Circle.png"
-                        width={50}
-                        height={100}
+                        src="/decoCircle.png"
+                        width={90}
+                        height={90}
                         alt="circle"
                     />
                 </Grid>
-                <Grid container sx={styles(theme).triangle2}>
+                <Grid container sx={styles(theme).triangleTop}>
                     <Image
-                        src="/Triangle2.png"
-                        width={70}
-                        height={70}
+                        src="/decoTriangle.png"
+                        width={120}
+                        height={100}
                         alt="triangle"
                     />
                 </Grid>
@@ -279,10 +281,10 @@ function FilterCollections({
                     </Grid>{" "}
                     <Grid container sx={styles(theme).fullCircle}>
                         <Image
-                            src="/FullCircle.png"
+                            src="/decoCircle.png"
                             width={70}
                             height={70}
-                            alt="triangle"
+                            alt="circle"
                         />
                     </Grid>
                 </Grid>

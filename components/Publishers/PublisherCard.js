@@ -19,10 +19,12 @@ import Link from "next/link";
 
 const styles = (theme) => ({
     root: {
-        height: "24rem",
-        display: "flex",
-        flexDirection: "column",
-        width: "17rem",
+        borderRadius: theme.shape.borderRadius + "px",
+        //overflow: "hidden",
+        boxShadow: theme.shadows[1],
+        position: "relative",
+        height: "350px",
+        width: "100%",
     },
     media: {
         width: "fill-available",
@@ -45,7 +47,7 @@ const styles = (theme) => ({
     },
     title: {
         fontWeight: 700,
-        fontSize: "1.5rem",
+        fontSize: "1.6rem",
     },
     publisherCountry: {
         display: "flex",
@@ -56,7 +58,7 @@ const styles = (theme) => ({
     countryTitle: {
         fontSize: "1.1rem",
         color: "#616161",
-        paddingLeft: "0.4rem",
+        paddingLeft: "0.5rem",
     },
     paper: {
         height: "100%",
@@ -65,6 +67,7 @@ const styles = (theme) => ({
         justifyContent: "flex-start",
         padding: "1rem 0rem 0rem 2rem",
         position: "relative",
+        overflow: "hidden",
     },
     chipsContainer: {
         display: "flex",
@@ -74,13 +77,13 @@ const styles = (theme) => ({
     },
     triangleGrid: {
         position: "absolute",
-        bottom: 0,
+        bottom: -60,
         left: 20,
     },
     circleGrid: {
         width: "auto",
         position: "absolute",
-        right: 0,
+        right: -40,
         bottom: 24,
     },
 });
@@ -102,106 +105,112 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
     };
 
     return (
-        <Link
-            href={{
-                pathname: "Publishers/[Publisher]",
-                query: {
-                    id: publisher.id,
-                    title: publisher.title,
-                    types: publisher.types,
-                    collections: publisher.collections,
-                    description: publisher.description,
-                    founded: publisher.founded,
-                },
-            }}
-            as={`/Publishers/${publisher.title}`}
-            passHref
-        >
-            <Card sx={styles(theme).root}>
-                <CardMedia sx={styles(theme).media}>
-                    <Grid sx={styles(theme).imageContainer}>
-                        <Image
-                            src={images[publisher.id % 3]}
-                            layout="responsive"
-                            alt={publisher.title}
-                        />
-                    </Grid>
-                </CardMedia>
-                <CardContent sx={styles(theme).content}>
-                    <Paper sx={styles(theme).paper}>
-                        <Grid item sx={{ marginTop: "1rem" }}>
-                            <FontAwesomeIcon
-                                icon={
-                                    favorite.includes(publisher.id)
-                                        ? faStarSharp
-                                        : faStar
-                                }
-                                size="3x"
-                                color={
-                                    favorite.includes(publisher.id)
-                                        ? theme.palette.secondary.light
-                                        : "#D0D0D0"
-                                }
-                                style={{
-                                    filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.4))",
-                                }}
-                                onClick={(e) => HandleClick(e)}
+        <Grid item xl={4} md={6} xs={12}>
+            <Link
+                href={{
+                    pathname: "Publishers/[Publisher]",
+                    query: {
+                        id: publisher.id,
+                        title: publisher.title,
+                        types: publisher.types,
+                        collections: publisher.collections,
+                        description: publisher.description,
+                        founded: publisher.founded,
+                    },
+                }}
+                as={`/Publishers/${publisher.title}`}
+                passHref
+            >
+                <Card sx={styles(theme).root}>
+                    <CardMedia sx={styles(theme).media}>
+                        <Grid sx={styles(theme).imageContainer}>
+                            <Image
+                                src={images[publisher.id % 3]}
+                                layout="fill"
+                                objectFit="contain"
+                                alt={publisher.title}
                             />
                         </Grid>
-                        <Grid item sx={{ margin: "0.7rem" }}>
-                            <Typography
-                                sx={styles(theme).title}
-                                variant="body1"
-                            >
-                                {publisher.title}
-                            </Typography>
-                            <Grid sx={styles(theme).publisherCountry}>
-                                <Image
-                                    src="https://flagcdn.com/24x18/hr.png"
-                                    srcset="https://flagcdn.com/48x36/hr.png 2x,
-                                        https://flagcdn.com/72x54/hr.png 3x"
-                                    width="24"
-                                    height="18"
-                                    alt="CountryFlag"
+                    </CardMedia>
+                    <CardContent sx={styles(theme).content}>
+                        <Paper sx={styles(theme).paper}>
+                            <Grid item sx={{ marginTop: "1rem" }}>
+                                <FontAwesomeIcon
+                                    icon={
+                                        favorite.includes(publisher.id)
+                                            ? faStarSharp
+                                            : faStar
+                                    }
+                                    size="3x"
+                                    color={
+                                        favorite.includes(publisher.id)
+                                            ? theme.palette.secondary.light
+                                            : "#D0D0D0"
+                                    }
+                                    style={{
+                                        filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.4))",
+                                    }}
+                                    onClick={(e) => HandleClick(e)}
                                 />
+                            </Grid>
+                            <Grid item sx={{ margin: "0.7rem" }}>
                                 <Typography
+                                    sx={styles(theme).title}
                                     variant="body1"
-                                    sx={styles(theme).countryTitle}
                                 >
-                                    {publisher.country}
+                                    {publisher.title}
                                 </Typography>
-                            </Grid>
-                            <Grid container sx={styles(theme).chipsContainer}>
-                                {publisher.types.map((typeName) => (
-                                    <Chip
-                                        key={typeName}
-                                        size="small"
-                                        label={typeName}
-                                        sx={{ margin: "0.15rem" }}
+                                <Grid sx={styles(theme).publisherCountry}>
+                                    <Image
+                                        src="https://flagcdn.com/24x18/hr.png"
+                                        srcset="https://flagcdn.com/48x36/hr.png 2x,
+                                        https://flagcdn.com/72x54/hr.png 3x"
+                                        width="24"
+                                        height="18"
+                                        alt="CountryFlag"
                                     />
-                                ))}
+                                    <Typography
+                                        variant="body1"
+                                        sx={styles(theme).countryTitle}
+                                    >
+                                        {publisher.country}
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    container
+                                    sx={styles(theme).chipsContainer}
+                                >
+                                    {publisher.types.map((typeName) => (
+                                        <Chip
+                                            key={typeName}
+                                            size="small"
+                                            label={typeName}
+                                            sx={{ margin: "0.15rem" }}
+                                        />
+                                    ))}
+                                </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid container sx={styles(theme).circleGrid}>
-                            <Image
-                                src="/Circle.png"
-                                width={50}
-                                height={100}
-                                alt="circle"
-                            />
-                        </Grid>
-                        <Grid container sx={styles(theme).triangleGrid}>
-                            <Image
-                                src="/Triangle.png"
-                                width={100}
-                                height={50}
-                                alt="circle"
-                            />
-                        </Grid>
-                    </Paper>
-                </CardContent>
-            </Card>
-        </Link>
+                            <Grid container sx={styles(theme).circleGrid}>
+                                <Image
+                                    src="/decoCircle.png"
+                                    width={80}
+                                    height={80}
+                                    alt="circle"
+                                />
+                            </Grid>
+                            <Grid container sx={styles(theme).triangleGrid}>
+                                <Image
+                                    src="/decoTriangle.png"
+                                    width={120}
+                                    height={100}
+                                    alt="triangle"
+                                />
+                            </Grid>
+                        </Paper>
+                    </CardContent>
+                </Card>
+            </Link>
+        </Grid>
     );
 }
 export default PublisherCard;
