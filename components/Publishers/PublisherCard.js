@@ -20,11 +20,13 @@ import Link from "next/link";
 const styles = (theme) => ({
     root: {
         borderRadius: theme.shape.borderRadius + "px",
-        //overflow: "hidden",
         boxShadow: theme.shadows[1],
         position: "relative",
         height: "350px",
         width: "100%",
+        "&:hover": {
+            cursor: "pointer",
+        },
     },
     media: {
         width: "fill-available",

@@ -89,10 +89,18 @@ function Publisher(props) {
     const theme = useTheme();
     const images = [publi1, publi2, publi3];
 
+    const getTypes = () => {
+        let temp = [];
+        if (typeof types === "string") {
+            temp.push(types);
+        } else temp = types;
+        return temp;
+    };
+
     return (
         <>
             <Head>
-                <title>Publishers/{title}</title>
+                <title>Publishers | {title}</title>
                 <meta
                     name="viewport"
                     content="initial-scale=1.0, width=device-width"
@@ -164,7 +172,7 @@ function Publisher(props) {
                     sm={10}
                     xs={10}
                 >
-                    {types.map((categories) => (
+                    {getTypes().map((categories) => (
                         <Grid key={categories.id} sx={{ width: "100%" }}>
                             <Categories categories={categories}></Categories>
                         </Grid>

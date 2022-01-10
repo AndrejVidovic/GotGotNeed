@@ -25,6 +25,9 @@ const styles = (theme) => ({
         position: "relative",
         height: "400px",
         width: "100%",
+        "&:hover": {
+            cursor: "pointer",
+        },
     },
     media: {
         width: "100%",
