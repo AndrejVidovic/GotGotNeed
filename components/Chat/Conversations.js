@@ -9,7 +9,9 @@ import {
     Icon,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import dummyConversations from "../../fakeData/Chat/Conversation.json";
+import { Archive, Unarchive } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+
 const styles = (theme) => ({
     searchPaper: {
         borderRadius: theme.shape.borderRadius + "px",
@@ -30,12 +32,12 @@ const styles = (theme) => ({
     },
     name: {
         fontWeight: 700,
-        fontSize: "20px",
+        fontSize: "19px",
         paddingLeft: "0.5rem",
     },
     container: {
         display: "flex",
-        alignItem: "center",
+        alignItems: "center",
         flexDirection: "column",
         justifyContent: "flex-start",
         marginTop: "4rem",
@@ -47,50 +49,170 @@ const styles = (theme) => ({
     deleteIcon: {
         marginRight: "0.5rem",
         color: theme.palette.secondary.light,
+        "&:hover": {
+            cursor: "pointer",
+        },
     },
     archiveIcon: {
         marginRight: "0.7rem",
         marginLeft: "auto",
         color: theme.palette.primary.main,
+        "&:hover": {
+            cursor: "pointer",
+        },
     },
     searchIcon: {
         margin: "0 0.5rem 0 0.5rem",
     },
+    archivedButton: {
+        width: "90%",
+        padding: "0.7rem 0",
+        fontWeight: 700,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    conversationActivePaper: {
+        height: "50px",
+        display: "flex",
+        alignItems: "center",
+        paddingLeft: "0.8rem",
+        marginTop: "0.5rem",
+        boxShadow: theme.shadows[4],
+        position: "relative",
+        backgroundColor: theme.palette.primary.light,
+    },
 });
-function Conversations() {
+function Conversations({
+    activeConversation,
+    setActiveConversation,
+    conversations,
+    index,
+    setIndex,
+    HandleFunction,
+    HandleDelete,
+}) {
     const theme = useTheme();
-    const allConversations = dummyConversations.sort(
+    const allconversations = conversations.sort(
         (a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time)
     );
+    const [filteredConversations, setFilteredConversations] = useState(
+        conversations.sort(
+            (a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time)
+        )
+    );
+    const HandleActive = (event, id) => {
+        event.preventDefault();
+        setActiveConversation(id);
+    };
+
+    const HandleArchived = (event) => {
+        event.preventDefault();
+        if (index === 1) {
+            setIndex(2);
+        } else setIndex(1);
+    };
+
+    const searchFilter = (event) => {
+        let tempSearchWord = event.target.value;
+        let searchWord = tempSearchWord.toLowerCase();
+        let tempFilteredItems = [];
+
+        if (searchWord != "") {
+            tempFilteredItems = allconversations.filter((x) =>
+                x.sender.toLowerCase().includes(searchWord)
+            );
+        } else {
+            tempFilteredItems = allconversations;
+        }
+        setFilteredConversations(tempFilteredItems);
+    };
+    useEffect(() => {
+        setFilteredConversations(allconversations);
+    }, [allconversations]);
 
     return (
-        <Grid item xl={4} sx={styles(theme).container}>
+        <Grid item xl={4} lg={4} sx={styles(theme).container}>
             <Paper sx={styles(theme).searchPaper}>
                 <SearchIcon sx={styles(theme).searchIcon}></SearchIcon>
-                <InputBase placeholder="Search"></InputBase>
+                <InputBase
+                    placeholder="Search"
+                    onChange={(event) => searchFilter(event)}
+                ></InputBase>
             </Paper>
             <Grid item sx={styles(theme).conversationGrid}>
-                {allConversations.map((conversation) => (
-                    <Paper sx={styles(theme).conversationPaper}>
+                {filteredConversations.map((conversation) => (
+                    <Paper
+                        sx={
+                            activeConversation === conversation.id
+                                ? styles(theme).conversationActivePaper
+                                : styles(theme).conversationPaper
+                        }
+                        onClick={(event) =>
+                            HandleActive(event, conversation.id)
+                        }
+                        key={conversation.id}
+                    >
                         <Avatar src="/maradonaAvatar.jpg    " />
                         <Typography sx={styles(theme).name}>
                             {conversation.sender}
                         </Typography>
                         {conversation.unread ? (
                             <Icon sx={{ color: "green" }}>
-                                chat_bubble_icon{" "}
+                                chat_bubble_icon
                             </Icon>
                         ) : null}
-                        <Icon sx={styles(theme).archiveIcon}>archive_icon</Icon>
-                        <Icon sx={styles(theme).deleteIcon}>
+                        {index === 1 ? (
+                            <Icon
+                                sx={styles(theme).archiveIcon}
+                                onClick={(event) =>
+                                    HandleFunction(event, conversation)
+                                }
+                            >
+                                archive_icon
+                            </Icon>
+                        ) : null}
+                        {index === 2 ? (
+                            <Icon
+                                sx={styles(theme).archiveIcon}
+                                onClick={(event) =>
+                                    HandleFunction(event, conversation)
+                                }
+                            >
+                                unarchive_icon
+                            </Icon>
+                        ) : null}
+                        <Icon
+                            sx={styles(theme).deleteIcon}
+                            onClick={(event) =>
+                                HandleDelete(event, conversation)
+                            }
+                        >
                             delete_forever_icon
                         </Icon>
                     </Paper>
                 ))}
             </Grid>
-            <Button variant="contained" sx={{ width: "90%" }}>
-                Archived
-            </Button>
+            {index === 1 ? (
+                <Button
+                    variant="contained"
+                    sx={styles(theme).archivedButton}
+                    startIcon={<Archive />}
+                    onClick={(event) => HandleArchived(event)}
+                >
+                    Archived
+                </Button>
+            ) : null}
+            {index === 2 ? (
+                <Button
+                    variant="contained"
+                    sx={styles(theme).archivedButton}
+                    startIcon={<Unarchive />}
+                    onClick={(event) => HandleArchived(event)}
+                >
+                    Unarchived
+                </Button>
+            ) : null}
         </Grid>
     );
 }
