@@ -25,6 +25,8 @@ const styles = (theme) => ({
         fontWeight: 700,
         fontSize: "19px",
         paddingLeft: "0.5rem",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
     },
     conversationGrid: {
         height: "33rem",
@@ -72,11 +74,22 @@ function Conversations({ activeConversation, setActiveConversation, conversation
     const theme = useTheme();
     const allconversations = conversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time));
     const [filteredConversations, setFilteredConversations] = useState(conversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time)));
+    const [id, setId] = useState();
+
+    const FindId = () => {
+        if (activeConversation === null) {
+            setId(null);
+        } else setId(activeConversation.id);
+    };
+    useEffect(() => {
+        FindId();
+    }, [activeConversation]);
+
     const HandleActive = (event, value) => {
+        value.unread = false;
         event.preventDefault();
         setActiveConversation(value);
     };
-
     const HandleArchived = (event) => {
         event.preventDefault();
         if (index === 1) {
@@ -108,10 +121,13 @@ function Conversations({ activeConversation, setActiveConversation, conversation
             </Paper>
             <Grid item sx={styles(theme).conversationGrid}>
                 {filteredConversations.map((conversation) => (
-                    <Paper sx={activeConversation === conversation.id ? styles(theme).conversationActivePaper : styles(theme).conversationPaper} onClick={(event) => HandleActive(event, conversation)} key={conversation.id}>
+                    <Paper sx={id === conversation.id ? styles(theme).conversationActivePaper : styles(theme).conversationPaper} onClick={(event) => HandleActive(event, conversation)} key={conversation.id}>
                         <Avatar src="/maradonaAvatar.jpg    " />
-                        <Typography sx={styles(theme).name}>{conversation.sender}</Typography>
-                        {conversation.unread ? <Icon sx={{ color: "#04C000" }}>chat_bubble_icon</Icon> : null}
+                        <Grid item sx={{ display: "flex", alignItems: "center", width: "50%" }}>
+                            <Typography sx={styles(theme).name}>{conversation.sender}</Typography>
+                            {conversation.unread ? <Icon sx={{ color: "#04C000" }}>chat_bubble_icon</Icon> : null}
+                        </Grid>
+
                         {index === 1 ? (
                             <Icon sx={styles(theme).archiveIcon} onClick={(event) => HandleFunction(event, conversation)}>
                                 archive_icon
@@ -122,6 +138,7 @@ function Conversations({ activeConversation, setActiveConversation, conversation
                                 unarchive_icon
                             </Icon>
                         ) : null}
+
                         <Icon sx={styles(theme).deleteIcon} onClick={(event) => HandleDelete(event, conversation)}>
                             delete_forever_icon
                         </Icon>

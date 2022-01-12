@@ -1,6 +1,6 @@
 import { Grid, Typography, useTheme } from "@mui/material";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Conversations from "../components/Chat/Conversations";
 import Messages from "../components/Chat/Messages";
 import Glass from "../components/Glass";
@@ -20,6 +20,9 @@ const styles = (theme) => ({
         justifyContent: "center",
         flexDirection: "row",
         paddingBottom: "15vh",
+        [theme.breakpoints.down("lg")]: {
+            marginTop: "7rem",
+        },
     },
     containerConversations: {
         display: "flex",
@@ -28,6 +31,9 @@ const styles = (theme) => ({
         justifyContent: "center",
         marginTop: "4rem",
         width: "100%",
+        [theme.breakpoints.down("md")]: {
+            alignItems: "center",
+        },
     },
 });
 function Chat() {
@@ -37,6 +43,7 @@ function Chat() {
     const [activeConversation, setActiveConversation] = useState(null);
     const [index, setIndex] = useState(1); //određujemo jesu li otvoreni razgovori ili arhivirani
 
+    //console.log(activeConversation);
     const HandleArchive = (event, value) => {
         event.preventDefault();
         setAllConversations(allConversations.filter((x) => x.id !== value.id));
@@ -63,15 +70,15 @@ function Chat() {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Grid item xl={7} lg={8} md={8} sm={10} xs={10}>
+                <Grid item xl={7} lg={8} md={10} sm={10} xs={10}>
                     <Glass color={0} styling={styles(theme).glass}>
-                        <Grid item xl={4} lg={4} sx={styles(theme).containerConversations}>
+                        <Grid item xl={4} lg={4} md={4} sm={10} xs={10} sx={styles(theme).containerConversations}>
                             {index === 1 ? <Conversations activeConversation={activeConversation} setActiveConversation={setActiveConversation} conversations={allConversations} index={index} setIndex={setIndex} HandleFunction={HandleArchive} HandleDelete={HandleDelete}></Conversations> : null}
                             {index === 2 ? (
                                 <Conversations activeConversation={activeConversation} setActiveConversation={setActiveConversation} conversations={archivedConversations} index={index} setIndex={setIndex} HandleFunction={HandleUnarchive} HandleDelete={HandleDelete}></Conversations>
                             ) : null}
                         </Grid>
-                        <Grid item xl={7} lg={7} sx={styles(theme).containerConversations}>
+                        <Grid item xl={7} lg={7} md={7} sm={10} xs={10} sx={styles(theme).containerConversations}>
                             {activeConversation ? <Messages conversation={activeConversation}></Messages> : <Typography>Open conversation to view messages</Typography>}
                         </Grid>
                     </Glass>

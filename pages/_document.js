@@ -10,46 +10,17 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     {/* PWA primary color */}
-                    <meta
-                        name="theme-color"
-                        content={theme.palette.primary.main}
-                    />
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                    />
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                    />
-                    <link
-                        rel="preconnect"
-                        href="https://fonts.googleapis.com"
-                    />
-                    <link
-                        rel="preconnect"
-                        href="https://fonts.gstatic.com"
-                        crossOrigin
-                    />
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&display=swap"
-                        rel="stylesheet"
-                    />
+                    <meta name="theme-color" content={theme.palette.primary.main} />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                    <link rel="preconnect" href="https://fonts.googleapis.com" />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+                    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap" rel="stylesheet" />
                 </Head>
                 <body>
                     <div id="fb-root"></div>
-                    <script
-                        async
-                        defer
-                        crossOrigin="anonymous"
-                        src="https://connect.facebook.net/hr_HR/sdk.js#xfbml=1&version=v12.0"
-                        nonce="CcJfqhpC"
-                    ></script>
-                    <script
-                        async
-                        src="https://platform.twitter.com/widgets.js"
-                        charset="utf-8"
-                    ></script>
+                    <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/hr_HR/sdk.js#xfbml=1&version=v12.0" nonce="CcJfqhpC"></script>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     <Main />
                     <NextScript />
                 </body>
@@ -114,9 +85,6 @@ MyDocument.getInitialProps = async (ctx) => {
     return {
         ...initialProps,
         // Styles fragment is rendered after the app and page rendering finish.
-        styles: [
-            ...emotionStyleTags,
-            ...React.Children.toArray(initialProps.styles),
-        ],
+        styles: [...emotionStyleTags, ...React.Children.toArray(initialProps.styles)],
     };
 };
