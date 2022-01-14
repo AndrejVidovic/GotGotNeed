@@ -7,7 +7,7 @@ const styles = (theme) => ({
         [theme.breakpoints.between("xs", "sm")]: {
             marginTop: "5rem",
         },
-        [theme.breakpoints.between("sm", "md")]: {
+        [theme.breakpoints.between("sm", "lg")]: {
             marginTop: "6rem",
         },
     },
@@ -18,7 +18,7 @@ const styles = (theme) => ({
             fontSize: "60px",
         },
         [theme.breakpoints.between("xs", "sm")]: {
-            fontSize: "50px",
+            fontSize: "40px",
         },
     },
     subtitle: {
@@ -30,7 +30,7 @@ const styles = (theme) => ({
             fontSize: "30px",
         },
         [theme.breakpoints.between("xs", "md")]: {
-            fontSize: "25px",
+            fontSize: "20px",
         },
     },
 });

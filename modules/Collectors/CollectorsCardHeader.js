@@ -1,11 +1,4 @@
-import {
-    Grid,
-    Box,
-    useTheme,
-    Typography,
-    IconButton,
-    Link,
-} from "@mui/material";
+import { Grid, Box, useTheme, Typography, IconButton, Link } from "@mui/material";
 import { Person, LocationOn, Badge, PersonAdd } from "@mui/icons-material";
 import Image from "next/image";
 import triangleImg from "../../public/decoTriangle.png";
@@ -14,8 +7,8 @@ import circleImg from "../../public/decoCircle.png";
 const styles = (theme) => ({
     textField: {
         display: "inline",
-        color: theme.palette.grey[600],
-        fontSize: "12px",
+        color: theme.palette.grey[700],
+        fontSize: "14px",
         margin: "5px auto 5px 0",
     },
     username: {
@@ -23,6 +16,7 @@ const styles = (theme) => ({
         fontWeight: "700",
         textShadow: theme.shadows[4],
         fontSize: "25px",
+        marginBottom: "5px",
         transition: "all 0.2s ease",
         "&:hover": {
             transform: "scale(1.03)",
@@ -62,7 +56,7 @@ const styles = (theme) => ({
         fontSize: "25px",
     },
     cardHeader: {
-        padding: "25px",
+        padding: "25px 25px 35px 25px",
         position: "absolute",
         bottom: 0,
         height: "50%",
@@ -93,11 +87,7 @@ const CollectorsCardHeader = ({ user }) => {
     return (
         <Box sx={styles(theme).cardHeader}>
             <Grid item xs={12} container direction="row">
-                <Link
-                    href={`/Collectors/${user.username}`}
-                    passHref
-                    style={{ textDecoration: "none", color: "black" }}
-                >
+                <Link href={`/Collectors/${user.username}`} passHref style={{ textDecoration: "none", color: "black" }}>
                     <Typography sx={styles(theme).username}>
                         <Box
                             sx={
@@ -117,64 +107,26 @@ const CollectorsCardHeader = ({ user }) => {
                 </IconButton>
             </Grid>
 
-            <Link
-                href={`/Collectors/${user.username}`}
-                passHref
-                style={{ textDecoration: "none" }}
-            >
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+            <Link href={`/Collectors/${user.username}`} passHref style={{ textDecoration: "none" }}>
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <Person sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.name}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.name}</Typography>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <LocationOn sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.location}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.location}</Typography>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <Badge sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.joined}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.joined}</Typography>
                 </Grid>
             </Link>
             <Box sx={styles(theme).circle}>
-                <Image
-                    src={circleImg}
-                    alt="circle"
-                    layout="fill"
-                    objectFit="cover"
-                />
+                <Image src={circleImg} alt="circle" layout="fill" objectFit="cover" />
             </Box>
 
             <Box sx={styles(theme).triangle}>
-                <Image
-                    src={triangleImg}
-                    alt="circle"
-                    layout="fill"
-                    objectFit="cover"
-                />
+                <Image src={triangleImg} alt="circle" layout="fill" objectFit="cover" />
             </Box>
         </Box>
     );

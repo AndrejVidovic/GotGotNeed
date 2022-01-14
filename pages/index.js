@@ -8,7 +8,7 @@ import Glass from "../components/Glass";
 import BannerAndButton from "../modules/BannerAndButton";
 import Footer from "../components/Layout/footer";
 import NewsOnGlass from "../modules/NewsOnGlass";
-import { getNewsForHomePage } from "../helper";
+import DataSourceAPI from "../helpers/contentful";
 
 const styles = (theme) => ({
     gridContainer: {
@@ -48,67 +48,31 @@ const styles = (theme) => ({
 
 const Home = ({ newsData }) => {
     const theme = useTheme();
+    console.log(newsData);
 
     return (
         <>
             <Head>
                 <title>GGN | Home</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                sx={styles(theme).gridContainer}
-            >
-                <Grid
-                    item
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    sx={styles(theme).backBanner}
-                >
+            <Grid container direction="column" justifyContent="center" alignItems="center" sx={styles(theme).gridContainer}>
+                <Grid item container justifyContent="center" alignItems="center" sx={styles(theme).backBanner}>
                     <BannerAndButton />
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        md={6}
-                        lg={4}
-                        justifyContent="center"
-                        alignItems="center"
-                    >
+                    <Grid item container xs={12} md={6} lg={4} justifyContent="center" alignItems="center">
                         <SmallLogin />
                     </Grid>
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        justifyContent="center"
-                        alignItems="center"
-                    >
+                    <Grid item container xs={12} justifyContent="center" alignItems="center">
                         <Glass
                             color={0}
                             styling={styles(theme).glass}
                             onClickFunction={() => {
-                                var element =
-                                    document.getElementById(
-                                        "smoothScrollTarget"
-                                    );
+                                var element = document.getElementById("smoothScrollTarget");
                                 element.scrollIntoView({ behavior: "smooth" });
                             }}
                         >
-                            <FontAwesomeIcon
-                                icon={faChevronDown}
-                                size="40px"
-                                color="grey"
-                                style={styles(theme).downIcon}
-                            />
+                            <FontAwesomeIcon icon={faChevronDown} size="40px" color="grey" style={styles(theme).downIcon} />
                         </Glass>
                     </Grid>
                 </Grid>
@@ -124,7 +88,7 @@ const Home = ({ newsData }) => {
 export default Home;
 
 export async function getStaticProps() {
-    const newsData = await getNewsForHomePage();
+    const newsData = await DataSourceAPI.getPosts();
     return {
         props: {
             newsData,

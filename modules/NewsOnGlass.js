@@ -1,4 +1,4 @@
-import { useTheme, Grid } from "@mui/material";
+import { useTheme, Grid, Typography } from "@mui/material";
 import Glass from "../components/Glass";
 import BlogCard from "../components/News/BlogCard";
 import Link from "next/link";
@@ -22,12 +22,14 @@ const styles = (theme) => ({
     newsTitle: {
         fontSize: "65px", //prije 80px
         fontWeight: "700",
+        padding: "55px",
         textShadow: theme.shadows[2],
         display: "block",
         width: "100%",
         textAlign: "center",
         [theme.breakpoints.between("xs", "md")]: {
-            fontSize: "50px",
+            fontSize: "35px",
+            padding: "30px",
         },
     },
     glass: {
@@ -40,27 +42,13 @@ const NewsOnGlass = ({ newsData }) => {
 
     return (
         <Glass color={0} styling={styles(theme).glass}>
-            <h1 style={styles(theme).newsTitle}>NEWS</h1>
-            <Grid
-                xs={11}
-                md={9}
-                lg={7}
-                xl={6}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
+            <Typography variant="h1" sx={styles(theme).newsTitle}>
+                NEWS
+            </Typography>
+            <Grid xs={11} md={9} lg={7} xl={6} container direction="column" justifyContent="center" alignItems="center">
                 {newsData.slice(0, 3).map((newsItem) => (
                     <Grid item xs={12}>
-                        <BlogCard
-                            key={newsItem.id}
-                            id={newsItem.id}
-                            title={newsItem.title}
-                            type={newsItem.type}
-                            description={newsItem.description}
-                            date={newsItem.date}
-                        />
+                        <BlogCard key={newsItem.sys.id} id={newsItem.sys.id} title={newsItem.title} types={newsItem.types.items} description={newsItem.description} date={newsItem.date} />
                     </Grid>
                 ))}
             </Grid>

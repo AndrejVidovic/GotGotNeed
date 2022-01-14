@@ -10,7 +10,7 @@ const styles = (theme) => ({
         overflow: "hidden",
         boxShadow: theme.shadows[1],
         position: "relative",
-        height: "350px",
+        height: "375px",
         width: "100%",
     },
     cardImage: {
@@ -31,12 +31,7 @@ const CollectorCard = ({ user }) => {
             <Box sx={styles(theme).card}>
                 <Box sx={styles(theme).cardImage}>
                     <Link href={`/Collectors/${user.username}`} passHref>
-                        <Image
-                            src={avatarImg}
-                            alt={"najs"}
-                            layout="fill"
-                            objectFit="cover"
-                        />
+                        <Image src={avatarImg} alt={"najs"} layout="fill" objectFit="cover" />
                     </Link>
                 </Box>
                 <CollectorsCardHeader user={user} />

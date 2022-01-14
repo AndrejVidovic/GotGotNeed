@@ -35,11 +35,8 @@ const styles = (theme) => ({
             transform: "scale(1.03)",
             cursor: "pointer",
         },
-        [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "13px",
-        },
-        [theme.breakpoints.down("sm")]: {
-            fontSize: "10px",
+        [theme.breakpoints.down("md")]: {
+            fontSize: "14px",
         },
     },
     reviewDate: {
@@ -58,21 +55,17 @@ const styles = (theme) => ({
         color: theme.palette.grey[700],
         fontWeight: 500,
         [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "11px",
+            fontSize: "12px",
         },
         [theme.breakpoints.down("sm")]: {
-            fontSize: "9px",
             margin: "0 0 10px 0",
         },
     },
     reviewText: {
         margin: 0,
-        fontSize: "12px",
-        [theme.breakpoints.between("sm", "md")]: {
-            fontSize: "10px",
-        },
-        [theme.breakpoints.down("sm")]: {
-            fontSize: "8px",
+        fontSize: "14px",
+        [theme.breakpoints.down("md")]: {
+            fontSize: "12px",
         },
     },
     reviewProfilePictureContainer: {
@@ -104,46 +97,25 @@ const Review = ({ review }) => {
 
     return (
         <Glass color={review.positive + 3} styling={styles(theme).glassReview}>
-            <Link
-                href={`/Collectors/${review.username}`}
-                passHref
-                style={{ textDecoration: "none", color: "black" }}
-            >
+            <Link href={`/Collectors/${review.username}`} passHref style={{ textDecoration: "none", color: "black" }}>
                 <Box sx={styles(theme).reviewProfilePictureContainer}>
-                    <Image
-                        src={avatarImg}
-                        alt={review.username + "'s profile picture."}
-                        layout="fill"
-                        objectFit="cover"
-                    />
+                    <Image src={avatarImg} alt={review.username + "'s profile picture."} layout="fill" objectFit="cover" />
                 </Box>
             </Link>
             <Grid container>
                 <Grid item xs={12} container>
                     <Grid item xs={12} container>
-                        <Link
-                            href={`/Collectors/${review.username}`}
-                            passHref
-                            style={{ textDecoration: "none", color: "black" }}
-                        >
-                            <Typography sx={styles(theme).reviewUsername}>
-                                {review.username}
-                            </Typography>
+                        <Link href={`/Collectors/${review.username}`} passHref style={{ textDecoration: "none", color: "black" }}>
+                            <Typography sx={styles(theme).reviewUsername}>{review.username}</Typography>
                         </Link>
-                        <Typography sx={styles(theme).reviewDate}>
-                            {review.date}
-                        </Typography>
+                        <Typography sx={styles(theme).reviewDate}>{review.date}</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography sx={styles(theme).reviewLocation}>
-                            {review.location}
-                        </Typography>
+                        <Typography sx={styles(theme).reviewLocation}>{review.location}</Typography>
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography sx={styles(theme).reviewText}>
-                        {review.description}
-                    </Typography>
+                    <Typography sx={styles(theme).reviewText}>{review.description}</Typography>
                 </Grid>
             </Grid>
         </Glass>

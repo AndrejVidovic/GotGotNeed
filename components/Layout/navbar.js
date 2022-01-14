@@ -1,26 +1,12 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Toolbar,
-    darken,
-    useTheme,
-    IconButton,
-} from "@mui/material";
+import { useState } from "react";
+import { AppBar, Box, Button, Toolbar, darken, useTheme, IconButton } from "@mui/material";
 import Image from "next/image";
 import { MenuRounded } from "@mui/icons-material";
 import Link from "next/link";
 import logo from "../../public/LogoS.png";
+import { useAuth } from "../../context/AuthContext";
 
-const pages = [
-    "About Us",
-    "News",
-    "Collections",
-    "Collectors",
-    "Publishers",
-    "Chat",
-    "Swap",
-];
+const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat", "Swap"];
 
 const styles = (theme) => ({
     appBar: {
@@ -29,9 +15,6 @@ const styles = (theme) => ({
     loginButtonBox: {
         marginLeft: "auto",
         marginRight: "0",
-        "@media (min-width: 1100px) and (max-width: 1300px)": {
-            marginLeft: "24px",
-        },
     },
     loginButton: {
         backgroundColor: theme.palette.secondary.light,
@@ -76,47 +59,51 @@ const styles = (theme) => ({
 
 const Navbar = ({ openDrawer }) => {
     const theme = useTheme(); //dohvaćamo temu zadanu ThemeProviderom iz _app.js
+    const { currentUser, logout } = useAuth();
+    const [error, setError] = useState("");
+
+    async function handleLogout() {
+        setError("");
+
+        try {
+            await logout();
+            history.push("/login");
+        } catch {
+            setError("Failed to log out");
+        }
+    }
 
     return (
         <>
             <AppBar position="fixed" sx={styles(theme).appBar}>
                 <Toolbar>
-                    <IconButton
-                        onClick={() => openDrawer()}
-                        sx={styles(theme).menuButton}
-                    >
+                    <IconButton onClick={() => openDrawer()} sx={styles(theme).menuButton}>
                         <MenuRounded sx={styles(theme).menuButton} />
                     </IconButton>
                     <Box>
                         <Link href="/" passHref>
                             <a style={styles(theme).logoLink}>
-                                <Image
-                                    src={logo}
-                                    layout="intrinsic"
-                                    alt="GGN"
-                                ></Image>
+                                <Image src={logo} layout="intrinsic" alt="GGN"></Image>
                             </a>
                         </Link>
                     </Box>
                     {pages.map((page) => (
                         <Box ml={3} key={page} sx={styles(theme).pageBox}>
-                            <Link
-                                href={{ pathname: "/[page]" }}
-                                as={`/${page.replace(/\s+/g, "")}`}
-                                passHref
-                            >
-                                <Button sx={styles(theme).navbarButtons}>
-                                    {page}
-                                </Button>
+                            <Link href={{ pathname: "/[page]" }} as={`/${page.replace(/\s+/g, "")}`} passHref>
+                                <Button sx={styles(theme).navbarButtons}>{page}</Button>
                             </Link>
                         </Box>
                     ))}
                     <Box sx={styles(theme).loginButtonBox}>
-                        <Link href="/Login" passHref>
-                            <Button sx={styles(theme).loginButton}>
-                                Login
+                        {currentUser ? (
+                            <Button sx={styles(theme).loginButton} onClick={() => handleLogout()}>
+                                Log Out
                             </Button>
-                        </Link>
+                        ) : (
+                            <Link href="/Login" passHref>
+                                <Button sx={styles(theme).loginButton}>Log In</Button>
+                            </Link>
+                        )}
                     </Box>
                 </Toolbar>
             </AppBar>

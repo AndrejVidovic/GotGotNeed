@@ -1,12 +1,7 @@
 import { Box, Button, Grid, useTheme } from "@mui/material";
 import Glass from "../components/Glass.js";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-    FormControl,
-    IconButton,
-    InputAdornment,
-    TextField,
-} from "@mui/material";
+import { FormControl, IconButton, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import Image from "next/image";
 import ggnImage from "../public/GGNImage.png";
@@ -104,21 +99,10 @@ const SmallLogin = () => {
     return (
         <Glass color={2} styling={styles(theme).root}>
             <Box sx={styles(theme).logo}>
-                <Image
-                    alt="logo"
-                    src={ggnImage}
-                    layout="fill"
-                    objectFit="contain"
-                />
+                <Image alt="logo" src={ggnImage} layout="fill" objectFit="contain" />
             </Box>
             <FormControl sx={styles(theme).textfield}>
-                <TextField
-                    variant="filled"
-                    label="Username"
-                    onChange={handleChange("Username")}
-                    sx={styles(theme).textfield}
-                    size="normal"
-                />
+                <TextField variant="filled" label="Username" onChange={handleChange("Username")} sx={styles(theme).textfield} size="normal" />
                 <TextField
                     variant="filled"
                     label="Password"
@@ -130,30 +114,15 @@ const SmallLogin = () => {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="password visibility"
-                                    onClick={HandleClickShowPassword}
-                                    onMouseDown={HandleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {user.ShowPassword ? (
-                                        <Visibility />
-                                    ) : (
-                                        <VisibilityOff />
-                                    )}
+                                <IconButton aria-label="password visibility" onClick={HandleClickShowPassword} onMouseDown={HandleMouseDownPassword} edge="end">
+                                    {user.ShowPassword ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
                         ),
                     }}
                 />
             </FormControl>
-            <Grid
-                container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                sx={styles(theme).buttons}
-            >
+            <Grid container direction="row" justifyContent="space-between" alignItems="center" sx={styles(theme).buttons}>
                 <Grid item xs={5.5}>
                     <Button
                         variant="contained"
@@ -162,7 +131,7 @@ const SmallLogin = () => {
                             ...styles(theme).loginButton,
                         }}
                     >
-                        LOGIN
+                        LOG IN
                     </Button>
                 </Grid>
                 <Grid item xs={5.5}>

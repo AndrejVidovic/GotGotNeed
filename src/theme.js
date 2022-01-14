@@ -49,7 +49,7 @@ const theme = createTheme({
                         marginTop: "5vh",
                     },
                     "@media (min-width: 1100px)": {
-                        zoom: "85%",
+                        zoom: "90%",
                         marginTop: "15vh",
                     },
                     backgroundImage: `url(${backgroundIMG.src})`,

@@ -1,21 +1,13 @@
+import { useRef, useEffect } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {
-    Button,
-    Divider,
-    FilledInput,
-    FormControl,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    Paper,
-    TextField,
-    Typography,
-    useTheme,
-} from "@mui/material";
+import { Button, Divider, FilledInput, FormControl, Grid, IconButton, InputAdornment, InputLabel, Paper, TextField, Typography, useTheme } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 import Head from "next/head";
+import { useAuth } from "../context/AuthContext";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { auth } from "../helpers/firebase";
+import firebase from "firebase/compat/app";
 
 const styles = (theme) => ({
     loginButton: {
@@ -23,32 +15,28 @@ const styles = (theme) => ({
         color: "black",
         fontWeight: 700,
         boxShadow: theme.shadows[2],
-        width: "13vh",
-        height: "5vh",
+        width: "100%",
+        height: "4rem",
+        fontSize: "1.3rem",
         "&:hover": {
             backgroundColor: theme.palette.secondary.main,
         },
-        margin: "1vh",
-        [theme.breakpoints.down("sm")]: {
-            height: "7vh",
-        },
+        marginTop: "2rem",
+        marginBottom: "1.5rem",
     },
     signUpButton: {
         backgroundColor: theme.palette.main,
         color: "white",
         fontWeight: 700,
         boxShadow: theme.shadows[2],
-        width: "13vh",
-        height: "5vh",
+        width: "100%",
+        height: "4rem",
+        fontSize: "1.3rem",
         "&:hover": {
             backgroundColor: theme.palette.primary.dark,
         },
-        marginTop: "1vh",
-        marginBottom: "4vh",
-        [theme.breakpoints.down("sm")]: {
-            height: "7vh",
-            padding: 0,
-        },
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
     },
     gridBox: {
         display: "flex",
@@ -57,27 +45,33 @@ const styles = (theme) => ({
     },
     paper: {
         display: "flex",
+        padding: "3rem 5rem",
         alignItems: "center",
         flexDirection: "column",
         boxShadow: theme.shadows[2],
-        width: "47vh",
+        width: "450px",
         height: "100%",
-        [theme.breakpoints.between("xs", "sm")]: {
-            marginTop: "5rem",
-        },
-        [theme.breakpoints.between("sm", "md")]: {
+        [theme.breakpoints.down("lg")]: {
             marginTop: "6rem",
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+            padding: "2rem 4rem",
         },
     },
     title: {
         fontWeight: 700,
-        fontSize: "30px",
-        paddingTop: "6vh",
-        paddingBottom: "4vh",
+        fontSize: "3rem",
+        paddingTop: "2rem",
+        paddingBottom: "4rem",
+        [theme.breakpoints.down("sm")]: {
+            paddingBottom: "3rem",
+            fontSize: "2.5rem",
+        },
     },
     divider: {
         borderWidth: "2px",
-        width: "75%",
+        width: "100%",
         margin: "2vh",
         alignText: "center",
         "::before": {
@@ -91,7 +85,7 @@ const styles = (theme) => ({
     textfield: {
         marginTop: "1vh",
         marginBottom: "3vh",
-        width: "75%",
+        width: "100%",
     },
     caption: {
         fontSize: "10px",
@@ -100,91 +94,80 @@ const styles = (theme) => ({
     },
 });
 
+const uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+    callbacks: {
+        signInSuccessWithAuthResult: () => false,
+    },
+};
+
 function Login() {
     const theme = useTheme();
-    const [user, setUser] = useState({
-        Username: "",
-        Password: "",
-        ShowPassword: false,
-    });
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const { login } = useAuth();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const handleChange = (props) => (event) => {
-        setUser({ ...user, [props]: event.target.value });
-    };
-    const HandleClickShowPassword = () => {
-        setUser({ ...user, ShowPassword: !user.ShowPassword });
-    };
-    const HandleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        try {
+            setError("");
+            setLoading(true);
+            await login("vidaftw@gmail.com", "VidexSpiner1950");
+        } catch (error) {
+            console.error(error.message);
+            setError("Failed to log in.");
+        }
+        setLoading(false);
+    }
 
     return (
         <>
             <Head>
                 <title>Login</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
             </Head>
             <Grid container sx={styles(theme).gridBox}>
                 <Paper sx={styles(theme).paper}>
                     <Typography variant="body1" sx={styles(theme).title}>
-                        Welcome Back!
+                        Welcome back!
                     </Typography>
-                    <TextField
-                        type="text"
-                        variant="filled"
-                        label="Username"
-                        onChange={handleChange("Username")}
-                        sx={styles(theme).textfield}
-                    />
-                    <FormControl variant="filled" sx={styles(theme).textfield}>
-                        <InputLabel htmlFor="filled-adornment-password">
-                            Password
-                        </InputLabel>
-                        <FilledInput
-                            id="filled-adornment-password"
-                            type={user.ShowPassword ? "text" : "password"}
-                            value={user.Password}
-                            onChange={handleChange("Password")}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="password visibility"
-                                        onClick={HandleClickShowPassword}
-                                        onMouseDown={HandleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {user.ShowPassword ? (
-                                            <Visibility />
-                                        ) : (
-                                            <VisibilityOff />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        ></FilledInput>
-                    </FormControl>
-                    <Button
-                        variant="contained"
-                        sx={styles(theme).loginButton}
-                        type="submit"
-                    >
-                        LOGIN
-                    </Button>
+                    <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+                        <TextField variant="filled" label="Email" type="email" ref={emailRef} sx={styles(theme).textfield} />
+                        <FormControl variant="filled" sx={styles(theme).textfield}>
+                            <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                            <FilledInput
+                                id="filled-adornment-password"
+                                type={showPassword ? "text" : "password"}
+                                ref={passwordRef}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton aria-label="password visibility" onClick={() => setShowPassword(!showPassword)} onMouseDown={(e) => e.preventDefault()} edge="end">
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            ></FilledInput>
+                        </FormControl>
+                        <Button variant="contained" sx={styles(theme).loginButton} type="submit" disabled={loading}>
+                            LOG IN
+                        </Button>
+                    </form>
+
                     <Typography variant="caption" sx={styles(theme).caption}>
                         Forgot Your Password?
                     </Typography>
                     <Divider sx={styles(theme).divider}>OR</Divider>
                     <Link href="/Register" passHref>
-                        <Button
-                            variant="contained"
-                            sx={styles(theme).signUpButton}
-                        >
+                        <Button variant="contained" sx={styles(theme).signUpButton}>
                             SIGN UP
                         </Button>
                     </Link>
+                    <Divider sx={styles(theme).divider}>OR</Divider>
+                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                 </Paper>
             </Grid>
         </>

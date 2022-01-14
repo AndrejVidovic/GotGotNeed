@@ -8,13 +8,7 @@ const styles = () => ({
     },
 });
 
-const Chips = ({
-    chipName,
-    setFilteredNews,
-    allNews,
-    activeChips,
-    setActiveChips,
-}) => {
+const Chips = ({ chipName, setFilteredNews, allNews, activeChips, setActiveChips }) => {
     const handleClickChip = (chipName) => {
         let tempNews = [];
         let tempChips = activeChips;
@@ -26,9 +20,7 @@ const Chips = ({
         }
 
         if (tempChips.length > 0) {
-            tempNews = allNews.filter((blog) =>
-                blog.type.some((keyword) => tempChips.includes(keyword))
-            );
+            tempNews = allNews.filter((blog) => blog.types.items.some((keyword) => tempChips.includes(keyword.name)));
         } else {
             tempNews = allNews;
         }
@@ -37,13 +29,7 @@ const Chips = ({
         setFilteredNews(tempNews);
     };
 
-    return (
-        <Chip
-            label={chipName}
-            sx={activeChips.includes(chipName) ? styles().chipActive : null}
-            onClick={() => handleClickChip(chipName)}
-        />
-    );
+    return <Chip label={chipName} sx={activeChips.includes(chipName) ? styles().chipActive : null} onClick={() => handleClickChip(chipName)} />;
 };
 
 export default Chips;

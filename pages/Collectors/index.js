@@ -16,9 +16,11 @@ const styles = (theme) => ({
         flexDirection: "column",
     },
     searchGrid: {
-        marginTop: "4vh",
-        marginBottom: "10vh",
+        marginBottom: "4rem",
         width: "100%",
+        [theme.breakpoints.down("lg")]: {
+            marginBottom: "2rem",
+        },
     },
     pagination: {
         marginTop: "5vh",
@@ -36,10 +38,10 @@ const styles = (theme) => ({
         width: "100%",
         height: "60%",
     },
-    searchButtons: {
-        margin: "0 0 0 15px",
-        fontWeight: 600,
-    },
+    // searchButtons: {
+    //     margin: "0 0 0 15px",
+    //     fontWeight: 600,
+    // },
 });
 
 const Collectors = () => {
@@ -49,9 +51,7 @@ const Collectors = () => {
 
     const [currentPage, setCurrentPage] = useState(() => 1);
     const [filteredUsers, setFilteredUsers] = useState(() => allUsers);
-    const [numberOfPages, setNumberOfPages] = useState(
-        Math.ceil(allUsers.length / cardsPerPage)
-    );
+    const [numberOfPages, setNumberOfPages] = useState(Math.ceil(allUsers.length / cardsPerPage));
 
     useEffect(() => {
         setCurrentPage(1);
@@ -66,8 +66,7 @@ const Collectors = () => {
     const getDisplayedUsers = () => {
         const startIndex = cardsPerPage * currentPage - cardsPerPage;
         let endIndex = cardsPerPage + startIndex;
-        endIndex =
-            endIndex > filteredUsers.length ? filteredUsers.length : endIndex;
+        endIndex = endIndex > filteredUsers.length ? filteredUsers.length : endIndex;
 
         return filteredUsers.slice(startIndex, endIndex);
     };
@@ -78,16 +77,9 @@ const Collectors = () => {
                 <title>Collectors</title>
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Title
-                    title="Collectors"
-                    subtitle="Your fellow sticker enthusiasts."
-                />
+                <Title title="Collectors" subtitle="Your fellow sticker enthusiasts." />
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).searchGrid}>
-                    <Search
-                        itemsToFilter={allUsers}
-                        setFilteredItems={setFilteredUsers}
-                        propertiesToSearch={["username", "location", "name"]}
-                    >
+                    <Search itemsToFilter={allUsers} setFilteredItems={setFilteredUsers} propertiesToSearch={["username", "location", "name"]}>
                         {/* <Button variant="contained" color="secondary" sx={styles(theme).searchButtons}>Split</Button>
                         <Button variant="contained" color="secondary" sx={styles(theme).searchButtons}>Croatia</Button> */}
                     </Search>
@@ -98,11 +90,7 @@ const Collectors = () => {
                     ))}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
-                    <Pagination
-                        page={currentPage}
-                        count={numberOfPages}
-                        onChange={handlePageChange}
-                    />
+                    <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />
                 </Grid>
             </Grid>
             <Footer />

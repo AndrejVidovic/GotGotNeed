@@ -1,12 +1,6 @@
 import { Box, Grid, useTheme, IconButton, Typography } from "@mui/material";
 import Glass from "../../components/Glass";
-import {
-    Person,
-    LocationOn,
-    Badge,
-    Mail,
-    PersonAdd,
-} from "@mui/icons-material";
+import { Person, LocationOn, Badge, Mail, PersonAdd } from "@mui/icons-material";
 import Image from "next/image";
 import avatarImg from "../../public/maradonaAvatar.jpg";
 
@@ -30,6 +24,9 @@ const styles = (theme) => ({
             fontSize: "30px",
             margin: "0",
         },
+        [theme.breakpoints.down("md")]: {
+            fontSize: "20px",
+        },
     },
     headerIcon: {
         display: "inline",
@@ -49,7 +46,7 @@ const styles = (theme) => ({
             paddingLeft: "90px",
         },
         [theme.breakpoints.down("sm")]: {
-            paddingLeft: "65px",
+            paddingLeft: "40px",
         },
     },
     glass: {
@@ -107,6 +104,10 @@ const styles = (theme) => ({
             width: "100px",
             height: "100px",
         },
+        [theme.breakpoints.down("sm")]: {
+            width: "80px",
+            height: "80px",
+        },
     },
     mainHeaderAdd: {
         marginLeft: "auto",
@@ -131,7 +132,7 @@ const styles = (theme) => ({
             fontSize: "30px",
         },
         [theme.breakpoints.down("sm")]: {
-            fontSize: "20px",
+            fontSize: "15px",
         },
     },
 });
@@ -153,19 +154,12 @@ const ProfileHeader = ({ user }) => {
                     }
                 ></Box>
                 <Box sx={styles(theme).profilePicture}>
-                    <Image
-                        src={avatarImg}
-                        alt={user.username + "'s profile picture."}
-                        layout="fill"
-                        objectFit="cover"
-                    />
+                    <Image src={avatarImg} alt={user.username + "'s profile picture."} layout="fill" objectFit="cover" />
                 </Box>
             </Box>
             <Grid container sx={styles(theme).headerContainer}>
                 <Grid item xs={12} container direction="row">
-                    <Typography sx={styles(theme).username}>
-                        {user.username}
-                    </Typography>
+                    <Typography sx={styles(theme).username}>{user.username}</Typography>
                     <IconButton sx={styles(theme).mainHeaderAdd}>
                         <PersonAdd sx={styles(theme).mainHeaderSvg} />
                     </IconButton>
@@ -173,41 +167,17 @@ const ProfileHeader = ({ user }) => {
                         <Mail sx={styles(theme).mainHeaderSvg} />
                     </IconButton>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <Person sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.name}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.name}</Typography>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <LocationOn sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.location}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.location}</Typography>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
+                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
                     <Badge sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>
-                        {user.joined}
-                    </Typography>
+                    <Typography sx={styles(theme).textField}>{user.joined}</Typography>
                 </Grid>
             </Grid>
         </Glass>

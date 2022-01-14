@@ -1,18 +1,5 @@
 import React, { useState } from "react";
-import {
-    Grid,
-    Card,
-    CardHeader,
-    Chip,
-    useTheme,
-    CardMedia,
-    CardContent,
-    IconButton,
-    Avatar,
-    Typography,
-    MenuItem,
-    Menu,
-} from "@mui/material";
+import { Grid, Card, CardHeader, Chip, useTheme, CardMedia, CardContent, IconButton, Avatar, Typography, MenuItem, Menu } from "@mui/material";
 import { Share as ShareIcon } from "@mui/icons-material";
 import Image from "next/image";
 import ar1 from "../../public/article1.png";
@@ -150,7 +137,7 @@ const styles = (theme) => ({
     },
 });
 
-const BlogCard = ({ id, title, type, description, date }) => {
+const BlogCard = ({ id, title, types, description, date }) => {
     const theme = useTheme();
     const [anchor, setAnchor] = useState(null);
     const open = Boolean(anchor);
@@ -170,73 +157,33 @@ const BlogCard = ({ id, title, type, description, date }) => {
                 {/* Link */}
                 <CardMedia sx={styles(theme).media} title={title}>
                     <div style={styles(theme).imageContainer}>
-                        <Image
-                            src={images[id % 3]}
-                            layout="fill"
-                            objectFit="cover"
-                            objectPosition="top"
-                            alt={title}
-                        />
+                        <Image src={images[0]} layout="fill" objectFit="cover" objectPosition="top" alt={title} />
                     </div>
                 </CardMedia>
                 <div style={styles(theme).textPart}>
                     <CardContent sx={styles(theme).content}>
                         <CardHeader
                             sx={styles(theme).header}
-                            title={
-                                <Typography sx={styles(theme).title}>
-                                    {title}
-                                </Typography>
-                            }
-                            subheader={
-                                <Typography sx={styles(theme).subtitle}>
-                                    {date}
-                                </Typography>
-                            }
+                            title={<Typography sx={styles(theme).title}>{title}</Typography>}
+                            subheader={<Typography sx={styles(theme).subtitle}>{date}</Typography>}
                             avatar={
-                                <Avatar
-                                    aria-label="Author"
-                                    sx={styles(theme).avatar}
-                                >
-                                    <Image
-                                        src={avatarImg}
-                                        layout="fill"
-                                        objectFit="cover"
-                                        alt=""
-                                    />
+                                <Avatar aria-label="Author" sx={styles(theme).avatar}>
+                                    <Image src={avatarImg} layout="fill" objectFit="cover" alt="" />
                                 </Avatar>
                             }
                             action={
-                                <IconButton
-                                    aria-label="share"
-                                    style={styles(theme).shareButton}
-                                >
-                                    <ShareIcon
-                                        onClick={shareMenuOpen}
-                                        sx={styles(theme).shareIcon}
-                                    />
+                                <IconButton aria-label="share" style={styles(theme).shareButton}>
+                                    <ShareIcon onClick={shareMenuOpen} sx={styles(theme).shareIcon} />
                                 </IconButton>
                             }
                         />
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                            sx={styles(theme).article}
-                        >
+                        <Typography variant="body2" color="textSecondary" component="p" sx={styles(theme).article}>
                             {description}
                         </Typography>
-                        <Grid
-                            container
-                            direction="row"
-                            justifyContent="flex-start"
-                            alignItems="center"
-                            spacing={1.3}
-                            sx={styles(theme).chipsContainer}
-                        >
-                            {type.map((typeName) => (
-                                <Grid item key={typeName}>
-                                    <Chip size="small" label={typeName} />
+                        <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={1.3} sx={styles(theme).chipsContainer}>
+                            {types.map((type) => (
+                                <Grid item key={type.name}>
+                                    <Chip size="small" label={type.name} />
                                 </Grid>
                             ))}
                         </Grid>
@@ -253,18 +200,8 @@ const BlogCard = ({ id, title, type, description, date }) => {
                 onClose={shareMenuClose}
             >
                 <MenuItem onClick={shareMenuClose}>
-                    <div
-                        className="fb-share-button"
-                        data-href="https://gotgotneed-lpce94hu6-andrejvidovic.vercel.app/"
-                        data-layout="button"
-                        data-size="large"
-                    >
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgotgotneed-lpce94hu6-andrejvidovic.vercel.app%2F&amp;src=sdkpreparse"
-                            className="fb-xfbml-parse-ignore"
-                        >
+                    <div className="fb-share-button" data-href="https://gotgotneed-lpce94hu6-andrejvidovic.vercel.app/" data-layout="button" data-size="large">
+                        <a target="_blank" rel="noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgotgotneed-lpce94hu6-andrejvidovic.vercel.app%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">
                             Share on Facebook
                         </a>
                     </div>

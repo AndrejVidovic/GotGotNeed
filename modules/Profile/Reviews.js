@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Grid, useTheme, Button, Collapse } from "@mui/material";
-import {
-    KeyboardArrowDownRounded,
-    KeyboardArrowUpRounded,
-} from "@mui/icons-material";
+import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from "@mui/icons-material";
 import Glass from "../../components/Glass";
 import Review from "../../components/Review";
 import StarRating from "../../components/StarRating";
@@ -25,7 +22,7 @@ const styles = (theme) => ({
     expandedGlass: {
         paddingBottom: "100px",
         [theme.breakpoints.down("sm")]: {
-            paddingBottom: "70px",
+            padding: "30px 20px 70px 10px ",
         },
     },
     reviewsTitle: {
@@ -58,24 +55,12 @@ const styles = (theme) => ({
 
 const Reviews = ({ reviews }) => {
     const theme = useTheme();
-    const [displayReviewsStatus, setDisplayReviewsStatus] = useState(
-        () => false
-    );
+    const [displayReviewsStatus, setDisplayReviewsStatus] = useState(() => false);
 
-    const gradeToFive =
-        (reviews.filter((review) => review.positive === 1).length /
-            reviews.length) *
-        5;
+    const gradeToFive = (reviews.filter((review) => review.positive === 1).length / reviews.length) * 5;
 
     return (
-        <Glass
-            color={0}
-            styling={
-                displayReviewsStatus
-                    ? { ...styles(theme).glass, ...styles(theme).expandedGlass }
-                    : { ...styles(theme).glass }
-            }
-        >
+        <Glass color={0} styling={displayReviewsStatus ? { ...styles(theme).glass, ...styles(theme).expandedGlass } : { ...styles(theme).glass }}>
             <Grid container direction="row" justifyContent="space-evenly">
                 <Grid item>
                     <StarRating gradeToFive={gradeToFive} />
@@ -98,11 +83,7 @@ const Reviews = ({ reviews }) => {
                         setDisplayReviewsStatus(!displayReviewsStatus);
                     }}
                 >
-                    {displayReviewsStatus ? (
-                        <KeyboardArrowUpRounded />
-                    ) : (
-                        <KeyboardArrowDownRounded />
-                    )}
+                    {displayReviewsStatus ? <KeyboardArrowUpRounded /> : <KeyboardArrowDownRounded />}
                 </Button>
             </Grid>
         </Glass>
