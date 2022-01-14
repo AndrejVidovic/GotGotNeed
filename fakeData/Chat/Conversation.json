@@ -1,0 +1,47 @@
+[
+    {
+        "id": 2,
+        "sender": "JohnDoe",
+        "city": "Split",
+        "country": "Croatia",
+        "recipient": "PetarPetric",
+        "unread": false,
+        "time": "2021-04-14 18:28:19"
+    },
+    {
+        "id": 3,
+        "sender": "Marmar99ssssssssssssssssssssssssssssssssssssssssssssssssssss",
+        "city": "Split",
+        "country": "Croatia",
+        "recipient": "PetarPetric",
+        "unread": false,
+        "time": "2021-08-24 19:14:54"
+    },
+    {
+        "id": 4,
+        "sender": "ivjak24",
+        "city": "Split",
+        "country": "Croatia",
+        "recipient": "PetarPetric",
+        "unread": true,
+        "time": "2022-01-10 11:01:24"
+    },
+    {
+        "id": 5,
+        "sender": "krajo123",
+        "city": "Split",
+        "country": "Croatia",
+        "recipient": "PetarPetric",
+        "unread": true,
+        "time": "2021-01-08 23:22:48"
+    },
+    {
+        "id": 6,
+        "sender": "nzup257",
+        "city": "Split",
+        "country": "Croatia",
+        "recipient": "PetarPetric",
+        "unread": false,
+        "time": "2020-12-12 06:36:32"
+    }
+]
