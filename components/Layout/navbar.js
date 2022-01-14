@@ -5,6 +5,7 @@ import { MenuRounded } from "@mui/icons-material";
 import Link from "next/link";
 import logo from "../../public/LogoS.png";
 import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/router";
 
 const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat", "Swap"];
 
@@ -37,6 +38,12 @@ const styles = (theme) => ({
             backgroundColor: theme.palette.primary.dark,
         },
     },
+    selectedButton: {
+        backgroundColor: theme.palette.primary.dark,
+        "&:hover": {
+            backgroundColor: darken(theme.palette.primary.dark, 0.1),
+        },
+    },
     logoLink: {
         display: "flex",
         alignItems: "center",
@@ -61,6 +68,8 @@ const Navbar = ({ openDrawer }) => {
     const theme = useTheme(); //dohvaćamo temu zadanu ThemeProviderom iz _app.js
     const { currentUser, logout } = useAuth();
     const [error, setError] = useState("");
+    const router = useRouter();
+    console.log(router.pathname);
 
     async function handleLogout() {
         setError("");
@@ -90,7 +99,7 @@ const Navbar = ({ openDrawer }) => {
                     {pages.map((page) => (
                         <Box ml={3} key={page} sx={styles(theme).pageBox}>
                             <Link href={{ pathname: "/[page]" }} as={`/${page.replace(/\s+/g, "")}`} passHref>
-                                <Button sx={styles(theme).navbarButtons}>{page}</Button>
+                                <Button sx={router.pathname !== `/${page.replace(/\s+/g, "")}` ? styles(theme).navbarButtons : { ...styles(theme).navbarButtons, ...styles(theme).selectedButton }}>{page}</Button>
                             </Link>
                         </Box>
                     ))}

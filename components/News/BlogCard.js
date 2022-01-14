@@ -79,6 +79,7 @@ const styles = (theme) => ({
     textPart: {
         display: "flex",
         flexDirection: "column",
+        width: "100%",
         [theme.breakpoints.between("sm", "md")]: {
             padding: "0.5rem",
             fontSize: "1rem",

@@ -45,11 +45,11 @@ const styles = (theme) => ({
     },
     paper: {
         display: "flex",
-        padding: "3rem 5rem",
+        padding: "3rem 6rem",
         alignItems: "center",
         flexDirection: "column",
         boxShadow: theme.shadows[2],
-        width: "450px",
+        width: "500px",
         height: "100%",
         [theme.breakpoints.down("lg")]: {
             marginTop: "6rem",
