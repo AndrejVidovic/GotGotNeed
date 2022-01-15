@@ -1,15 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    useTheme,
-    Grid,
-    Paper,
-    Typography,
-    IconButton,
-    Collapse,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, useTheme, Grid, Paper, Typography, IconButton, Collapse } from "@mui/material";
 import Image from "next/image";
 import PublisherCollection from "../../public/CollectionBig.png";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
@@ -70,6 +60,10 @@ const styles = (theme) => ({
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-around",
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        height: "2.9rem",
+        width: "100%",
     },
     paper: {
         height: "9rem",
@@ -154,46 +148,17 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
     return (
         <Grid item xl={4} md={6} xs={12}>
             <Card sx={styles(theme).root}>
-                <CardMedia
-                    sx={collapse ? styles(theme).media1 : styles(theme).media}
-                >
-                    <Image
-                        src={image}
-                        alt="collection"
-                        layout="fill"
-                        objectFit="cover"
-                    />
+                <CardMedia sx={collapse ? styles(theme).media1 : styles(theme).media}>
+                    <Image src={image} alt="collection" layout="fill" objectFit="cover" />
                 </CardMedia>
-                <CardContent
-                    sx={
-                        collapse
-                            ? styles(theme).content1
-                            : styles(theme).content
-                    }
-                >
-                    <Paper
-                        sx={
-                            collapse
-                                ? styles(theme).paper1
-                                : styles(theme).paper
-                        }
-                    >
+                <CardContent sx={collapse ? styles(theme).content1 : styles(theme).content}>
+                    <Paper sx={collapse ? styles(theme).paper1 : styles(theme).paper}>
                         <Grid item sx={styles(theme).titleGrid}>
-                            <Typography sx={styles(theme).title}>
-                                {collection.title}
-                            </Typography>
+                            <Typography sx={styles(theme).title}>{collection.title}</Typography>
                             <FontAwesomeIcon
-                                icon={
-                                    favorite.includes(collection.id)
-                                        ? faStarSharp
-                                        : faStar
-                                }
+                                icon={favorite.includes(collection.id) ? faStarSharp : faStar}
                                 size="2x"
-                                color={
-                                    favorite.includes(collection.id)
-                                        ? theme.palette.secondary.light
-                                        : "#D0D0D0"
-                                }
+                                color={favorite.includes(collection.id) ? theme.palette.secondary.light : "#D0D0D0"}
                                 style={{
                                     filter: "drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.4))",
                                     zIndex: 10,
@@ -202,82 +167,35 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
                             />
                         </Grid>
                         <Grid sx={styles(theme).collapseGrid}>
-                            <Collapse
-                                in={collapse}
-                                sx={{
-                                    position: "absolute",
-                                    bottom: 52,
-                                    paddingLeft: "0.5rem",
-                                }}
-                            >
+                            <Collapse in={collapse} sx={{ position: "absolute", bottom: 52, paddingLeft: "0.5rem" }}>
                                 <Grid sx={styles(theme).moreInfo}>
-                                    <Typography sx={styles(theme).info}>
-                                        Release Year:
-                                    </Typography>
-                                    <Typography sx={styles(theme).infoValues}>
-                                        {collection.releaseYear}
-                                    </Typography>
+                                    <Typography sx={styles(theme).info}>Release Year:</Typography>
+                                    <Typography sx={styles(theme).infoValues}>{collection.releaseYear}</Typography>
                                 </Grid>
                                 <Grid sx={styles(theme).moreInfo}>
-                                    <Typography sx={styles(theme).info}>
-                                        Number of stickers:
-                                    </Typography>
-                                    <Typography sx={styles(theme).infoValues}>
-                                        {collection.numberOfStickers}
-                                    </Typography>
+                                    <Typography sx={styles(theme).info}>Number of stickers:</Typography>
+                                    <Typography sx={styles(theme).infoValues}>{collection.numberOfStickers}</Typography>
                                 </Grid>
                                 <Grid sx={styles(theme).moreInfo}>
-                                    <Typography sx={styles(theme).info}>
-                                        Publisher:
-                                    </Typography>
-                                    <Typography sx={styles(theme).infoValues}>
-                                        {collection.publisher}
-                                    </Typography>
+                                    <Typography sx={styles(theme).info}>Publisher:</Typography>
+                                    <Typography sx={styles(theme).infoValues}>{collection.publisher}</Typography>
                                 </Grid>
                                 <Grid sx={styles(theme).moreInfo}>
-                                    <Typography sx={styles(theme).info}>
-                                        Category:
-                                    </Typography>
-                                    <Typography sx={styles(theme).infoValues}>
-                                        {collection.category}
-                                    </Typography>
+                                    <Typography sx={styles(theme).info}>Category:</Typography>
+                                    <Typography sx={styles(theme).infoValues}>{collection.category}</Typography>
                                 </Grid>
                             </Collapse>
                         </Grid>
                         <Grid sx={styles(theme).iconButtonGrid}>
-                            <IconButton
-                                sx={styles(theme).iconButton}
-                                onClick={handleCollapse}
-                            >
-                                {collapse ? (
-                                    <ExpandCircleDown
-                                        sx={{
-                                            color: theme.palette.primary.main,
-                                            fontSize: "2.2rem",
-                                        }}
-                                    />
-                                ) : (
-                                    <ExpandCircleDown
-                                        sx={styles(theme).expandIcon}
-                                    />
-                                )}
+                            <IconButton sx={styles(theme).iconButton} onClick={handleCollapse}>
+                                {collapse ? <ExpandCircleDown sx={{ color: theme.palette.primary.main, fontSize: "2.2rem" }} /> : <ExpandCircleDown sx={styles(theme).expandIcon} />}
                             </IconButton>
                         </Grid>
                         <Grid container sx={styles(theme).halfCircle}>
-                            <Image
-                                src="/decoCircle.png"
-                                width={80}
-                                height={80}
-                                alt="circle"
-                            />
+                            <Image src="/decoCircle.png" width={80} height={80} alt="circle" />
                         </Grid>
                         <Grid container sx={styles(theme).triangleBottom}>
-                            <Image
-                                src="/decoTriangle.png"
-                                width={120}
-                                height={100}
-                                alt="triangle"
-                            />
+                            <Image src="/decoTriangle.png" width={120} height={100} alt="triangle" />
                         </Grid>
                     </Paper>
                 </CardContent>
