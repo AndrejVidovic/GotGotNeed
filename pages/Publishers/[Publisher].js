@@ -84,8 +84,8 @@ const styles = (theme) => ({
         },
     },
 });
-function Publisher(props) {
-    const { id, title, types, collections, description, founded } = props;
+
+function Publisher({ id, title, types, collections, description, founded }) {
     const theme = useTheme();
     const images = [publi1, publi2, publi3];
 
@@ -101,27 +101,11 @@ function Publisher(props) {
         <>
             <Head>
                 <title>Publishers | {title}</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
             </Head>
             <Grid container sx={styles(theme).container}>
                 <Grid container sx={styles(theme).infoGrid}>
-                    <Grid
-                        item
-                        lg={3}
-                        xl={2}
-                        md={3}
-                        sm={4}
-                        xs={4}
-                        sx={styles(theme).imageGrid}
-                    >
-                        <Image
-                            src={images[id % 3]}
-                            layout="intrinsic"
-                            alt={title}
-                        />
+                    <Grid item lg={3} xl={2} md={3} sm={4} xs={4} sx={styles(theme).imageGrid}>
+                        <Image src={images[id % 3]} layout="intrinsic" alt={title} />
                     </Grid>
                     <Grid item lg={3} xl={2} md={4} sm={4} xs={5}>
                         <Typography variant="h1" sx={styles(theme).title}>
@@ -136,10 +120,7 @@ function Publisher(props) {
                         <Typography variant="body1" sx={styles(theme).info}>
                             Founded: {founded}.
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).description}
-                        >
+                        <Typography variant="body1" sx={styles(theme).description}>
                             {description}
                         </Typography>
                     </Grid>
@@ -155,23 +136,12 @@ function Publisher(props) {
                         justifyContent: "flex-end",
                     }}
                 >
-                    <Typography
-                        variant="body1"
-                        sx={styles(theme).descriptionSmall}
-                    >
+                    <Typography variant="body1" sx={styles(theme).descriptionSmall}>
                         {description}
                     </Typography>
                 </Grid>
 
-                <Grid
-                    sx={styles(theme).categoriesGrid}
-                    item
-                    xl={7}
-                    lg={9}
-                    md={9}
-                    sm={10}
-                    xs={10}
-                >
+                <Grid sx={styles(theme).categoriesGrid} item xl={7} lg={9} md={9} sm={10} xs={10}>
                     {getTypes().map((categories) => (
                         <Grid key={categories.id} sx={{ width: "100%" }}>
                             <Categories categories={categories}></Categories>
@@ -195,4 +165,5 @@ export async function getServerSideProps(context) {
         },
     };
 }
+
 export default Publisher;

@@ -48,7 +48,7 @@ const NewsOnGlass = ({ newsData }) => {
             <Grid xs={11} md={9} lg={7} xl={6} container direction="column" justifyContent="center" alignItems="center">
                 {newsData.slice(0, 3).map((newsItem) => (
                     <Grid item xs={12} sx={{ width: "100%" }}>
-                        <BlogCard key={newsItem.sys.id} id={newsItem.sys.id} title={newsItem.title} types={newsItem.types.items} description={newsItem.description} date={newsItem.date} />
+                        <BlogCard key={newsItem.sys.id} id={newsItem.sys.id} title={newsItem.title} slug={newsItem.slug} types={newsItem.types.items} description={newsItem.description} date={newsItem.date} author={newsItem.author} image={newsItem.cardImage.url} />
                     </Grid>
                 ))}
             </Grid>

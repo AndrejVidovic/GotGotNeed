@@ -48,7 +48,6 @@ const styles = (theme) => ({
 
 const Home = ({ newsData }) => {
     const theme = useTheme();
-    console.log(newsData);
 
     return (
         <>

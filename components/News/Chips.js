@@ -6,6 +6,9 @@ const styles = () => ({
         boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.45)",
         backdropFilter: "blur(4px)",
     },
+    chipClickable: {
+        boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)",
+    },
 });
 
 const Chips = ({ chipName, setFilteredNews, allNews, activeChips, setActiveChips }) => {
@@ -29,7 +32,7 @@ const Chips = ({ chipName, setFilteredNews, allNews, activeChips, setActiveChips
         setFilteredNews(tempNews);
     };
 
-    return <Chip label={chipName} sx={activeChips.includes(chipName) ? styles().chipActive : null} onClick={() => handleClickChip(chipName)} />;
+    return <Chip label={chipName} sx={activeChips.includes(chipName) ? styles().chipActive : styles().chipClickable} onClick={() => handleClickChip(chipName)} />;
 };
 
 export default Chips;

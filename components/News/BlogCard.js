@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Grid, Card, CardHeader, Chip, useTheme, CardMedia, CardContent, IconButton, Avatar, Typography, MenuItem, Menu } from "@mui/material";
 import { Share as ShareIcon } from "@mui/icons-material";
 import Image from "next/image";
-import ar1 from "../../public/article1.png";
-import ar2 from "../../public/article2.png";
-import ar3 from "../../public/article3.png";
-import avatarImg from "../../public/avatar.png";
+import Link from "next/link";
 
 const styles = (theme) => ({
     root: {
@@ -26,6 +23,9 @@ const styles = (theme) => ({
         [theme.breakpoints.up("xl")]: {
             flexDirection: "row",
             marginBottom: "3rem",
+        },
+        "&:hover": {
+            cursor: "pointer",
         },
     },
     media: {
@@ -136,16 +136,19 @@ const styles = (theme) => ({
     chipsContainer: {
         marginTop: "1rem",
     },
+    chip: {
+        border: "1px solid " + theme.palette.grey[200],
+        background: "rgba(219, 219, 219, 0.35)",
+    },
 });
 
-const BlogCard = ({ id, title, types, description, date }) => {
+const BlogCard = ({ id, title, types, description, date, author, image, slug }) => {
     const theme = useTheme();
     const [anchor, setAnchor] = useState(null);
     const open = Boolean(anchor);
 
-    let images = [ar1, ar2, ar3];
-
     const shareMenuOpen = (event) => {
+        event.preventDefault();
         setAnchor(event.currentTarget);
     };
     const shareMenuClose = () => {
@@ -154,43 +157,44 @@ const BlogCard = ({ id, title, types, description, date }) => {
 
     return (
         <>
-            <Card sx={styles(theme).root}>
-                {/* Link */}
-                <CardMedia sx={styles(theme).media} title={title}>
-                    <div style={styles(theme).imageContainer}>
-                        <Image src={images[0]} layout="fill" objectFit="cover" objectPosition="top" alt={title} />
+            <Link href={`/News/${slug}`} passHref>
+                <Card sx={styles(theme).root}>
+                    <CardMedia sx={styles(theme).media} title={title}>
+                        <div style={styles(theme).imageContainer}>
+                            <Image src={image} layout="fill" objectFit="cover" objectPosition="top" alt={title} />
+                        </div>
+                    </CardMedia>
+                    <div style={styles(theme).textPart}>
+                        <CardContent sx={styles(theme).content}>
+                            <CardHeader
+                                sx={styles(theme).header}
+                                title={<Typography sx={styles(theme).title}>{title}</Typography>}
+                                subheader={<Typography sx={styles(theme).subtitle}>{date}</Typography>}
+                                avatar={
+                                    <Avatar aria-label="Author" sx={styles(theme).avatar}>
+                                        <Image src={author.authorPhoto.url} layout="fill" objectFit="cover" alt={author.name} />
+                                    </Avatar>
+                                }
+                                action={
+                                    <IconButton aria-label="share" style={styles(theme).shareButton}>
+                                        <ShareIcon onClick={shareMenuOpen} sx={styles(theme).shareIcon} />
+                                    </IconButton>
+                                }
+                            />
+                            <Typography variant="body2" color="textSecondary" component="p" sx={styles(theme).article}>
+                                {description}
+                            </Typography>
+                            <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={1.3} sx={styles(theme).chipsContainer}>
+                                {types.map((type) => (
+                                    <Grid item key={type.name}>
+                                        <Chip size="small" label={type.name} sx={styles(theme).chip} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </CardContent>
                     </div>
-                </CardMedia>
-                <div style={styles(theme).textPart}>
-                    <CardContent sx={styles(theme).content}>
-                        <CardHeader
-                            sx={styles(theme).header}
-                            title={<Typography sx={styles(theme).title}>{title}</Typography>}
-                            subheader={<Typography sx={styles(theme).subtitle}>{date}</Typography>}
-                            avatar={
-                                <Avatar aria-label="Author" sx={styles(theme).avatar}>
-                                    <Image src={avatarImg} layout="fill" objectFit="cover" alt="" />
-                                </Avatar>
-                            }
-                            action={
-                                <IconButton aria-label="share" style={styles(theme).shareButton}>
-                                    <ShareIcon onClick={shareMenuOpen} sx={styles(theme).shareIcon} />
-                                </IconButton>
-                            }
-                        />
-                        <Typography variant="body2" color="textSecondary" component="p" sx={styles(theme).article}>
-                            {description}
-                        </Typography>
-                        <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={1.3} sx={styles(theme).chipsContainer}>
-                            {types.map((type) => (
-                                <Grid item key={type.name}>
-                                    <Chip size="small" label={type.name} />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </CardContent>
-                </div>
-            </Card>
+                </Card>
+            </Link>
             <Menu
                 anchorEl={anchor} // html element koji je lokacija -> klikon na taj element se i otvara
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }} // u odnosu na ANchorEl di ga displaya
@@ -209,7 +213,7 @@ const BlogCard = ({ id, title, types, description, date }) => {
                 </MenuItem>
                 <MenuItem onClick={shareMenuClose}>
                     <a
-                        href="https://twitter.com/intent/tweet?text=Checkout%20this%20amazing%20blog%20piece%20on%20%23GotGotNeed%20!"
+                        href="https://twitter.com/intent/tweet?text=Checkout%20this%20amazing%20blog%20piece%20on%20%23GotGotNeed%20"
                         className="twitter-hashtag-button"
                         data-size="large"
                         data-text="Check out GotGotNeed, its great!"

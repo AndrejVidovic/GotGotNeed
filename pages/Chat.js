@@ -43,7 +43,6 @@ function Chat() {
     const [activeConversation, setActiveConversation] = useState(null);
     const [index, setIndex] = useState(1); //određujemo jesu li otvoreni razgovori ili arhivirani
 
-    //console.log(activeConversation);
     const HandleArchive = (event, value) => {
         event.preventDefault();
         setAllConversations(allConversations.filter((x) => x.id !== value.id));

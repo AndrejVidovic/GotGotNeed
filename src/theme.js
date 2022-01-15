@@ -60,7 +60,6 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: "6px",
-                    boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.25)",
                     paddingLeft: "5px",
                     paddingRight: "5px",
                     background: "rgba(219, 219, 219, 0.08)" /*0 sivo*/,
