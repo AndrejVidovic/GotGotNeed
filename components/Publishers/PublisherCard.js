@@ -56,9 +56,12 @@ const styles = (theme) => ({
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "flex-start",
-        padding: "2rem 2.5rem 0rem 2.5rem",
+        padding: "1rem 1.1rem 0rem 1.1rem",
         position: "relative",
         overflow: "hidden",
+        [theme.breakpoints.between("sm", "md")]: {
+            padding: "1rem 0rem 0rem 0rem",
+        },
     },
     chipsContainer: {
         display: "flex",
@@ -130,10 +133,10 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                     </CardMedia>
                     <CardContent sx={styles(theme).content}>
                         <Paper sx={styles(theme).paper}>
-                            <Grid item sx={{ marginTop: "1rem" }}>
+                            <Grid item sx={{ marginTop: "1rem", marginRight: "1rem" }} xl={4} md={4} sm={4} xs={4}>
                                 <StarRounded sx={favorite.includes(publisher.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClick(e)} />
                             </Grid>
-                            <Grid item sx={{ margin: "1rem" }}>
+                            <Grid item sx={{ marginTop: "1rem" }} xl={8} md={8} sm={8} xs={8}>
                                 <Typography sx={styles(theme).title} variant="body1">
                                     {publisher.name}
                                 </Typography>
