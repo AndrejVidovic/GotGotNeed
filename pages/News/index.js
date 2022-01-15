@@ -35,6 +35,8 @@ const News = ({ newsData }) => {
     const allNews = newsData;
     const newsLimitPerPage = 3;
 
+    console.log(allNews.length);
+
     const [chipsNews, setChipsNews] = useState(() => newsData);
     const [searchNews, setSearchNews] = useState(() => newsData);
 
@@ -45,13 +47,14 @@ const News = ({ newsData }) => {
     useEffect(() => {
         setCurrentPage(1);
         let filteredNews = [];
-        for (let chipBlog in chipsNews) {
-            for (let searchBlog in searchNews) {
-                if (chipBlog.id === searchBlog.id) {
-                    filteredNews.push(chipBlog);
+        for (let i in chipsNews) {
+            for (let j in searchNews) {
+                if (chipsNews[i].slug === searchNews[j].slug) {
+                    filteredNews.push(chipsNews[i]);
                 }
             }
         }
+
         setNumberOfPages(Math.ceil(filteredNews.length / newsLimitPerPage));
     }, [searchNews, chipsNews]);
 
@@ -70,7 +73,7 @@ const News = ({ newsData }) => {
         let filteredNews = [];
         for (let i in chipsNews) {
             for (let j in searchNews) {
-                if (chipsNews[i].id === searchNews[j].id) {
+                if (chipsNews[i].slug === searchNews[j].slug) {
                     filteredNews.push(chipsNews[i]);
                 }
             }
@@ -106,7 +109,7 @@ const News = ({ newsData }) => {
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} sx={styles(theme).cards}>
                     {getDisplayedNews().map((blog) => (
-                        <BlogCard key={blog.id} id={blog.id} title={blog.title} types={blog.types.items} description={blog.description} date={blog.date} />
+                        <BlogCard key={blog.slug} id={blog.slug} slug={blog.slug} author={blog.author} image={blog.cardImage.url} title={blog.title} types={blog.types.items} description={blog.description} date={blog.date} />
                     ))}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
@@ -121,6 +124,7 @@ export default News;
 
 export async function getStaticProps() {
     const newsData = await DataSourceAPI.getPosts();
+
     return {
         props: {
             newsData,

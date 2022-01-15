@@ -69,7 +69,6 @@ const Navbar = ({ openDrawer }) => {
     const { currentUser, logout } = useAuth();
     const [error, setError] = useState("");
     const router = useRouter();
-    console.log(router.pathname);
 
     async function handleLogout() {
         setError("");

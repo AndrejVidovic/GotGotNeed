@@ -6,7 +6,7 @@ import Footer from "../../components/Layout/footer";
 import dummyPublishersData from "../../fakeData/Publishers/Publishers.json";
 import { useState, useEffect } from "react";
 import PublisherCard from "../../components/Publishers/PublisherCard";
-
+import DataSourceApi from "../../helpers/contentful";
 const styles = (theme) => ({
     container: {
         display: "flex",
@@ -24,35 +24,24 @@ const styles = (theme) => ({
         marginTop: "5vh",
     },
 });
-function Publishers() {
+function Publishers({ publishers }) {
     const theme = useTheme();
-    const allPublishers = dummyPublishersData;
+    const allPublishers = publishers;
     const PublishersLimitPerPage = 6;
-
-    const [filteredPublishers, setFilteredPublishers] =
-        useState(dummyPublishersData);
-    const [numberOfPages, setNumberOfPages] = useState(
-        Math.ceil(filteredPublishers.length / PublishersLimitPerPage)
-    );
+    const [filteredPublishers, setFilteredPublishers] = useState(publishers);
+    const [numberOfPages, setNumberOfPages] = useState(Math.ceil(filteredPublishers.length / PublishersLimitPerPage));
     const [currentPage, setCurrentPage] = useState(1);
-
     const [favorite, setFavorite] = useState([]);
 
     useEffect(() => {
         setCurrentPage(1);
-        setNumberOfPages(
-            Math.ceil(filteredPublishers.length / PublishersLimitPerPage)
-        );
+        setNumberOfPages(Math.ceil(filteredPublishers.length / PublishersLimitPerPage));
     }, [filteredPublishers]);
 
     const getFilteredPublishers = () => {
-        const startIndex =
-            PublishersLimitPerPage * currentPage - PublishersLimitPerPage;
+        const startIndex = PublishersLimitPerPage * currentPage - PublishersLimitPerPage;
         let endIndex = PublishersLimitPerPage + startIndex;
-        endIndex =
-            endIndex > filteredPublishers.length
-                ? filteredPublishers.length
-                : endIndex;
+        endIndex = endIndex > filteredPublishers.length ? filteredPublishers.length : endIndex;
         return filteredPublishers.slice(startIndex, endIndex);
     };
 
@@ -65,55 +54,19 @@ function Publishers() {
         <>
             <Head>
                 <title>Publishers</title>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1.0, width=device-width"
-                />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Title
-                    title="Publishers"
-                    subtitle="The sticker makers themselves"
-                />
-                <Grid
-                    item
-                    xl={6}
-                    lg={8}
-                    md={8}
-                    sm={10}
-                    xs={10}
-                    sx={styles(theme).searchGrid}
-                >
-                    <Search
-                        itemsToFilter={allPublishers}
-                        setFilteredItems={setFilteredPublishers}
-                        propertiesToSearch={["title", "country"]}
-                    />
+                <Title title="Publishers" subtitle="The sticker makers themselves" />
+                <Grid item xl={6} md={8} xs={10} sx={styles(theme).searchGrid}>
+                    <Search itemsToFilter={allPublishers} setFilteredItems={setFilteredPublishers} propertiesToSearch={["title", "location"]} />
                 </Grid>
-                <Grid container item xl={6} md={8} xs={10} spacing={6}>
+                <Grid container item xl={6} md={8} xs={10} spacing={5}>
                     {getFilteredPublishers().map((publisher) => (
-                        <PublisherCard
-                            key={publisher.id}
-                            publisher={publisher}
-                            favorite={favorite}
-                            setFavorite={setFavorite}
-                        />
+                        <PublisherCard key={publisher.id} publisher={publisher} favorite={favorite} setFavorite={setFavorite} />
                     ))}
                 </Grid>
-                <Grid
-                    item
-                    xl={6}
-                    lg={8}
-                    md={8}
-                    sm={10}
-                    xs={10}
-                    sx={styles(theme).pagination}
-                >
-                    <Pagination
-                        page={currentPage}
-                        count={numberOfPages}
-                        onChange={handlePageChange}
-                    />
+                <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
+                    <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />
                 </Grid>
             </Grid>
             <Footer></Footer>
@@ -121,3 +74,13 @@ function Publishers() {
     );
 }
 export default Publishers;
+
+export async function getStaticProps() {
+    const publishers = await DataSourceApi.getPublishers();
+
+    return {
+        props: {
+            publishers,
+        },
+    };
+}

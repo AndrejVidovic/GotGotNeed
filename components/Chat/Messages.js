@@ -108,11 +108,9 @@ function Messages({ conversation }) {
 
     const HandleChange = (prop) => (event) => {
         setNewMessage({ ...newMessage, [prop]: event.target.value });
-        console.log(newMessage);
     };
 
     const HandleSend = () => {
-        console.log(newMessage);
         if (newMessage.text !== "") {
             setMessages([...messages, newMessage]);
         }
