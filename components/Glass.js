@@ -14,9 +14,9 @@ const Glass = ({ children, styling, color, onClickFunction }) => {
 
     const allStyles = {
         glass: {
-            ...styling,
             ...styles(theme).glass,
             background: background[color],
+            ...styling,
         },
     };
 

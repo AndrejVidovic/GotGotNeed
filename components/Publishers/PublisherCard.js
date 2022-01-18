@@ -1,8 +1,5 @@
 import { Card, CardContent, CardMedia, Grid, Paper, Typography, useTheme, Chip, Box } from "@mui/material";
 import Image from "next/image";
-import publ1 from "../../public/KrašPublisher.png";
-import publ2 from "../../public/PaniniPublisher.png";
-import publ3 from "../../public/ToppsPublisher.png";
 import { StarRounded } from "@mui/icons-material";
 import Link from "next/link";
 
@@ -13,7 +10,9 @@ const styles = (theme) => ({
         position: "relative",
         height: "350px",
         width: "100%",
+        transition: "all 0.3s ease",
         "&:hover": {
+            transform: "scale(1.03)",
             cursor: "pointer",
         },
     },

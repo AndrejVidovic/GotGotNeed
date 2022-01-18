@@ -53,6 +53,8 @@ const theme = createTheme({
                         marginTop: "15vh",
                     },
                     backgroundImage: `url(${backgroundIMG.src})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundAttachment: "fixed",
                 },
             },
         },

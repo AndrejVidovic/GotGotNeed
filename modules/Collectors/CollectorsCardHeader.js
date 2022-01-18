@@ -17,10 +17,6 @@ const styles = (theme) => ({
         textShadow: theme.shadows[4],
         fontSize: "25px",
         marginBottom: "5px",
-        transition: "all 0.2s ease",
-        "&:hover": {
-            transform: "scale(1.03)",
-        },
     },
     headerIcon: {
         display: "inline",
@@ -87,40 +83,35 @@ const CollectorsCardHeader = ({ user }) => {
     return (
         <Box sx={styles(theme).cardHeader}>
             <Grid item xs={12} container direction="row">
-                <Link href={`/Collectors/${user.username}`} passHref style={{ textDecoration: "none", color: "black" }}>
-                    <Typography sx={styles(theme).username}>
-                        <Box
-                            sx={
-                                user.online > 0
-                                    ? {
-                                          ...styles(theme).statusBlob,
-                                          ...styles(theme).statusBlobOffline,
-                                      }
-                                    : styles(theme).statusBlob
-                            }
-                        ></Box>
-                        {user.username}
-                    </Typography>
-                </Link>
-                <IconButton sx={styles(theme).mainHeaderAdd}>
+                <Typography sx={styles(theme).username}>
+                    <Box
+                        sx={
+                            user.online > 0
+                                ? {
+                                      ...styles(theme).statusBlob,
+                                      ...styles(theme).statusBlobOffline,
+                                  }
+                                : styles(theme).statusBlob
+                        }
+                    ></Box>
+                    {user.username}
+                </Typography>
+                <IconButton sx={styles(theme).mainHeaderAdd} onClick={(e) => e.preventDefault()}>
                     <PersonAdd sx={styles(theme).mainHeaderSvg} />
                 </IconButton>
             </Grid>
-
-            <Link href={`/Collectors/${user.username}`} passHref style={{ textDecoration: "none" }}>
-                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
-                    <Person sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>{user.name}</Typography>
-                </Grid>
-                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
-                    <LocationOn sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>{user.location}</Typography>
-                </Grid>
-                <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
-                    <Badge sx={styles(theme).headerIcon} />
-                    <Typography sx={styles(theme).textField}>{user.joined}</Typography>
-                </Grid>
-            </Link>
+            <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
+                <Person sx={styles(theme).headerIcon} />
+                <Typography sx={styles(theme).textField}>{user.name}</Typography>
+            </Grid>
+            <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
+                <LocationOn sx={styles(theme).headerIcon} />
+                <Typography sx={styles(theme).textField}>{user.location}</Typography>
+            </Grid>
+            <Grid item xs={12} container justifyContent="flex-start" alignItems="center">
+                <Badge sx={styles(theme).headerIcon} />
+                <Typography sx={styles(theme).textField}>{user.joined}</Typography>
+            </Grid>
             <Box sx={styles(theme).circle}>
                 <Image src={circleImg} alt="circle" layout="fill" objectFit="cover" />
             </Box>
