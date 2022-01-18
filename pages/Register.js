@@ -21,6 +21,7 @@ const styles = (theme) => ({
         width: "500px",
         height: "auto",
         flexDirection: "column",
+        marginBottom: "4rem",
         [theme.breakpoints.down("lg")]: {
             marginTop: "6rem",
         },

@@ -45,13 +45,12 @@ function Categories({ categories, collections }) {
     const [collapse, setCollapse] = useState(false);
     const [height, setHeight] = useState(0);
     const ScrollRef = useRef();
-    console.log(collections);
     const handleCollapse = () => {
         setCollapse(!collapse);
     };
     useEffect(() => {
         setHeight(ScrollRef.current.clientHeight);
-    });
+    }, []);
 
     const collectionsForCategory = () => {
         let temp = [];
