@@ -63,7 +63,7 @@ const styles = (theme) => ({
         fontWeight: 700,
         fontSize: "3rem",
         paddingTop: "2rem",
-        paddingBottom: "4rem",
+        paddingBottom: "5rem",
         [theme.breakpoints.down("sm")]: {
             paddingBottom: "3rem",
             fontSize: "2.5rem",
@@ -83,7 +83,7 @@ const styles = (theme) => ({
         fontSize: "10px",
     },
     textfield: {
-        marginTop: "1vh",
+        // marginTop: "1vh",
         marginBottom: "3vh",
         width: "100%",
     },

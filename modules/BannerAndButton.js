@@ -58,35 +58,17 @@ const BannerAndButton = () => {
     const theme = useTheme();
 
     return (
-        <Grid
-            item
-            container
-            xs={6}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            sx={styles(theme).bigBanner}
-        >
+        <Grid item container xs={6} direction="column" justifyContent="center" alignItems="center" sx={styles(theme).bigBanner}>
             <Grid item>
                 <Box sx={styles(theme).bannerImage}>
-                    <Image
-                        alt="banner"
-                        src={homeBanner}
-                        layout="fill"
-                        objectFit="contain"
-                    />
+                    <Image alt="banner" src={homeBanner} layout="fill" objectFit="contain" quality={60} />
                 </Box>
             </Grid>
             <Grid item>
                 <Link href="/Swap">
                     <Button sx={styles(theme).tradeButton}>
                         TRADE YOUR STICKERS
-                        <FontAwesomeIcon
-                            icon={faPlay}
-                            size="28px"
-                            color="white"
-                            style={styles(theme).playIcon}
-                        />
+                        <FontAwesomeIcon icon={faPlay} size="28px" color="white" style={styles(theme).playIcon} />
                     </Button>
                 </Link>
             </Grid>

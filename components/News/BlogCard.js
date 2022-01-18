@@ -161,7 +161,7 @@ const BlogCard = ({ id, title, types, description, date, author, image, slug }) 
                 <Card sx={styles(theme).root}>
                     <CardMedia sx={styles(theme).media} title={title}>
                         <div style={styles(theme).imageContainer}>
-                            <Image src={image} layout="fill" objectFit="cover" objectPosition="top" alt={title} />
+                            <Image src={image} layout="fill" objectFit="cover" objectPosition="top" alt={title} quality={60} />
                         </div>
                     </CardMedia>
                     <div style={styles(theme).textPart}>
@@ -169,7 +169,7 @@ const BlogCard = ({ id, title, types, description, date, author, image, slug }) 
                             <CardHeader
                                 sx={styles(theme).header}
                                 title={<Typography sx={styles(theme).title}>{title}</Typography>}
-                                subheader={<Typography sx={styles(theme).subtitle}>{date}</Typography>}
+                                subheader={<Typography sx={styles(theme).subtitle}>{date.slice(0, 10)}</Typography>}
                                 avatar={
                                     <Avatar aria-label="Author" sx={styles(theme).avatar}>
                                         <Image src={author.authorPhoto.url} layout="fill" objectFit="cover" alt={author.name} />

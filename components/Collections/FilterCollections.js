@@ -1,23 +1,7 @@
-import {
-    Button,
-    Checkbox,
-    Collapse,
-    FormControl,
-    Grid,
-    IconButton,
-    InputLabel,
-    ListItemText,
-    MenuItem,
-    OutlinedInput,
-    Select,
-    Typography,
-    useTheme,
-} from "@mui/material";
+import { Button, Checkbox, Collapse, FormControl, Grid, IconButton, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import Search from "../Search";
-import { ExpandCircleDown } from "@mui/icons-material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { ExpandCircleDown, FilterAlt } from "@mui/icons-material";
 import Image from "next/image";
 const styles = (theme) => ({
     searchGrid: {
@@ -34,20 +18,21 @@ const styles = (theme) => ({
         textShadow: theme.shadows[4],
     },
     select: {
-        margin: "2rem 1rem 2rem 1rem",
-        width: "14rem",
+        marginBottom: "2rem",
+        width: "45%",
         [theme.breakpoints.down("md")]: {
-            margin: "1rem 1rem 1rem 1rem",
+            width: "45%",
         },
     },
     formControlGrid: {
-        width: "50%",
+        width: "70%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        marginTop: "1rem",
+        justifyContent: "space-between",
+        margin: 0,
         [theme.breakpoints.down("md")]: {
             flexDirection: "column",
+            width: "80%",
         },
     },
     container: {
@@ -60,15 +45,19 @@ const styles = (theme) => ({
         overflow: "hidden",
     },
     filterButton: {
-        padding: "0.5rem 4rem",
-        fontWeight: 700,
+        paddingTop: "1rem",
+        margin: "1rem 0",
+        width: "70%",
         [theme.breakpoints.down("md")]: {
-            margin: "1rem 1rem 0rem 1rem",
+            width: "80%",
         },
+        fontWeight: 700,
+        // [theme.breakpoints.down("md")]: {
+        // },
         zIndex: 100,
     },
     expandGrid: {
-        marginBottom: "0.7rem",
+        marginBottom: "1rem",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -77,7 +66,8 @@ const styles = (theme) => ({
     expandIcon: {
         transform: "rotate(180deg)",
         color: theme.palette.primary.main,
-        fontSize: "2.2rem",
+        fontSize: "2.5rem",
+        position: "relative",
     },
     halfCircle: {
         position: "absolute",
@@ -120,14 +110,7 @@ const styles = (theme) => ({
         overflow: "hidden",
     },
 });
-function FilterCollections({
-    setCategory,
-    setPublisher,
-    publisher,
-    category,
-    collections,
-    setFilteredCollections,
-}) {
+function FilterCollections({ setCategory, setPublisher, publisher, category, collections, setFilteredCollections }) {
     const theme = useTheme();
     const allData = collections;
     const [expand, setExpand] = useState(false);
@@ -166,13 +149,9 @@ function FilterCollections({
         let tempPublisher = [];
         let tempCategory = [];
         if (publisher.length != 0) {
-            tempPublisher = allData.filter((x) =>
-                publisher.includes(x.publisher)
-            );
+            tempPublisher = allData.filter((x) => publisher.includes(x.publisher));
             if (category.length != 0) {
-                tempCategory = tempPublisher.filter((x) =>
-                    category.includes(x.category)
-                );
+                tempCategory = tempPublisher.filter((x) => category.includes(x.category));
                 setFilteredCollections(tempCategory);
             } else {
                 setFilteredCollections(tempPublisher);
@@ -186,123 +165,58 @@ function FilterCollections({
             <Grid sx={styles(theme).titleGrid}>
                 <Typography sx={styles(theme).title}>FILTER</Typography>
                 <Grid container sx={styles(theme).halfCircle}>
-                    <Image
-                        src="/decoCircle.png"
-                        width={90}
-                        height={90}
-                        alt="circle"
-                    />
+                    <Image src="/decoCircle.png" width={90} height={90} alt="circle" />
                 </Grid>
                 <Grid container sx={styles(theme).triangleTop}>
-                    <Image
-                        src="/decoTriangle.png"
-                        width={120}
-                        height={100}
-                        alt="triangle"
-                    />
+                    <Image src="/decoTriangle.png" width={120} height={100} alt="triangle" />
                 </Grid>
             </Grid>
             <Collapse in={expand} sx={{ width: "100%" }}>
-                <Grid container sx={styles(theme).container}>
+                <Grid item container sx={styles(theme).container}>
                     <Grid sx={styles(theme).searchGrid}>
-                        <Search
-                            itemsToFilter={allData}
-                            setFilteredItems={setFilteredCollections}
-                            propertiesToSearch={[
-                                "title",
-                                "publisher",
-                                "category",
-                            ]}
-                        />
+                        <Search itemsToFilter={allData} setFilteredItems={setFilteredCollections} propertiesToSearch={["title", "publisher", "category"]} />
                     </Grid>
-                    <Grid sx={styles(theme).formControlGrid}>
+                    <Grid container item spacing={6} sx={styles(theme).formControlGrid} xs={12}>
                         <FormControl sx={styles(theme).select}>
-                            <InputLabel id="select-publisher-checkbox-label">
-                                Publisher
-                            </InputLabel>
-                            <Select
-                                labelId="select-publisher-checkbox-label"
-                                id="publisher-checkbox"
-                                multiple
-                                multiline
-                                value={publisher}
-                                onChange={HandleChangePublisher}
-                                input={<OutlinedInput label="Publisher" />}
-                                renderValue={(selected) => selected.join(", ")}
-                            >
+                            <InputLabel id="select-publisher-checkbox-label">Publisher</InputLabel>
+                            <Select labelId="select-publisher-checkbox-label" id="publisher-checkbox" multiple multiline value={publisher} onChange={HandleChangePublisher} input={<OutlinedInput label="Publisher" />} renderValue={(selected) => selected.join(", ")}>
                                 {getPublisher().map((data) => (
                                     <MenuItem key={data} value={data}>
-                                        <Checkbox
-                                            checked={
-                                                publisher.indexOf(data) > -1
-                                            }
-                                        />
+                                        <Checkbox checked={publisher.indexOf(data) > -1} />
                                         <ListItemText primary={data} />
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                         <FormControl sx={styles(theme).select}>
-                            <InputLabel id="select-category-checkbox-label">
-                                Category
-                            </InputLabel>
-                            <Select
-                                labelId="select-category-checkbox-label"
-                                id="category-checkbox"
-                                multiple
-                                multiline
-                                value={category}
-                                onChange={HandleChangeCategory}
-                                input={<OutlinedInput label="Category" />}
-                                renderValue={(selected) => selected.join(", ")}
-                            >
+                            <InputLabel id="select-category-checkbox-label">Category</InputLabel>
+                            <Select labelId="select-category-checkbox-label" id="category-checkbox" multiple multiline value={category} onChange={HandleChangeCategory} input={<OutlinedInput label="Category" />} renderValue={(selected) => selected.join(", ")}>
                                 {findCategory().map((data) => (
                                     <MenuItem key={data} value={data}>
-                                        <Checkbox
-                                            checked={
-                                                category.indexOf(data) > -1
-                                            }
-                                        />
+                                        <Checkbox checked={category.indexOf(data) > -1} />
                                         <ListItemText primary={data} />
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid>
-                        <Button
-                            variant="contained"
-                            type="button"
-                            sx={styles(theme).filterButton}
-                            onClick={handleFilter}
-                        >
-                            Filter
-                        </Button>
-                    </Grid>{" "}
+                    <Button variant="contained" type="button" sx={styles(theme).filterButton} onClick={handleFilter}>
+                        Filter
+                    </Button>{" "}
                     <Grid container sx={styles(theme).fullCircle}>
-                        <Image
-                            src="/decoCircle.png"
-                            width={70}
-                            height={70}
-                            alt="circle"
-                        />
+                        <Image src="/decoCircle.png" width={70} height={70} alt="circle" />
                     </Grid>
                 </Grid>
             </Collapse>
             <Grid sx={styles(theme).expandGrid}>
                 {expand ? (
                     <IconButton onClick={() => setExpand(false)}>
-                        <ExpandCircleDown
-                            sx={styles(theme).expandIcon}
-                        ></ExpandCircleDown>
+                        <ExpandCircleDown sx={styles(theme).expandIcon}></ExpandCircleDown>
                     </IconButton>
                 ) : (
-                    <IconButton onClick={() => setExpand(true)}>
-                        <FontAwesomeIcon
-                            icon={faFilter}
-                            color={theme.palette.primary.main}
-                        ></FontAwesomeIcon>
-                    </IconButton>
+                    <Button variant="contained" color="primary" sx={{ borderRadius: "25px", padding: 0, minWidth: 0, width: "30px", height: "30px" }} onClick={() => setExpand(true)}>
+                        <FilterAlt />
+                    </Button>
                 )}
             </Grid>
         </>

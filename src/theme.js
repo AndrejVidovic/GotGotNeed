@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { blue, orange } from "@mui/material/colors";
-import backgroundIMG from "../public/Background.png";
+import backgroundIMG from "../public/Background.webp";
 
 const theme = createTheme({
     breakpoints: {

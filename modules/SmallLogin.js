@@ -99,7 +99,7 @@ const SmallLogin = () => {
     return (
         <Glass color={2} styling={styles(theme).root}>
             <Box sx={styles(theme).logo}>
-                <Image alt="logo" src={ggnImage} layout="fill" objectFit="contain" />
+                <Image alt="logo" src={ggnImage} quality={60} layout="fill" objectFit="contain" />
             </Box>
             <FormControl sx={styles(theme).textfield}>
                 <TextField variant="filled" label="Username" onChange={handleChange("Username")} sx={styles(theme).textfield} size="normal" />

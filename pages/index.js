@@ -2,7 +2,7 @@ import { Grid, useTheme } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import Head from "next/head";
-import mobileHomeBanner from "../public/mobileHomeBanner.png";
+import mobileHomeBanner from "../public/mobileHomeBanner.jpg";
 import SmallLogin from "../modules/SmallLogin";
 import Glass from "../components/Glass";
 import BannerAndButton from "../modules/BannerAndButton";
