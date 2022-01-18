@@ -70,7 +70,7 @@ const styles = (theme) => ({
         backgroundColor: theme.palette.primary.light,
     },
 });
-function Conversations({ activeConversation, setActiveConversation, conversations, index, setIndex, HandleFunction, HandleDelete }) {
+function Conversations({ activeConversation, setActiveConversation, conversations, index, setIndex, HandleFunction, HandleDelete, setConversationIndex }) {
     const theme = useTheme();
     const allconversations = conversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time));
     const [filteredConversations, setFilteredConversations] = useState(conversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time)));
@@ -89,6 +89,7 @@ function Conversations({ activeConversation, setActiveConversation, conversation
         value.unread = false;
         event.preventDefault();
         setActiveConversation(value);
+        setConversationIndex(1);
     };
     const HandleArchived = (event) => {
         event.preventDefault();

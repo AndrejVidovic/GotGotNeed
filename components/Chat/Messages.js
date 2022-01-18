@@ -1,8 +1,10 @@
 import { AddBox, AddPhotoAlternate, PersonAdd, Send } from "@mui/icons-material";
-import { Avatar, Grid, IconButton, Typography, useTheme, Paper, InputBase } from "@mui/material";
+import { Avatar, Grid, IconButton, Typography, useTheme, Paper, InputBase, Button } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import dummyMessages from "../../fakeData/Chat/Messages.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 const styles = (theme) => ({
     messagesHeader: {
         height: "70px",
@@ -42,6 +44,8 @@ const styles = (theme) => ({
         margin: "0.5rem 0.2rem 0.5rem 0.2rem",
         [theme.breakpoints.down("md")]: {
             margin: "0.5rem 0.1rem 0.5rem 0.1rem",
+            width: "35px",
+            height: "35px",
         },
     },
     username: {
@@ -84,13 +88,38 @@ const styles = (theme) => ({
         marginRight: "1vh",
         padding: "0.5vh",
     },
+    iconButton: {
+        [theme.breakpoints.down("md")]: {
+            padding: 0,
+        },
+    },
+    playIcon: {
+        margin: "0 0 5px 15px",
+        [theme.breakpoints.between("md", "xl")]: {
+            margin: "0 0 2px 10px",
+        },
+        transform: "rotate(180deg)",
+    },
+    backButton: {
+        color: "white",
+        backgroundColor: theme.palette.primary.main,
+        display: "flex",
+        alignItems: "center",
+        fontSize: "15px",
+        fontWeight: 700,
+        padding: "10px 15px 10px 5px",
+        marginBottom: "1rem",
+        [theme.breakpoints.up("sm")]: {
+            display: "none",
+        },
+    },
 });
 //glumi usera koji je prijavljen to je primatelj ovih poruka
 const DUMMYUSER = {
     id: 1,
     username: "PetarPetric",
 };
-function Messages({ conversation }) {
+function Messages({ conversation, setConversationIndex }) {
     const theme = useTheme();
     const [messages, setMessages] = useState(dummyMessages);
     const [user, setUser] = useState(DUMMYUSER);
@@ -98,12 +127,12 @@ function Messages({ conversation }) {
         id: 11,
         text: "",
         user_id: user.id,
+        date: new Date().toLocaleDateString(),
         conversation_id: conversation.id,
     });
     const ScrollRef = useRef();
-
     useEffect(() => {
-        ScrollRef.current?.scrollIntoView({ behavior: "smooth" });
+        ScrollRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
     }, [messages]);
 
     const HandleChange = (prop) => (event) => {
@@ -116,8 +145,15 @@ function Messages({ conversation }) {
         }
         conversation.time = new Date();
     };
+    const HandleBack = () => {
+        setConversationIndex(0);
+    };
     return (
         <>
+            <Button variant="contained" sx={styles(theme).backButton} onClick={HandleBack}>
+                <FontAwesomeIcon icon={faPlay} size="28px" color="white" style={styles(theme).playIcon} />
+                back
+            </Button>
             <Grid item sx={styles(theme).messagesHeader}>
                 <Avatar src="/maradonaAvatar.jpg" sx={{ width: 60, height: 60 }}></Avatar>
                 <Grid sx={{ marginLeft: "1rem" }}>
@@ -155,14 +191,14 @@ function Messages({ conversation }) {
                 </Paper>
             </Grid>
             <Grid sx={styles(theme).sendGrid}>
-                <IconButton>
+                <IconButton sx={styles(theme).iconButton}>
                     <AddBox sx={styles(theme).icons} />
                 </IconButton>
-                <IconButton>
+                <IconButton sx={styles(theme).iconButton}>
                     <AddPhotoAlternate sx={styles(theme).icons} />
                 </IconButton>
                 <InputBase placeholder="New message" sx={styles(theme).newMessageBox} onChange={HandleChange("text")} />
-                <IconButton>
+                <IconButton sx={styles(theme).iconButton}>
                     <Send sx={styles(theme).icons} onClick={HandleSend} />
                 </IconButton>
             </Grid>
