@@ -108,7 +108,6 @@ const styles = (theme) => ({
 
 function PublisherCard({ publisher, favorite, setFavorite }) {
     const theme = useTheme();
-
     //izvlačimo jedinstvene vrijednosti kategorija pripadajućih kolekcija/albuma
     let categories = [];
     for (let i = 0; i < publisher.collections.items.length; i++) {
@@ -133,11 +132,25 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
         }
         setFavorite(tempFavorite);
     };
-
-    //{ pathname: "Publishers/[Publisher]", query: { id: publisher.id, title: publisher.title, types: publisher.types, collections: publisher.collections, description: publisher.description, founded: publisher.founded,},}} as={
     return (
         <Grid item xl={4} sm={6} xs={12}>
-            <Link href={`/Publishers/${publisher.name}`} passHref>
+            <Link
+                href={{
+                    pathname: "Publishers/[Publisher]",
+                    query: {
+                        id: publisher.id,
+                        name: publisher.name,
+                        location: publisher.location,
+                        collections: allUniqueCategories,
+                        description: publisher.description,
+                        founded: publisher.founded,
+                        locationIconUri: publisher.locationIconUri,
+                        logo: publisher.logo.url,
+                    },
+                }}
+                as={`/Publishers/${publisher.name}`}
+                passHref
+            >
                 <Card sx={styles(theme).root}>
                     <CardMedia sx={styles(theme).media}>
                         <Grid sx={styles(theme).imageContainer}>

@@ -9,7 +9,7 @@ import Footer from "../components/Layout/footer";
 
 const styles = (theme) => ({
     glass: {
-        height: "640px",
+        height: "760px",
         width: "100%",
         display: "flex",
         alignItems: "flex-start",

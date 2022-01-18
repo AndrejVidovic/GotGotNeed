@@ -1,11 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    useTheme,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 
 const styles = (theme) => ({
@@ -38,7 +31,7 @@ const styles = (theme) => ({
         fontSize: "12px",
         marginBottom: "0.3rem",
         color: "#616161",
-        paddingLeft: "0.1rem",
+        paddingLeft: "0.2rem",
     },
     infoGrid: {
         display: "flex",
@@ -67,50 +60,36 @@ function PublisherCollection({ collection }) {
         <Card sx={styles(theme).card}>
             <CardMedia sx={styles(theme).media}>
                 <Grid sx={styles(theme).imageContainer}>
-                    <Image
-                        src="/CollectionSmall.png"
-                        layout="fill"
-                        objectFit="cover"
-                        objectPosition="top"
-                        alt={collection.id}
-                    />
+                    <Image src={collection.coverPhoto.url} layout="fill" objectFit="cover" alt={collection.id} />
                 </Grid>
             </CardMedia>
             <CardContent sx={styles(theme).content}>
                 <Typography variant="body1" sx={styles(theme).title}>
-                    {collection.title}
+                    {collection.name}
                 </Typography>
                 <Grid sx={styles(theme).infoGrid}>
                     <Typography variant="body1" sx={styles(theme).info}>
                         Release year:
                     </Typography>
-                    <Typography sx={styles(theme).infoValues}>
-                        {collection.releaseYear}
-                    </Typography>
+                    <Typography sx={styles(theme).infoValues}>{collection.releaseYear}</Typography>
                 </Grid>
                 <Grid sx={styles(theme).infoGrid}>
                     <Typography variant="body1" sx={styles(theme).info}>
                         Number of stickers:
                     </Typography>
-                    <Typography sx={styles(theme).infoValues}>
-                        {collection.numberOfSticker}
-                    </Typography>
+                    <Typography sx={styles(theme).infoValues}>{collection.numberOfStickers}</Typography>
                 </Grid>
                 <Grid sx={styles(theme).infoGrid}>
                     <Typography variant="body1" sx={styles(theme).info}>
-                        Publisher:{" "}
+                        Publisher:
                     </Typography>
-                    <Typography sx={styles(theme).infoValues}>
-                        {collection.publisher}
-                    </Typography>
+                    <Typography sx={styles(theme).infoValues}>{collection.publisher}</Typography>
                 </Grid>
                 <Grid sx={styles(theme).infoGrid}>
                     <Typography variant="body1" sx={styles(theme).info}>
                         Category:{" "}
                     </Typography>
-                    <Typography sx={styles(theme).infoValues}>
-                        {collection.category}
-                    </Typography>
+                    <Typography sx={styles(theme).infoValues}>{collection.categories.map((category) => category).join(", ")}</Typography>
                 </Grid>
             </CardContent>
         </Card>

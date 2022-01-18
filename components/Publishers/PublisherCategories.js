@@ -1,20 +1,11 @@
 import { ExpandCircleDown } from "@mui/icons-material";
-import {
-    Collapse,
-    Grid,
-    IconButton,
-    Paper,
-    Typography,
-    useTheme,
-} from "@mui/material";
-import { useState } from "react";
-import dummyPublisherCollections from "../../fakeData/Publishers/PublisherCollections.json";
+import { Collapse, Grid, IconButton, Paper, Typography, useTheme } from "@mui/material";
+import { useState, useRef, useEffect } from "react";
 import PublisherCollection from "./PublisherCollection";
 
 const styles = (theme) => ({
     container: {
         marginTop: "2rem",
-        // marginBottom:"2rem"
     },
     paper: {
         height: "3.5rem",
@@ -49,13 +40,23 @@ const styles = (theme) => ({
     },
 });
 
-function Categories({ categories }) {
+function Categories({ categories, collections }) {
     const theme = useTheme();
-    const collections = dummyPublisherCollections;
     const [collapse, setCollapse] = useState(false);
-
+    const [height, setHeight] = useState(0);
+    const ScrollRef = useRef();
+    console.log(collections);
     const handleCollapse = () => {
         setCollapse(!collapse);
+    };
+    useEffect(() => {
+        setHeight(ScrollRef.current.clientHeight);
+    });
+
+    const collectionsForCategory = () => {
+        let temp = [];
+        temp = collections.filter((x) => x.categories.includes(categories));
+        return temp;
     };
     return (
         <Grid item sx={styles(theme).container}>
@@ -65,46 +66,16 @@ function Categories({ categories }) {
                 </Typography>
             </Paper>
             <Paper>
-                <Grid container sx={styles(theme).collectionsGrid}>
-                    {collections.map((collection) => (
-                        <PublisherCollection
-                            collection={collection}
-                            key={collection.id}
-                        />
-                    ))}
-                </Grid>
-                <Collapse in={collapse}>
-                    <Grid container sx={styles(theme).collectionsGrid}>
-                        {/*hardkodirano da jos jednom prikaže podatke cisto da se vidi funkcionalonst inace ce slice podatake za prva tri a ostale ce sakriti se ode */}
-                        {collections.map((collection) => (
-                            <PublisherCollection
-                                collection={collection}
-                                key={collection.id}
-                            />
+                <Collapse in={collapse} collapsedSize={height}>
+                    <Grid container sx={styles(theme).collectionsGrid} ref={ScrollRef}>
+                        {collectionsForCategory().map((collection) => (
+                            <PublisherCollection collection={collection} key={collection.id} />
                         ))}
                     </Grid>
                 </Collapse>
                 <Grid sx={styles(theme).expandIconGrid}>
-                    <IconButton
-                        sx={styles(theme).iconButton}
-                        onClick={handleCollapse}
-                    >
-                        {collapse ? (
-                            <ExpandCircleDown
-                                sx={{
-                                    transform: "rotate(180deg)",
-                                    color: theme.palette.primary.main,
-                                    fontSize: "2.2rem",
-                                }}
-                            />
-                        ) : (
-                            <ExpandCircleDown
-                                sx={{
-                                    color: theme.palette.primary.main,
-                                    fontSize: "2.2rem",
-                                }}
-                            />
-                        )}
+                    <IconButton sx={styles(theme).iconButton} onClick={handleCollapse}>
+                        {collapse ? <ExpandCircleDown sx={{ transform: "rotate(180deg)", color: theme.palette.primary.main, fontSize: "2.2rem" }} /> : <ExpandCircleDown sx={{ color: theme.palette.primary.main, fontSize: "2.2rem" }} />}
                     </IconButton>
                 </Grid>
             </Paper>

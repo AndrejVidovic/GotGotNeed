@@ -1,10 +1,8 @@
 import { Grid, Typography, useTheme } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
-import publi2 from "../../public/PaniniPublisher.png";
-import publi1 from "../../public/KrašPublisher.png";
-import publi3 from "../../public/ToppsPublisher.png";
 import Footer from "../../components/Layout/footer";
+import DataSourceAPI from "../../helpers/contentful";
 import Categories from "../../components/Publishers/PublisherCategories";
 import { useState } from "react";
 
@@ -67,12 +65,19 @@ const styles = (theme) => ({
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-        height: "100%",
+        height: "370px",
         marginRight: "4rem",
+        [theme.breakpoints.down("lg")]: {
+            marginRight: "1.3rem",
+            height: "420px",
+        },
         [theme.breakpoints.down("md")]: {
             marginRight: "1.3rem",
+            height: "260px",
         },
+        position: "relative",
     },
+
     categoriesGrid: {
         width: "100%",
         padding: "3rem",
@@ -85,66 +90,57 @@ const styles = (theme) => ({
     },
 });
 
-function Publisher({ id, title, types, collections, description, founded }) {
+function Publisher({ id, name, location, categories, description, founded, locationIconUri, logo, collections }) {
     const theme = useTheme();
-    const images = [publi1, publi2, publi3];
 
     const getTypes = () => {
         let temp = [];
-        if (typeof types === "string") {
-            temp.push(types);
-        } else temp = types;
+        if (typeof categories === "string") {
+            temp.push(categories);
+        } else temp = categories;
         return temp;
     };
-
     return (
         <>
             <Head>
-                <title>Publishers | {title}</title>
+                <title>Publishers | {name}</title>
             </Head>
             <Grid container sx={styles(theme).container}>
                 <Grid container sx={styles(theme).infoGrid}>
                     <Grid item lg={3} xl={2} md={3} sm={4} xs={4} sx={styles(theme).imageGrid}>
-                        <Image src={images[id % 3]} layout="intrinsic" alt={title} />
+                        <Image src={logo} layout="fill" objectFit="contain" alt={name} />
                     </Grid>
-                    <Grid item lg={3} xl={2} md={4} sm={4} xs={5}>
+                    <Grid item lg={4} xl={3} md={4} sm={4} xs={5}>
                         <Typography variant="h1" sx={styles(theme).title}>
-                            {title}
+                            {name}
                         </Typography>
                         <Typography variant="body1" sx={styles(theme).info}>
-                            Collections: {collections}
+                            Location: <Image src={`https://flagcdn.com/24x18/${locationIconUri}.png`} width="22" height="16" alt="CountryFlag" /> {location}
                         </Typography>
                         <Typography variant="body1" sx={styles(theme).info}>
-                            Categories: {types.length}
+                            Categories: {categories.length}
                         </Typography>
                         <Typography variant="body1" sx={styles(theme).info}>
-                            Founded: {founded}.
+                            Collections: {collections.length}
+                        </Typography>
+                        <Typography variant="body1" sx={styles(theme).info}>
+                            Founded: {founded}
                         </Typography>
                         <Typography variant="body1" sx={styles(theme).description}>
                             {description}
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid
-                    item
-                    md={9}
-                    sm={9}
-                    xs={10}
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "flex-end",
-                    }}
-                >
+                <Grid item md={9} sm={9} xs={10} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
                     <Typography variant="body1" sx={styles(theme).descriptionSmall}>
                         {description}
                     </Typography>
                 </Grid>
 
                 <Grid sx={styles(theme).categoriesGrid} item xl={7} lg={9} md={9} sm={10} xs={10}>
-                    {getTypes().map((categories) => (
-                        <Grid key={categories.id} sx={{ width: "100%" }}>
-                            <Categories categories={categories}></Categories>
+                    {getTypes().map((category) => (
+                        <Grid key={category} sx={{ width: "100%" }}>
+                            <Categories categories={category} collections={collections}></Categories>
                         </Grid>
                     ))}
                 </Grid>
@@ -154,14 +150,20 @@ function Publisher({ id, title, types, collections, description, founded }) {
     );
 }
 export async function getServerSideProps(context) {
+    const collectionsUnormated = await DataSourceAPI.getCollections();
+    const collections = collectionsUnormated.map((col) => ({ ...col, publisher: col.publisher.name, categories: col.categories.items.map((item) => item.name) }));
+    const collectionsFiltered = collections.filter((x) => x.publisher === context.query.name);
     return {
         props: {
             id: context.query.id,
-            title: context.query.title,
-            types: context.query.types, //odavde izlacimo broj kategorija
-            collections: context.query.collections,
+            name: context.query.name,
+            location: context.query.location,
+            categories: context.query.collections,
             description: context.query.description,
             founded: context.query.founded,
+            locationIconUri: context.query.locationIconUri,
+            logo: context.query.logo,
+            collections: collectionsFiltered,
         },
     };
 }
