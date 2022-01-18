@@ -109,7 +109,19 @@ const styles = (theme) => ({
 function PublisherCard({ publisher, favorite, setFavorite }) {
     const theme = useTheme();
 
-    const images = [publ1, publ2, publ3];
+    //izvlačimo jedinstvene vrijednosti kategorija pripadajućih kolekcija/albuma
+    let categories = [];
+    for (let i = 0; i < publisher.collections.items.length; i++) {
+        for (let j = 0; j < publisher.collections.items[i].categories.items.length; j++) {
+            categories.push(publisher.collections.items[i].categories.items[j].name);
+        }
+    }
+    let allUniqueCategories = [...new Set(categories)]; // samo jedinstvene vrijednosti
+    if (allUniqueCategories.length > 4) {
+        allUniqueCategories = [...allUniqueCategories.slice(0, 3), "Other..."];
+    } else if (allUniqueCategories.length === 0) {
+        allUniqueCategories = ["No categories."];
+    }
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -121,6 +133,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
         }
         setFavorite(tempFavorite);
     };
+
     //{ pathname: "Publishers/[Publisher]", query: { id: publisher.id, title: publisher.title, types: publisher.types, collections: publisher.collections, description: publisher.description, founded: publisher.founded,},}} as={
     return (
         <Grid item xl={4} sm={6} xs={12}>
@@ -133,7 +146,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                     </CardMedia>
                     <CardContent sx={styles(theme).content}>
                         <Paper sx={styles(theme).paper}>
-                            <Grid item sx={{ marginTop: "1rem", marginRight: "1rem" }} xl={4} md={4} sm={4} xs={4}>
+                            <Grid item container sx={{ justifyContent: "center", marginTop: "1rem" }} xl={4} md={4} sm={4} xs={4}>
                                 <StarRounded sx={favorite.includes(publisher.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClick(e)} />
                             </Grid>
                             <Grid item sx={{ marginTop: "1rem" }} xl={8} md={8} sm={8} xs={8}>
@@ -147,7 +160,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                                     </Typography>
                                 </Grid>
                                 <Grid container sx={styles(theme).chipsContainer}>
-                                    {["None"].map((typeName) => (
+                                    {allUniqueCategories.map((typeName) => (
                                         <Chip key={typeName} size="small" label={typeName} sx={styles(theme).chip} />
                                     ))}
                                 </Grid>

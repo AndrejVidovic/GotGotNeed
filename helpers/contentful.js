@@ -58,13 +58,22 @@ class DataSourceAPI {
 
     static async getPublishers({ preview = false } = {}) {
         const query = gql`
-            query getPosts($preview: Boolean!) {
+            query getPublishers($preview: Boolean!) {
                 publisherCollection(preview: $preview) {
                     publishers: items {
                         id
                         name
                         logo {
                             url
+                        }
+                        collections: collectionsCollection(limit: 15) {
+                            items {
+                                categories: categoriesCollection(limit: 5) {
+                                    items {
+                                        name
+                                    }
+                                }
+                            }
                         }
                         description
                         location
@@ -135,6 +144,65 @@ class DataSourceAPI {
 
         return slugs;
     }
+
+    static async getCollections({ preview = false } = {}) {
+        const query = gql`
+            query getCollections($preview: Boolean!) {
+                collectionCollection(preview: $preview) {
+                    collections: items {
+                        name
+                        id
+                        stickers
+                        coverPhoto {
+                            url
+                        }
+                        releaseYear
+                        numberOfStickers
+                        publisher {
+                            id
+                            name
+                            logo {
+                                url
+                            }
+                        }
+                        categories: categoriesCollection {
+                            items {
+                                name
+                            }
+                        }
+                    }
+                }
+            }
+        `;
+
+        const variables = { preview };
+        const response = await this.queryContentful(query, variables);
+        const { collections } = response?.collectionCollection;
+        console.log(collections);
+
+        return collections;
+    }
+    // collectionCollection{
+    //     collections: items{
+    //       name
+    //       id
+    //       stickers
+    //       coverPhoto{url}
+    //       releaseYear
+    //       numberOfStickers
+    //       publisher{
+    //         id
+    //         name
+    //         logo{url}
+    //       }
+    //       categories:categoriesCollection{
+    //         items{
+    //           name
+    //         }
+    //       }
+
+    //     }
+    //   }
 }
 
 export default DataSourceAPI;

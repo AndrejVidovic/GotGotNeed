@@ -16,9 +16,11 @@ const styles = (theme) => ({
         flexDirection: "column",
     },
     searchGrid: {
-        marginTop: "4vh",
-        marginBottom: "6vh",
+        marginBottom: "4rem",
         width: "100%",
+        [theme.breakpoints.down("lg")]: {
+            marginBottom: "2rem",
+        },
     },
     pagination: {
         marginTop: "5vh",

@@ -9,7 +9,7 @@ import Footer from "../components/Layout/footer";
 
 const styles = (theme) => ({
     glass: {
-        height: "764px",
+        height: "640px",
         width: "100%",
         display: "flex",
         alignItems: "flex-start",
@@ -69,15 +69,15 @@ function Chat() {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Grid item xl={7} lg={8} md={10} sm={10} xs={10}>
+                <Grid item xl={7} lg={8} xs={10}>
                     <Glass color={0} styling={styles(theme).glass}>
-                        <Grid item xl={4} lg={4} md={4} sm={10} xs={10} sx={styles(theme).containerConversations}>
+                        <Grid item md={4} xs={10} sx={styles(theme).containerConversations}>
                             {index === 1 ? <Conversations activeConversation={activeConversation} setActiveConversation={setActiveConversation} conversations={allConversations} index={index} setIndex={setIndex} HandleFunction={HandleArchive} HandleDelete={HandleDelete}></Conversations> : null}
                             {index === 2 ? (
                                 <Conversations activeConversation={activeConversation} setActiveConversation={setActiveConversation} conversations={archivedConversations} index={index} setIndex={setIndex} HandleFunction={HandleUnarchive} HandleDelete={HandleDelete}></Conversations>
                             ) : null}
                         </Grid>
-                        <Grid item xl={7} lg={7} md={7} sm={10} xs={10} sx={styles(theme).containerConversations}>
+                        <Grid item md={7} xs={10} sx={styles(theme).containerConversations}>
                             {activeConversation ? <Messages conversation={activeConversation}></Messages> : <Typography>Open conversation to view messages</Typography>}
                         </Grid>
                     </Glass>

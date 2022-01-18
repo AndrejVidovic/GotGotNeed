@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import { auth } from "../helpers/firebase";
-import Router from "next/router";
 
 const AuthContext = createContext();
 
@@ -9,7 +8,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState({});
     const [loading, setLoading] = useState(true);
 
     const signup = (email, password) => {
@@ -27,9 +26,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const changeOfUserStatus = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
-            if (user !== null) {
-                Router.push("/");
-            }
+
             setLoading(false);
         });
         return changeOfUserStatus;

@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardContent, CardMedia, useTheme, Grid, Box, Typography, IconButton, Collapse } from "@mui/material";
 import Image from "next/image";
-import PublisherCollection from "../../public/CollectionBig.png";
 import { ExpandCircleDown, StarRounded } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -39,9 +38,9 @@ const styles = (theme) => ({
         fontSize: "22px",
         width: "70%",
         lineHeight: "26px",
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        textOverflow: "ellipsis",
+        // overflow: "hidden",
+        // whiteSpace: "nowrap",
+        // textOverflow: "ellipsis",
     },
     titleOpen: {
         overflow: "unset",
@@ -92,7 +91,7 @@ const styles = (theme) => ({
     },
     moreInfo: {
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
     },
     info: {
         fontWeight: 700,
@@ -121,7 +120,6 @@ const styles = (theme) => ({
 });
 function CollectionsCard({ collection, favorite, setFavorite }) {
     const theme = useTheme();
-    const image = PublisherCollection;
     const [collapse, setCollapse] = useState(false);
 
     const handleClickFavorite = (e) => {
@@ -141,12 +139,12 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
         <Grid item xl={4} md={6} xs={12}>
             <Card sx={styles(theme).root}>
                 <CardMedia sx={styles(theme).media}>
-                    <Image src={image} alt="collection" layout="fill" objectFit="cover" />
+                    <Image src={collection.coverPhoto.url} alt="collection" layout="fill" objectFit="cover" />
                 </CardMedia>
                 <CardContent sx={styles(theme).content}>
                     <Collapse in={collapse} collapsedSize={"130px"} sx={styles(theme).collapse}>
                         <Grid item sx={styles(theme).titleGrid}>
-                            <Typography sx={collapse ? { ...styles(theme).title, ...styles(theme).titleOpen } : styles(theme).title}>{collection.title}</Typography>
+                            <Typography sx={collapse ? { ...styles(theme).title, ...styles(theme).titleOpen } : styles(theme).title}>{collection.name}</Typography>
                             <StarRounded sx={favorite.includes(collection.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClickFavorite(e)} />
                         </Grid>
                         <Grid item xs={12} sx={styles(theme).moreInfo}>
@@ -162,8 +160,8 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
                             <Typography sx={styles(theme).infoValues}>{collection.publisher}</Typography>
                         </Grid>
                         <Grid item xs={12} sx={styles(theme).moreInfo}>
-                            <Typography sx={styles(theme).info}>Category:</Typography>
-                            <Typography sx={styles(theme).infoValues}>{collection.category}</Typography>
+                            <Typography sx={styles(theme).info}>Categories:</Typography>
+                            <Typography sx={styles(theme).infoValues}>{collection.categories.map((category) => category).join(", ")}</Typography>
                         </Grid>
                     </Collapse>
 

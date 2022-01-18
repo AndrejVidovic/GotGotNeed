@@ -12,6 +12,7 @@ const styles = (theme) => ({
         flexDirection: "column",
         marginBottom: "1rem",
         minWidth: "100%",
+        transition: "all 0.5s ease",
         [theme.breakpoints.between("sm", "md")]: {
             marginBottom: "2rem",
             flexDirection: "row",
@@ -26,6 +27,7 @@ const styles = (theme) => ({
         },
         "&:hover": {
             cursor: "pointer",
+            transform: "scale(1.02)",
         },
     },
     media: {
@@ -94,10 +96,7 @@ const styles = (theme) => ({
         },
     },
     article: {
-        [theme.breakpoints.between("xs", "md")]: {
-            fontSize: "0.75rem",
-        },
-        [theme.breakpoints.between("md", "xl")]: {
+        [theme.breakpoints.between("xs", "xl")]: {
             fontSize: "0.9rem",
         },
         [theme.breakpoints.up("xl")]: {

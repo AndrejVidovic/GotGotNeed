@@ -6,6 +6,8 @@ import { useState } from "react";
 import Image from "next/image";
 import ggnImage from "../public/GGNImage.png";
 import Link from "next/link";
+import { useAuth } from "../context/AuthContext";
+import Router from "next/router";
 
 const styles = (theme) => ({
     root: {
@@ -80,19 +82,29 @@ const styles = (theme) => ({
 
 const SmallLogin = () => {
     const theme = useTheme();
-    const [user, setUser] = useState({
-        Username: "",
-        Password: "",
-        ShowPassword: false,
-    });
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const { login, currentUser } = useAuth();
 
-    const handleChange = (props) => (event) => {
-        setUser({ ...user, [props]: event.target.value });
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        try {
+            setLoading(true);
+            await login(email, password);
+            Router.push("/");
+        } catch (error) {
+            console.error(error.message);
+        }
+        setLoading(false);
+    }
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
     };
-    const HandleClickShowPassword = () => {
-        setUser({ ...user, ShowPassword: !user.ShowPassword });
-    };
-    const HandleMouseDownPassword = (event) => {
+    const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
@@ -101,53 +113,63 @@ const SmallLogin = () => {
             <Box sx={styles(theme).logo}>
                 <Image alt="logo" src={ggnImage} quality={60} layout="fill" objectFit="contain" />
             </Box>
-            <FormControl sx={styles(theme).textfield}>
-                <TextField variant="filled" label="Username" onChange={handleChange("Username")} sx={styles(theme).textfield} size="normal" />
-                <TextField
-                    variant="filled"
-                    label="Password"
-                    id="filled-adornment-password"
-                    type={user.ShowPassword ? "text" : "password"}
-                    value={user.Password}
-                    onChange={handleChange("Password")}
-                    size="normal"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton aria-label="password visibility" onClick={HandleClickShowPassword} onMouseDown={HandleMouseDownPassword} edge="end">
-                                    {user.ShowPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </FormControl>
-            <Grid container direction="row" justifyContent="space-between" alignItems="center" sx={styles(theme).buttons}>
-                <Grid item xs={5.5}>
-                    <Button
-                        variant="contained"
-                        sx={{
-                            ...styles(theme).button,
-                            ...styles(theme).loginButton,
-                        }}
-                    >
-                        LOG IN
-                    </Button>
-                </Grid>
-                <Grid item xs={5.5}>
-                    <Link href="/Register" passHref passHref>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                ...styles(theme).button,
-                                ...styles(theme).signupButton,
+            {currentUser === null ? (
+                <>
+                    <FormControl sx={styles(theme).textfield}>
+                        <TextField variant="filled" label="Username" onChange={(e) => setEmail(e.target.value)} sx={styles(theme).textfield} size="normal" />
+                        <TextField
+                            variant="filled"
+                            label="Password"
+                            id="filled-adornment-password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            size="normal"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton aria-label="password visibility" onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
                             }}
-                        >
-                            SIGN UP
-                        </Button>
-                    </Link>
-                </Grid>
-            </Grid>
+                        />
+                    </FormControl>
+                    <Grid container direction="row" justifyContent="space-between" alignItems="center" sx={styles(theme).buttons}>
+                        <Grid item xs={5.5}>
+                            <Button
+                                variant="contained"
+                                disabled={loading}
+                                sx={{
+                                    ...styles(theme).button,
+                                    ...styles(theme).loginButton,
+                                }}
+                            >
+                                LOG IN
+                            </Button>
+                        </Grid>
+                        <Grid item xs={5.5}>
+                            <Link href="/Register" passHref passHref>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        ...styles(theme).button,
+                                        ...styles(theme).signupButton,
+                                    }}
+                                >
+                                    SIGN UP
+                                </Button>
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </>
+            ) : (
+                <div style={{ width: "100%", textAlign: "center" }}>
+                    <p style={{ fontSize: "28px", fontWeight: 700 }}>Welcome back!</p>
+                    <p style={{ margin: "1rem 0 4rem 0", fontSize: "20px", fontWeight: 500 }}>You are signed in!</p>
+                </div>
+            )}
         </Glass>
     );
 };

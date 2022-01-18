@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { auth } from "../helpers/firebase";
 import firebase from "firebase/compat/app";
+import Router from "next/router";
 
 const styles = (theme) => ({
     loginButton: {
@@ -104,10 +105,9 @@ const uiConfig = {
 
 function Login() {
     const theme = useTheme();
-    const emailRef = useRef();
-    const passwordRef = useRef();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const { login } = useAuth();
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -115,12 +115,11 @@ function Login() {
         e.preventDefault();
 
         try {
-            setError("");
             setLoading(true);
-            await login("vidaftw@gmail.com", "VidexSpiner1950");
+            await login(email, password);
+            Router.push("/");
         } catch (error) {
             console.error(error.message);
-            setError("Failed to log in.");
         }
         setLoading(false);
     }
@@ -136,13 +135,14 @@ function Login() {
                         Welcome back!
                     </Typography>
                     <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
-                        <TextField variant="filled" label="Email" type="email" ref={emailRef} sx={styles(theme).textfield} />
+                        <TextField variant="filled" label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={styles(theme).textfield} />
                         <FormControl variant="filled" sx={styles(theme).textfield}>
                             <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
                             <FilledInput
                                 id="filled-adornment-password"
                                 type={showPassword ? "text" : "password"}
-                                ref={passwordRef}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton aria-label="password visibility" onClick={() => setShowPassword(!showPassword)} onMouseDown={(e) => e.preventDefault()} edge="end">
