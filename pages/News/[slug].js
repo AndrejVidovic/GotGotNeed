@@ -5,7 +5,7 @@ import remarkUnwrapImages from "remark-unwrap-images";
 import { MDXRemote } from "next-mdx-remote";
 import { P, H1, H2, H3, Quote, Strong } from "../../components/News/Text";
 import { Ul, Li } from "../../components/News/List";
-import { Code } from "../../components/News/Code";
+import { Code, Pre } from "../../components/News/Code";
 import { ImageContainer } from "../../components/News/Image";
 import Head from "next/head";
 import DataSourceAPI from "../../helpers/contentful";
@@ -33,6 +33,7 @@ const components = {
     ul: Ul,
     li: Li,
     p: P,
+    pre: Pre,
     strong: Strong,
     code: Code,
     inlineCode: Code,

@@ -3,6 +3,7 @@ import Image from "next/image";
 import avatarImg from "../../public/maradonaAvatar.jpg";
 import CollectorsCardHeader from "./CollectorsCardHeader";
 import Link from "next/link";
+import Glass from "../../components/Glass";
 
 const styles = (theme) => ({
     card: {
@@ -12,14 +13,16 @@ const styles = (theme) => ({
         position: "relative",
         height: "375px",
         width: "100%",
+        transition: "all 0.3s ease",
+        "&:hover": {
+            transform: "scale(1.03)",
+            cursor: "pointer",
+        },
     },
     cardImage: {
         position: "relative",
         width: "100%",
         height: "55%",
-        "&:hover": {
-            cursor: "pointer",
-        },
     },
 });
 
@@ -28,14 +31,24 @@ const CollectorCard = ({ user }) => {
 
     return (
         <Grid item xl={4} md={6} xs={12}>
-            <Box sx={styles(theme).card}>
-                <Box sx={styles(theme).cardImage}>
-                    <Link href={`/Collectors/${user.username}`} passHref>
+            <Link href={`/Collectors/${user.username}`} passHref>
+                <Box sx={styles(theme).card}>
+                    <Box sx={styles(theme).cardImage}>
                         <Image src={avatarImg} alt={"najs"} layout="fill" objectFit="cover" />
-                    </Link>
+                    </Box>
+                    <CollectorsCardHeader user={user} />
+                    <Glass styling={{ position: "absolute", top: "40px", left: "0", width: "60px", height: "25px", background: "rgba(255, 152, 0, 0.9)", border: "3px solid #feb64d", fontSize: "15px", fontWeight: 700 }} color={3}>
+                        {`- `}
+                        {user.reviews.filter((review) => review.positive === 0).length}
+                        {/*Broj NEGATIVNIH */}
+                    </Glass>
+                    <Glass styling={{ position: "absolute", top: "10px", left: "0", width: "60px", height: "25px", background: "rgba(15, 109, 202, 0.85)", border: "3px solid #71a5d7", fontSize: "15px", color: "white", fontWeight: 700 }} color={3}>
+                        {`+ `}
+                        {user.reviews.filter((review) => review.positive === 1).length}
+                        {/*Broj POZITIVNIH */}
+                    </Glass>
                 </Box>
-                <CollectorsCardHeader user={user} />
-            </Box>
+            </Link>
         </Grid>
     );
 };

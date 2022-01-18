@@ -21,6 +21,7 @@ const styles = (theme) => ({
         marginBottom: "2rem",
         width: "45%",
         backgroundColor: "white",
+        boxShadow: theme.shadows[1],
         [theme.breakpoints.down("md")]: {
             width: "100%",
         },

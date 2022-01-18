@@ -156,8 +156,8 @@ const BlogCard = ({ id, title, types, description, date, author, image, slug }) 
 
     return (
         <>
-            <Link href={`/News/${slug}`} passHref>
-                <Card sx={styles(theme).root}>
+            <Card sx={styles(theme).root}>
+                <Link href={`/News/${slug}`} passHref>
                     <CardMedia sx={styles(theme).media} title={title}>
                         <div style={styles(theme).imageContainer}>
                             <Image src={image} layout="fill" objectFit="cover" objectPosition="top" alt={title} quality={60} />
@@ -192,8 +192,8 @@ const BlogCard = ({ id, title, types, description, date, author, image, slug }) 
                             </Grid>
                         </CardContent>
                     </div>
-                </Card>
-            </Link>
+                </Link>
+            </Card>
             <Menu
                 anchorEl={anchor} // html element koji je lokacija -> klikon na taj element se i otvara
                 anchorOrigin={{ vertical: "bottom", horizontal: "left" }} // u odnosu na ANchorEl di ga displaya

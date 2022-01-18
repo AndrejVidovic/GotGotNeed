@@ -12,7 +12,9 @@ const styles = (theme) => ({
         position: "relative",
         height: "400px",
         width: "100%",
+        transition: "all 0.3s ease",
         "&:hover": {
+            transform: "scale(1.03)",
             cursor: "pointer",
         },
     },
@@ -38,6 +40,7 @@ const styles = (theme) => ({
         fontSize: "22px",
         width: "70%",
         lineHeight: "26px",
+        textShadow: theme.shadows[4],
         // overflow: "hidden",
         // whiteSpace: "nowrap",
         // textOverflow: "ellipsis",
@@ -50,6 +53,7 @@ const styles = (theme) => ({
     expandIcon: {
         color: theme.palette.primary.main,
         fontSize: "2.5rem",
+        filter: "drop-shadow(" + theme.shadows[1] + ")",
     },
     titleGrid: {
         display: "flex",

@@ -1,7 +1,7 @@
 //Shema preuzeta s: https://github.dev/mcagalj/next-app-prototype .
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialOceanic as style } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { materialLight as style } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useTheme, lighten } from "@mui/material";
 
 const styles = (theme) => ({
@@ -10,6 +10,9 @@ const styles = (theme) => ({
         fontSize: "12px",
         borderRadius: theme.shape.borderRadius + "px",
         padding: "4px 8px",
+    },
+    pre: {
+        margin: "2rem 0",
     },
 });
 
@@ -24,4 +27,10 @@ export const Code = (props) => {
     ) : (
         <code style={styles(theme).code}>{props.children}</code>
     );
+};
+
+export const Pre = (props) => {
+    const theme = useTheme();
+
+    return <pre style={styles(theme).pre} {...props} />;
 };
