@@ -10,6 +10,7 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     {/* PWA primary color */}
+                    <meta name="description" content="GotGotNeed free page for collecting and swaping stickers with users all around world" />
                     <meta name="theme-color" content={theme.palette.primary.main} />
                     <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" as="style" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />

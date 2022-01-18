@@ -60,7 +60,7 @@ function Publishers({ publishers }) {
             <Grid container sx={styles(theme).container}>
                 <Title title="Publishers" subtitle="The sticker makers themselves" />
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).searchGrid}>
-                    <Search itemsToFilter={allPublishers} setFilteredItems={setFilteredPublishers} propertiesToSearch={["title", "location"]} />
+                    <Search itemsToFilter={allPublishers} setFilteredItems={setFilteredPublishers} propertiesToSearch={["name", "location"]} />
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} spacing={5}>
                     {getFilteredPublishers().map((publisher) => (
