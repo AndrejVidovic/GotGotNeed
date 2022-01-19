@@ -115,10 +115,12 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
         }
     }
     let allUniqueCategories = [...new Set(categories)]; // samo jedinstvene vrijednosti
+    let allCategories = [...new Set(categories)];
     if (allUniqueCategories.length > 4) {
         allUniqueCategories = [...allUniqueCategories.slice(0, 3), "Other..."];
     } else if (allUniqueCategories.length === 0) {
         allUniqueCategories = ["No categories."];
+        allCategories = null;
     }
 
     const handleClick = (e) => {
@@ -140,7 +142,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
                         id: publisher.id,
                         name: publisher.name,
                         location: publisher.location,
-                        collections: allUniqueCategories,
+                        collections: allCategories,
                         description: publisher.description,
                         founded: publisher.founded,
                         locationIconUri: publisher.locationIconUri,

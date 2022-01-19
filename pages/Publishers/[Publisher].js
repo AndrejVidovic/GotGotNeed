@@ -66,12 +66,14 @@ const styles = (theme) => ({
 
 function Publisher({ id, name, location, categories, description, founded, locationIconUri, logo, collections }) {
     const theme = useTheme();
-
     const getTypes = () => {
         let temp = [];
         if (typeof categories === "string") {
             temp.push(categories);
-        } else temp = categories;
+        } else {
+            temp = categories;
+        }
+
         return temp;
     };
     return (

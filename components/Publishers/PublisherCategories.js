@@ -49,14 +49,11 @@ const styles = (theme) => ({
 function Categories({ categories, collections }) {
     const theme = useTheme();
     const [collapse, setCollapse] = useState(false);
-    const [height, setHeight] = useState(0);
+    const [height, setHeight] = useState(210); //namistit samo na velicnu vecu od kartice
     const ScrollRef = useRef();
     const handleCollapse = () => {
         setCollapse(!collapse);
     };
-    useEffect(() => {
-        setHeight(ScrollRef.current.clientHeight);
-    }, []);
 
     const collectionsForCategory = () => {
         let temp = [];
@@ -72,7 +69,7 @@ function Categories({ categories, collections }) {
             </Box>
             <Box sx={styles(theme).box}>
                 <Collapse in={collapse} collapsedSize={height}>
-                    <Grid container sx={styles(theme).collectionsGrid} ref={ScrollRef}>
+                    <Grid container sx={styles(theme).collectionsGrid}>
                         {collectionsForCategory().map((collection) => (
                             <PublisherCollection collection={collection} key={collection.id} />
                         ))}
