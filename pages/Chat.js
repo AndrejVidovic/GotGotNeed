@@ -77,14 +77,18 @@ function Chat() {
         setArchivedConversations(archivedConversations.filter((x) => x.id !== value.id));
         setActiveConversation(null);
     };
-    const ScrollRef = useRef();
+    const RefConversation = useRef();
+    const RefMessage = useRef();
     useEffect(() => {
         if (ConversationIndex != 0 && window.innerWidth < 900) {
-            ScrollRef.current.style.display = "none";
-        } else {
-            ScrollRef.current.style.display = "flex";
+            RefConversation.current.style.display = "none";
+            RefMessage.current.style.display = "flex";
+        } else if (ConversationIndex == 0 && window.innerWidth < 900) {
+            RefConversation.current.style.display = "flex";
+            RefMessage.current.style.display = "none";
         }
     }, [ConversationIndex]);
+    console.log(ConversationIndex);
 
     return (
         <>
@@ -95,7 +99,7 @@ function Chat() {
             <Grid container sx={styles(theme).container}>
                 <Grid item xl={7} lg={8} xs={10}>
                     <Glass color={0} styling={styles(theme).glass}>
-                        <Grid item md={4} xs={10} sx={styles(theme).containerConversations} ref={ScrollRef}>
+                        <Grid item md={4} xs={10} sx={styles(theme).containerConversations} ref={RefConversation}>
                             {index === 1 ? (
                                 <Conversations
                                     activeConversation={activeConversation}
@@ -121,7 +125,7 @@ function Chat() {
                                 />
                             ) : null}
                         </Grid>
-                        <Grid item md={7} xs={10} sx={styles(theme).containerMessages}>
+                        <Grid item md={7} xs={10} sx={styles(theme).containerMessages} ref={RefMessage}>
                             {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography>Open conversation to view messages</Typography>}
                         </Grid>
                     </Glass>
