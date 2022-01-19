@@ -1,5 +1,5 @@
 import { ExpandCircleDown } from "@mui/icons-material";
-import { Collapse, Grid, IconButton, Paper, Typography, useTheme } from "@mui/material";
+import { Collapse, Grid, IconButton, Paper, Typography, useTheme, Box } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import PublisherCollection from "./PublisherCollection";
 
@@ -38,6 +38,12 @@ const styles = (theme) => ({
         padding: 0,
         bottom: "-17px",
     },
+    box: {
+        boxShadow: theme.shadows[4],
+        backgroundColor: "rgba(219, 219, 219, 0.08)",
+        backdropFilter: "blur(10px)",
+        borderRadius: "0 0 10px 10px",
+    },
 });
 
 function Categories({ categories, collections }) {
@@ -59,12 +65,12 @@ function Categories({ categories, collections }) {
     };
     return (
         <Grid item sx={styles(theme).container}>
-            <Paper sx={styles(theme).paper}>
+            <Box sx={styles(theme).paper}>
                 <Typography variant="body1" sx={styles(theme).title}>
                     {categories}
                 </Typography>
-            </Paper>
-            <Paper>
+            </Box>
+            <Box sx={styles(theme).box}>
                 <Collapse in={collapse} collapsedSize={height}>
                     <Grid container sx={styles(theme).collectionsGrid} ref={ScrollRef}>
                         {collectionsForCategory().map((collection) => (
@@ -77,7 +83,7 @@ function Categories({ categories, collections }) {
                         {collapse ? <ExpandCircleDown sx={{ transform: "rotate(180deg)", color: theme.palette.primary.main, fontSize: "2.2rem" }} /> : <ExpandCircleDown sx={{ color: theme.palette.primary.main, fontSize: "2.2rem" }} />}
                     </IconButton>
                 </Grid>
-            </Paper>
+            </Box>
         </Grid>
     );
 }

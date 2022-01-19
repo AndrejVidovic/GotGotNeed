@@ -4,7 +4,7 @@ import Image from "next/image";
 import Footer from "../../components/Layout/footer";
 import DataSourceAPI from "../../helpers/contentful";
 import Categories from "../../components/Publishers/PublisherCategories";
-import { useState } from "react";
+import PublisherInfo from "../../components/Publishers/PublisherInfo";
 
 const styles = (theme) => ({
     container: {
@@ -27,20 +27,6 @@ const styles = (theme) => ({
             marginTop: "4rem",
         },
     },
-    info: {
-        fontWeight: 700,
-        fontSize: "16px",
-        marginBottom: "0.1rem",
-    },
-    description: {
-        fontWeight: 400,
-        fontSize: "16px",
-        textAlign: "justify",
-        marginTop: "1rem",
-        [theme.breakpoints.down("md")]: {
-            display: "none",
-        },
-    },
     descriptionSmall: {
         fontWeight: 400,
         fontSize: "15px",
@@ -49,17 +35,6 @@ const styles = (theme) => ({
         [theme.breakpoints.up("md")]: {
             display: "none",
         },
-    },
-    title: {
-        fontWeight: 700,
-        fontSize: "80px",
-        [theme.breakpoints.between("sm", "lg")]: {
-            fontSize: "60px",
-        },
-        [theme.breakpoints.between("xs", "sm")]: {
-            fontSize: "50px",
-        },
-        marginBottom: "1.5rem",
     },
     imageGrid: {
         alignItems: "center",
@@ -87,16 +62,6 @@ const styles = (theme) => ({
             padding: "1.4rem",
         },
     },
-    infoValues: {
-        fontSize: "16px",
-        color: "#616161",
-        paddingLeft: "0.5rem",
-    },
-    infoGrid1: {
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-    },
 });
 
 function Publisher({ id, name, location, categories, description, founded, locationIconUri, logo, collections }) {
@@ -120,36 +85,7 @@ function Publisher({ id, name, location, categories, description, founded, locat
                         <Image src={logo} layout="fill" objectFit="contain" alt={name} />
                     </Grid>
                     <Grid item lg={4} xl={3} md={4} sm={4} xs={5}>
-                        <Typography variant="h1" sx={styles(theme).title}>
-                            {name}
-                        </Typography>
-                        <Grid item sx={styles(theme).infoGrid1}>
-                            <Typography variant="body1" sx={styles(theme).info}>
-                                Location: <Image src={`https://flagcdn.com/24x18/${locationIconUri}.png`} width="22" height="16" alt="CountryFlag" />
-                            </Typography>
-                            <Typography sx={styles(theme).infoValues}>{location}</Typography>
-                        </Grid>
-                        <Grid item sx={styles(theme).infoGrid1}>
-                            <Typography variant="body1" sx={styles(theme).info}>
-                                Categories:
-                            </Typography>
-                            <Typography sx={styles(theme).infoValues}>{categories.length}</Typography>
-                        </Grid>
-                        <Grid item sx={styles(theme).infoGrid1}>
-                            <Typography variant="body1" sx={styles(theme).info}>
-                                Collections:
-                            </Typography>
-                            <Typography sx={styles(theme).infoValues}>{collections.length}</Typography>
-                        </Grid>
-                        <Grid item sx={styles(theme).infoGrid1}>
-                            <Typography variant="body1" sx={styles(theme).info}>
-                                Founded:
-                            </Typography>
-                            <Typography sx={styles(theme).infoValues}>{founded}</Typography>
-                        </Grid>
-                        <Typography variant="body1" sx={styles(theme).description}>
-                            {description}
-                        </Typography>
+                        <PublisherInfo name={name} collections={collections} categories={categories} founded={founded} location={location} locationIconUri={locationIconUri} description={description} />
                     </Grid>
                 </Grid>
                 <Grid item md={9} sm={9} xs={10} sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
@@ -157,7 +93,6 @@ function Publisher({ id, name, location, categories, description, founded, locat
                         {description}
                     </Typography>
                 </Grid>
-
                 <Grid sx={styles(theme).categoriesGrid} item xl={7} lg={9} md={9} sm={10} xs={10}>
                     {getTypes().map((category) => (
                         <Grid key={category} sx={{ width: "100%" }}>

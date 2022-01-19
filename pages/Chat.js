@@ -29,7 +29,7 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         flexDirection: "column",
         justifyContent: "center",
-        margin: "3rem 3rem 0 3rem",
+        marginTop: "3rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
@@ -42,10 +42,12 @@ const styles = (theme) => ({
         flexDirection: "column",
         justifyContent: "center",
         marginTop: "3rem",
+        marginLeft: "2.5rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
             marginTop: "1rem",
+            marginLeft: 0,
         },
     },
 });
