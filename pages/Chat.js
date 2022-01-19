@@ -29,21 +29,19 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "4rem",
+        margin: "3rem 2rem 0 2rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
-        },
-        "::active": {
-            display: "none",
+            marginTop: "2rem",
         },
     },
     containerMessages: {
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "4rem",
+        marginTop: "3rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
@@ -126,7 +124,7 @@ function Chat() {
                             ) : null}
                         </Grid>
                         <Grid item md={7} xs={10} sx={styles(theme).containerMessages} ref={RefMessage}>
-                            {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography>Open conversation to view messages</Typography>}
+                            {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography sx={{ paddingTop: "19rem" }}>Open conversation to view messages</Typography>}
                         </Grid>
                     </Glass>
                 </Grid>

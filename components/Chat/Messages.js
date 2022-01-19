@@ -1,5 +1,5 @@
 import { AddBox, AddPhotoAlternate, PersonAdd, Send } from "@mui/icons-material";
-import { Avatar, Grid, IconButton, Typography, useTheme, Paper, InputBase, Button } from "@mui/material";
+import { Avatar, Grid, IconButton, Typography, useTheme, Paper, InputBase, Button, lighten } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import dummyMessages from "../../fakeData/Chat/Messages.json";
@@ -65,30 +65,32 @@ const styles = (theme) => ({
         [theme.breakpoints.down("md")]: {
             width: "8rem",
         },
+        paddingLeft: "0.5rem",
     },
     senderMessage: {
         width: "80%",
         margin: "1vh 0",
-        backgroundColor: theme.palette.secondary.light,
+        backgroundColor: lighten(theme.palette.secondary.light, 0.6),
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
         marginLeft: "1vh",
         marginRight: "auto",
-        padding: "0.5vh",
+        padding: "0.6rem",
     },
     recipientMessage: {
         width: "80%",
         margin: "1vh 0",
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: lighten(theme.palette.primary.light, 0.6),
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
         marginLeft: "auto",
         marginRight: "1vh",
-        padding: "0.5vh",
+        padding: "0.6rem",
     },
     iconButton: {
+        padding: "4px",
         [theme.breakpoints.down("md")]: {
             padding: 0,
         },
@@ -109,7 +111,7 @@ const styles = (theme) => ({
         fontWeight: 700,
         padding: "10px 15px 10px 5px",
         marginBottom: "1rem",
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             display: "none",
         },
     },
@@ -184,7 +186,7 @@ function Messages({ conversation, setConversationIndex }) {
                         <Grid key={message.id} ref={ScrollRef}>
                             <Paper sx={message.user_id === user.id ? styles(theme).recipientMessage : styles(theme).senderMessage}>
                                 <Typography>{message.text}</Typography>
-                                <Typography sx={{ fontSize: "11px" }}>{message.date}</Typography>
+                                <Typography sx={{ fontSize: "11px", paddingTop: "0.5rem", marginLeft: "auto", marginRight: "1rem" }}>{message.date}</Typography>
                             </Paper>
                         </Grid>
                     ))}

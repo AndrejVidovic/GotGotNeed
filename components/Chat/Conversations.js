@@ -1,4 +1,4 @@
-import { InputBase, Grid, Paper, useTheme, Typography, Button, Avatar, Icon } from "@mui/material";
+import { InputBase, Grid, Paper, useTheme, Typography, Button, Avatar, Icon, lighten } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { Archive, Unarchive } from "@mui/icons-material";
 import { useEffect, useState } from "react";
@@ -22,9 +22,9 @@ const styles = (theme) => ({
         position: "relative",
     },
     name: {
-        fontWeight: 700,
-        fontSize: "19px",
-        paddingLeft: "0.5rem",
+        fontWeight: 600,
+        fontSize: "17px",
+        paddingLeft: "1rem",
         overflow: "hidden",
         textOverflow: "ellipsis",
     },
@@ -35,15 +35,16 @@ const styles = (theme) => ({
     },
     deleteIcon: {
         marginRight: "0.5rem",
-        color: theme.palette.secondary.light,
+        color: theme.palette.secondary.main,
+        filter: "drop-shadow(" + theme.shadows[4] + ")",
         "&:hover": {
             cursor: "pointer",
         },
     },
     archiveIcon: {
-        marginRight: "0.7rem",
-        marginLeft: "auto",
+        margin: "0 0.7rem",
         color: theme.palette.primary.main,
+        filter: "drop-shadow(" + theme.shadows[4] + ")",
         "&:hover": {
             cursor: "pointer",
         },
@@ -67,7 +68,13 @@ const styles = (theme) => ({
         marginTop: "0.5rem",
         boxShadow: theme.shadows[4],
         position: "relative",
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: lighten(theme.palette.primary.light, 0.5),
+    },
+    iconContainer: {
+        marginLeft: "auto",
+        marginRight: "0",
+        width: "100%",
+        justifyContent: "flex-end",
     },
 });
 function Conversations({ activeConversation, setActiveConversation, conversations, index, setIndex, HandleFunction, HandleDelete, setConversationIndex }) {
@@ -126,23 +133,25 @@ function Conversations({ activeConversation, setActiveConversation, conversation
                         <Avatar src="/maradonaAvatar.jpg    " />
                         <Grid item sx={{ display: "flex", alignItems: "center", width: "50%" }}>
                             <Typography sx={styles(theme).name}>{conversation.sender}</Typography>
-                            {conversation.unread ? <Icon sx={{ color: "#04C000" }}>chat_bubble_icon</Icon> : null}
                         </Grid>
+                        <Grid container item xs={12} sx={styles(theme).iconContainer}>
+                            {conversation.unread ? <Icon sx={{ color: "#04C000" }}>chat_bubble_icon</Icon> : null}
 
-                        {index === 1 ? (
-                            <Icon sx={styles(theme).archiveIcon} onClick={(event) => HandleFunction(event, conversation)}>
-                                archive_icon
-                            </Icon>
-                        ) : null}
-                        {index === 2 ? (
-                            <Icon sx={styles(theme).archiveIcon} onClick={(event) => HandleFunction(event, conversation)}>
-                                unarchive_icon
-                            </Icon>
-                        ) : null}
+                            {index === 1 ? (
+                                <Icon sx={styles(theme).archiveIcon} onClick={(event) => HandleFunction(event, conversation)}>
+                                    archive_icon
+                                </Icon>
+                            ) : null}
+                            {index === 2 ? (
+                                <Icon sx={styles(theme).archiveIcon} onClick={(event) => HandleFunction(event, conversation)}>
+                                    unarchive_icon
+                                </Icon>
+                            ) : null}
 
-                        <Icon sx={styles(theme).deleteIcon} onClick={(event) => HandleDelete(event, conversation)}>
-                            delete_forever_icon
-                        </Icon>
+                            <Icon sx={styles(theme).deleteIcon} onClick={(event) => HandleDelete(event, conversation)}>
+                                delete_forever_icon
+                            </Icon>
+                        </Grid>
                     </Paper>
                 ))}
             </Grid>
