@@ -52,6 +52,7 @@ const styles = (theme) => ({
         boxShadow: theme.shadows[2],
         width: "500px",
         height: "100%",
+        marginBottom: "4rem",
         [theme.breakpoints.down("lg")]: {
             marginTop: "6rem",
         },
@@ -84,7 +85,6 @@ const styles = (theme) => ({
         fontSize: "10px",
     },
     textfield: {
-        // marginTop: "1vh",
         marginBottom: "3vh",
         width: "100%",
     },
