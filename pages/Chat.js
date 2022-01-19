@@ -29,7 +29,7 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         flexDirection: "column",
         justifyContent: "center",
-        margin: "3rem 2rem 0 2rem",
+        margin: "3rem 3rem 0 3rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
@@ -86,7 +86,6 @@ function Chat() {
             RefMessage.current.style.display = "none";
         }
     }, [ConversationIndex]);
-    console.log(ConversationIndex);
 
     return (
         <>
@@ -95,9 +94,9 @@ function Chat() {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Grid item xl={7} lg={8} xs={10}>
+                <Grid item xl={8} lg={8} xs={10}>
                     <Glass color={0} styling={styles(theme).glass}>
-                        <Grid item md={4} xs={10} sx={styles(theme).containerConversations} ref={RefConversation}>
+                        <Grid item md={4} xs={12} sx={styles(theme).containerConversations} ref={RefConversation}>
                             {index === 1 ? (
                                 <Conversations
                                     activeConversation={activeConversation}
@@ -123,7 +122,7 @@ function Chat() {
                                 />
                             ) : null}
                         </Grid>
-                        <Grid item md={7} xs={10} sx={styles(theme).containerMessages} ref={RefMessage}>
+                        <Grid item md={7} xs={11} sx={styles(theme).containerMessages} ref={RefMessage}>
                             {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography sx={{ paddingTop: "19rem" }}>Open conversation to view messages</Typography>}
                         </Grid>
                     </Glass>

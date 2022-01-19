@@ -96,7 +96,6 @@ export async function getStaticProps() {
     const collectionsUnormated = await DataSourceAPI.getCollections();
     const collections = collectionsUnormated.map((col) => ({ ...col, publisher: col.publisher.name, categories: col.categories.items.map((item) => item.name) }));
 
-    console.log(collections);
     return {
         props: {
             collections,

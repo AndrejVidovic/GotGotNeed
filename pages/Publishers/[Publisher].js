@@ -77,7 +77,6 @@ const styles = (theme) => ({
         },
         position: "relative",
     },
-
     categoriesGrid: {
         width: "100%",
         padding: "3rem",
@@ -87,6 +86,16 @@ const styles = (theme) => ({
         [theme.breakpoints.between("sm", "lg")]: {
             padding: "1.4rem",
         },
+    },
+    infoValues: {
+        fontSize: "16px",
+        color: "#616161",
+        paddingLeft: "0.5rem",
+    },
+    infoGrid1: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
     },
 });
 
@@ -114,18 +123,30 @@ function Publisher({ id, name, location, categories, description, founded, locat
                         <Typography variant="h1" sx={styles(theme).title}>
                             {name}
                         </Typography>
-                        <Typography variant="body1" sx={styles(theme).info}>
-                            Location: <Image src={`https://flagcdn.com/24x18/${locationIconUri}.png`} width="22" height="16" alt="CountryFlag" /> {location}
-                        </Typography>
-                        <Typography variant="body1" sx={styles(theme).info}>
-                            Categories: {categories.length}
-                        </Typography>
-                        <Typography variant="body1" sx={styles(theme).info}>
-                            Collections: {collections.length}
-                        </Typography>
-                        <Typography variant="body1" sx={styles(theme).info}>
-                            Founded: {founded}
-                        </Typography>
+                        <Grid item sx={styles(theme).infoGrid1}>
+                            <Typography variant="body1" sx={styles(theme).info}>
+                                Location: <Image src={`https://flagcdn.com/24x18/${locationIconUri}.png`} width="22" height="16" alt="CountryFlag" />
+                            </Typography>
+                            <Typography sx={styles(theme).infoValues}>{location}</Typography>
+                        </Grid>
+                        <Grid item sx={styles(theme).infoGrid1}>
+                            <Typography variant="body1" sx={styles(theme).info}>
+                                Categories:
+                            </Typography>
+                            <Typography sx={styles(theme).infoValues}>{categories.length}</Typography>
+                        </Grid>
+                        <Grid item sx={styles(theme).infoGrid1}>
+                            <Typography variant="body1" sx={styles(theme).info}>
+                                Collections:
+                            </Typography>
+                            <Typography sx={styles(theme).infoValues}>{collections.length}</Typography>
+                        </Grid>
+                        <Grid item sx={styles(theme).infoGrid1}>
+                            <Typography variant="body1" sx={styles(theme).info}>
+                                Founded:
+                            </Typography>
+                            <Typography sx={styles(theme).infoValues}>{founded}</Typography>
+                        </Grid>
                         <Typography variant="body1" sx={styles(theme).description}>
                             {description}
                         </Typography>

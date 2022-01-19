@@ -33,10 +33,11 @@ const styles = (theme) => ({
     },
     newMessageBox: {
         backgroundColor: "white",
-        width: "75%",
+        width: "80%",
         height: "45px",
         borderRadius: theme.shape.borderRadius + "px",
         boxShadow: theme.shadows[4],
+        paddingLeft: "1rem",
     },
     icons: {
         width: "40px",
@@ -108,12 +109,12 @@ const styles = (theme) => ({
         display: "flex",
         alignItems: "center",
         fontSize: "15px",
-        fontWeight: 700,
         padding: "10px 15px 10px 5px",
         marginBottom: "1rem",
         [theme.breakpoints.up("md")]: {
             display: "none",
         },
+        width: "100%",
     },
 });
 //glumi usera koji je prijavljen to je primatelj ovih poruka

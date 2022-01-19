@@ -131,7 +131,7 @@ function Conversations({ activeConversation, setActiveConversation, conversation
                 {filteredConversations.map((conversation) => (
                     <Paper sx={id === conversation.id ? styles(theme).conversationActivePaper : styles(theme).conversationPaper} onClick={(event) => HandleActive(event, conversation)} key={conversation.id}>
                         <Avatar src="/maradonaAvatar.jpg    " />
-                        <Grid item sx={{ display: "flex", alignItems: "center", width: "50%" }}>
+                        <Grid item sx={{ display: "flex", alignItems: "center", width: "40%" }}>
                             <Typography sx={styles(theme).name}>{conversation.sender}</Typography>
                         </Grid>
                         <Grid container item xs={12} sx={styles(theme).iconContainer}>
