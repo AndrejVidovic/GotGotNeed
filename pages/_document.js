@@ -7,7 +7,7 @@ import createEmotionCache from "../src/createEmotionCache";
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html lang="en" style={{ fontSize: "12px" }}>
                 <Head>
                     {/* PWA primary color */}
                     <meta name="description" content="GotGotNeed free page for collecting and swaping stickers with users all around world" />

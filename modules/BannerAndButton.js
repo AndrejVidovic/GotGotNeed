@@ -40,7 +40,7 @@ const styles = (theme) => ({
         padding: "25px 0",
         marginTop: "2rem",
         textShadow: theme.shadows[4],
-        boxShadow: theme.shadows[1],
+        boxShadow: theme.shadows[4],
         "&:hover": {
             backgroundColor: theme.palette.primary.dark,
         },

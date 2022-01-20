@@ -20,6 +20,11 @@ const styles = (theme) => ({
         marginTop: "0.5rem",
         boxShadow: theme.shadows[4],
         position: "relative",
+        transition: "all 0.5s ease ",
+        "&:hover": {
+            transform: "scale(1.03)",
+            cursor: "pointer",
+        },
     },
     name: {
         fontWeight: 600,
@@ -29,7 +34,7 @@ const styles = (theme) => ({
         textOverflow: "ellipsis",
     },
     conversationGrid: {
-        height: "33rem",
+        height: "40rem",
         width: "90%",
         marginBottom: "15px",
     },
@@ -69,6 +74,11 @@ const styles = (theme) => ({
         boxShadow: theme.shadows[4],
         position: "relative",
         backgroundColor: lighten(theme.palette.primary.light, 0.5),
+        transition: "all 0.5s ease ",
+        "&:hover": {
+            transform: "scale(1.03)",
+            cursor: "pointer",
+        },
     },
     iconContainer: {
         marginLeft: "auto",
@@ -77,6 +87,7 @@ const styles = (theme) => ({
         justifyContent: "flex-end",
     },
 });
+
 function Conversations({ activeConversation, setActiveConversation, conversations, index, setIndex, HandleFunction, HandleDelete, setConversationIndex }) {
     const theme = useTheme();
     const allconversations = conversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time));

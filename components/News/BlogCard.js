@@ -62,7 +62,7 @@ const styles = (theme) => ({
         margin: 0,
         fontWeight: 600,
         [theme.breakpoints.between("xs", "md")]: {
-            fontSize: "14px",
+            fontSize: "16px",
         },
         [theme.breakpoints.between("md", "xl")]: {
             fontSize: "16px",
@@ -97,7 +97,7 @@ const styles = (theme) => ({
     },
     article: {
         [theme.breakpoints.between("xs", "xl")]: {
-            fontSize: "0.9rem",
+            fontSize: "1rem",
         },
         [theme.breakpoints.up("xl")]: {
             fontSize: "1.1rem",
@@ -129,7 +129,7 @@ const styles = (theme) => ({
     content: {
         padding: "2.5rem 3rem",
         [theme.breakpoints.between("xs", "md")]: {
-            padding: "1.5rem 2rem",
+            padding: "2rem",
         },
     },
     chipsContainer: {

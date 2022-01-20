@@ -85,9 +85,7 @@ const Collectors = () => {
                     </Search>
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} spacing={6}>
-                    {getDisplayedUsers().map((user) => (
-                        <CollectorCard user={user} key={user.username} />
-                    ))}
+                    {getDisplayedUsers().length > 0 ? getDisplayedUsers().map((user) => <CollectorCard user={user} key={user.username} />) : <p style={{ margin: "4rem auto 2rem auto", paddingLeft: "4rem" }}>No results.</p>}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
                     <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />

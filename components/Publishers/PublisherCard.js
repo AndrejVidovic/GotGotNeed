@@ -135,23 +135,7 @@ function PublisherCard({ publisher, favorite, setFavorite }) {
     };
     return (
         <Grid item xl={4} sm={6} xs={12}>
-            <Link
-                href={{
-                    pathname: "Publishers/[Publisher]",
-                    query: {
-                        id: publisher.id,
-                        name: publisher.name,
-                        location: publisher.location,
-                        collections: allCategories,
-                        description: publisher.description,
-                        founded: publisher.founded,
-                        locationIconUri: publisher.locationIconUri,
-                        logo: publisher.logo.url,
-                    },
-                }}
-                as={`/Publishers/${publisher.name}`}
-                passHref
-            >
+            <Link href={`/Publishers/${publisher.slug}`} passHref>
                 <Card sx={styles(theme).root}>
                     <CardMedia sx={styles(theme).media}>
                         <Grid sx={styles(theme).imageContainer}>

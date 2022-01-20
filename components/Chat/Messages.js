@@ -14,7 +14,7 @@ const styles = (theme) => ({
         marginBottom: "1rem",
     },
     messagesGrid: {
-        height: "32rem",
+        height: "39rem",
         width: "100%",
         marginBottom: "10px",
     },
@@ -38,6 +38,10 @@ const styles = (theme) => ({
         borderRadius: theme.shape.borderRadius + "px",
         boxShadow: theme.shadows[4],
         paddingLeft: "1rem",
+        [theme.breakpoints.down("md")]: {
+            margin: "0 1rem",
+            height: "35px",
+        },
     },
     icons: {
         width: "40px",
@@ -57,6 +61,7 @@ const styles = (theme) => ({
         textOverflow: "ellipsis",
         [theme.breakpoints.down("md")]: {
             width: "8rem",
+            fontSize: "17px",
         },
     },
     country: {
@@ -65,6 +70,7 @@ const styles = (theme) => ({
         width: "15rem",
         [theme.breakpoints.down("md")]: {
             width: "8rem",
+            fontSize: "14px",
         },
         paddingLeft: "0.5rem",
     },
@@ -110,7 +116,7 @@ const styles = (theme) => ({
         alignItems: "center",
         fontSize: "15px",
         padding: "10px 15px 10px 5px",
-        marginBottom: "1rem",
+        marginTop: "2rem",
         [theme.breakpoints.up("md")]: {
             display: "none",
         },
@@ -153,10 +159,6 @@ function Messages({ conversation, setConversationIndex }) {
     };
     return (
         <>
-            <Button variant="contained" sx={styles(theme).backButton} onClick={HandleBack}>
-                <FontAwesomeIcon icon={faPlay} size="28px" color="white" style={styles(theme).playIcon} />
-                back
-            </Button>
             <Grid item sx={styles(theme).messagesHeader}>
                 <Avatar src="/maradonaAvatar.jpg" sx={{ width: 60, height: 60 }}></Avatar>
                 <Grid sx={{ marginLeft: "1rem" }}>
@@ -205,6 +207,10 @@ function Messages({ conversation, setConversationIndex }) {
                     <Send sx={styles(theme).icons} onClick={HandleSend} />
                 </IconButton>
             </Grid>
+            <Button variant="contained" sx={styles(theme).backButton} onClick={HandleBack}>
+                <FontAwesomeIcon icon={faPlay} size="28px" color="white" style={styles(theme).playIcon} />
+                back
+            </Button>
         </>
     );
 }

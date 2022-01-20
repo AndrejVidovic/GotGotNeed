@@ -1,15 +1,15 @@
 import { ExpandCircleDown } from "@mui/icons-material";
-import { Collapse, Grid, IconButton, Paper, Typography, useTheme, Box } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
+import { Collapse, Grid, IconButton, Typography, useTheme, Box } from "@mui/material";
+import { useState, useRef } from "react";
 import PublisherCollection from "./PublisherCollection";
 
 const styles = (theme) => ({
     container: {
-        marginTop: "2rem",
+        marginBottom: "6rem",
     },
     paper: {
-        height: "3.5rem",
-        backgroundColor: "#1976D2",
+        height: "4rem",
+        backgroundColor: theme.palette.primary.main,
         color: "white",
         display: "flex",
         alignItems: "center",
@@ -30,8 +30,12 @@ const styles = (theme) => ({
     collectionsGrid: {
         display: "flex",
         flexWrap: "wrap",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "space-evenly",
+        padding: "0 2rem",
+        [theme.breakpoints.down("md")]: {
+            padding: "1rem 0",
+        },
     },
     iconButton: {
         margin: 0,
@@ -69,7 +73,7 @@ function Categories({ categories, collections }) {
             </Box>
             <Box sx={styles(theme).box}>
                 <Collapse in={collapse} collapsedSize={height}>
-                    <Grid container sx={styles(theme).collectionsGrid}>
+                    <Grid container spacing={3} sx={styles(theme).collectionsGrid}>
                         {collectionsForCategory().map((collection) => (
                             <PublisherCollection collection={collection} key={collection.id} />
                         ))}
@@ -77,7 +81,11 @@ function Categories({ categories, collections }) {
                 </Collapse>
                 <Grid sx={styles(theme).expandIconGrid}>
                     <IconButton sx={styles(theme).iconButton} onClick={handleCollapse}>
-                        {collapse ? <ExpandCircleDown sx={{ transform: "rotate(180deg)", color: theme.palette.primary.main, fontSize: "2.2rem" }} /> : <ExpandCircleDown sx={{ color: theme.palette.primary.main, fontSize: "2.2rem" }} />}
+                        {collapse ? (
+                            <ExpandCircleDown sx={{ transform: "rotate(180deg)", color: theme.palette.primary.main, filter: "drop-shadow(2px 4px 6px white)", fontSize: "3rem" }} />
+                        ) : (
+                            <ExpandCircleDown sx={{ color: theme.palette.primary.main, fontSize: "3rem", filter: "drop-shadow(2px 4px 6px white)" }} />
+                        )}
                     </IconButton>
                 </Grid>
             </Box>

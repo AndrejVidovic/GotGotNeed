@@ -55,7 +55,7 @@ const styles = (theme) => ({
 
 const Reviews = ({ reviews }) => {
     const theme = useTheme();
-    const [displayReviewsStatus, setDisplayReviewsStatus] = useState(() => false);
+    const [displayReviewsStatus, setDisplayReviewsStatus] = useState(() => true);
 
     const gradeToFive = (reviews.filter((review) => review.positive === 1).length / reviews.length) * 5;
 

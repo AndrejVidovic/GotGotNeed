@@ -29,7 +29,7 @@ const styles = (theme) => ({
         textAlign: "center",
         [theme.breakpoints.between("xs", "md")]: {
             fontSize: "35px",
-            padding: "30px",
+            padding: "40px",
         },
     },
     glass: {

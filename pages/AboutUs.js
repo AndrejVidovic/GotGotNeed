@@ -1,8 +1,7 @@
 import { Grid, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import logo from "../public/GGNImage.png";
-import AndrejImg from "../public/AndrejImg.png";
-import BrunoImg from "../public/BrunoImg.png";
+import Avatar from "../public/avatar.webp";
 import StayInTouch from "../public/StayInTouch.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebookSquare, faInstagramSquare, faLinkedin } from "@fortawesome/free-brands-svg-icons";
@@ -10,6 +9,7 @@ import Footer from "../components/Layout/footer";
 import GGNWhole from "../public/GGNWhole.png";
 import Head from "next/head";
 import Glass from "../components/Glass";
+import Link from "next/link";
 
 const styles = (theme) => ({
     gridContainer: {
@@ -61,10 +61,7 @@ const styles = (theme) => ({
         padding: "10px",
         width: "90px",
         height: "90px",
-        transition: "all 0.5s ease",
-        "&:hover": {
-            transform: "scale(1.05)",
-        },
+        cursor: "pointer",
     },
     glass: {
         margin: "10vh 0",
@@ -103,7 +100,7 @@ const styles = (theme) => ({
         width: "250px",
         textAlign: "justify",
         [theme.breakpoints.down("md")]: {
-            fontSize: "12px",
+            fontSize: "14px",
             width: "170px",
         },
     },
@@ -134,6 +131,9 @@ const styles = (theme) => ({
             justifyContent: "flex-start",
         },
     },
+    bold: {
+        color: theme.palette.primary.dark,
+    },
 });
 
 function AboutUs() {
@@ -160,18 +160,18 @@ function AboutUs() {
                 </Grid>
                 <Grid item xl={6} lg={8} xs={10}>
                     <Typography variant="body1" sx={styles(theme).text}>
-                        Lorem ipsum dolor sit <b>swap</b>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{" "}
+                        Lorem ipsum dolor sit <b style={styles(theme).bold}>swap</b>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{" "}
                         <Grid sx={styles(theme).GGNImage}>
                             <Image src={GGNWhole} alt="GotGotNeed" width={700} height={140} />
                         </Grid>
-                        Duis aute irure dolor in reprehenderit in <b>collectors</b> cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt <b>news</b> mollit anim id est laborum. Duis aute irure dolor in <b>collections</b>{" "}
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        Duis aute irure dolor in reprehenderit in <b style={styles(theme).bold}>collectors</b> cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt <b style={styles(theme).bold}>news</b> mollit anim id est laborum.
+                        Duis aute irure dolor in <b style={styles(theme).bold}>collections</b> reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </Typography>
                 </Grid>
                 <Glass color={0} styling={styles(theme).glass}>
                     <Grid container justifyContent="center" item lg={12} xl={12} md={12} sm={12} xs={12} sx={styles(theme).glassGrid}>
                         <Grid sx={styles(theme).person} item xs={12} sm={5} lg={3}>
-                            <Image src={AndrejImg} width="140px" height="140px" alt="Andrej" />
+                            <Image src={Avatar} width="140px" height="140px" alt="Andrej" />
                             <Typography variant="body1" sx={styles(theme).fullName}>
                                 Andrej Vidović
                             </Typography>
@@ -180,7 +180,7 @@ function AboutUs() {
                             </Typography>
                         </Grid>
                         <Grid sx={styles(theme).person} item xs={12} sm={5} lg={3}>
-                            <Image src={BrunoImg} width="140px" height="140px" alt="Bruno" />
+                            <Image src={Avatar} width="140px" height="140px" alt="Bruno" />
                             <Typography variant="body1" sx={styles(theme).fullName}>
                                 Bruno Grbavac
                             </Typography>
@@ -195,20 +195,20 @@ function AboutUs() {
                 </Grid>
                 <Grid item container sx={styles(theme).iconContainer} xs={12} sm={11} md={9}>
                     <Grid item xs={12} sm={6} sx={styles(theme).firstBlockOfIcons}>
-                        <a href="https://www.facebook.com/">
+                        <Link href="https://www.facebook.com/">
                             <FontAwesomeIcon icon={faFacebookSquare} size="7x" color="#3b5998" style={styles(theme).icon} />
-                        </a>
-                        <a href="https://www.twitter.com/">
+                        </Link>
+                        <Link href="https://www.twitter.com/">
                             <FontAwesomeIcon icon={faTwitter} size="7x" color="#00ACEE" style={styles(theme).icon} />
-                        </a>
+                        </Link>
                     </Grid>
                     <Grid item xs={12} sm={6} sx={styles(theme).secondBlockOfIcons}>
-                        <a href="https://www.instagram.com/">
+                        <Link href="https://www.instagram.com/">
                             <FontAwesomeIcon icon={faInstagramSquare} size="7x" color="#1976d2" style={styles(theme).icon} />
-                        </a>
-                        <a href="https://www.linkedin.com/">
+                        </Link>
+                        <Link href="https://www.linkedin.com/">
                             <FontAwesomeIcon icon={faLinkedin} size="7x" color="#007bb6" style={styles(theme).icon} />
-                        </a>
+                        </Link>
                     </Grid>
                 </Grid>
             </Grid>

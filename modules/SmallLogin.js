@@ -36,7 +36,7 @@ const styles = (theme) => ({
         fontWeight: 700,
         boxShadow: theme.shadows[2],
         height: "55px",
-        width: "90%",
+        width: "100%",
         [theme.breakpoints.between("xs", "md")]: {
             height: "40px",
             fontSize: "0.8rem",
@@ -77,6 +77,29 @@ const styles = (theme) => ({
             position: "relative",
             marginBottom: "1.5rem",
         },
+    },
+    logoLI: {
+        display: "block",
+        height: "75px",
+        width: "150px",
+        position: "relative",
+        margin: "auto",
+        marginBottom: "1.5rem",
+        filter: "drop-shadow(" + theme.shadows[4] + ")",
+        [theme.breakpoints.down("lg")]: {
+            display: "none",
+        },
+    },
+    titleLI: {
+        fontSize: "30px",
+        fontWeight: 800,
+        textShadow: theme.shadows[1],
+    },
+    subtitleLI: {
+        margin: "0.5rem 0 4rem 0",
+        fontSize: "20px",
+        fontWeight: 500,
+        textShadow: theme.shadows[1],
     },
 });
 
@@ -166,8 +189,11 @@ const SmallLogin = () => {
                 </>
             ) : (
                 <div style={{ width: "100%", textAlign: "center" }}>
-                    <p style={{ fontSize: "28px", fontWeight: 700 }}>Welcome back!</p>
-                    <p style={{ margin: "1rem 0 4rem 0", fontSize: "20px", fontWeight: 500 }}>You are signed in!</p>
+                    <Box sx={styles(theme).logoLI}>
+                        <Image alt="logo" src={ggnImage} quality={60} layout="fill" objectFit="contain" />
+                    </Box>
+                    <p style={styles(theme).titleLI}>Welcome back!</p>
+                    <p style={styles(theme).subtitleLI}>You are signed in!</p>
                 </div>
             )}
         </Glass>

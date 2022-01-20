@@ -59,7 +59,7 @@ const styles = (theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        height: "3rem",
+        height: "fit-content",
         width: "100%",
         marginBottom: "2rem",
     },
@@ -126,8 +126,6 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
     const theme = useTheme();
     const [collapse, setCollapse] = useState(false);
 
-    const HeightRef = useRef();
-    const [height, setHeight] = useState(0);
     const handleClickFavorite = (e) => {
         e.preventDefault();
         let tempFavorite = [];
@@ -141,11 +139,7 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
     const handleCollapse = () => {
         setCollapse(!collapse);
     };
-    useEffect(() => {
-        console.log(HeightRef.current.clientHeight);
-        setHeight(HeightRef.current.clientHeight + 120);
-    }, []);
-    console.log(height);
+
     return (
         <Grid item xl={4} md={6} xs={12}>
             <Card sx={styles(theme).root}>
@@ -153,8 +147,8 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
                     <Image src={collection.coverPhoto.url} alt="collection" layout="fill" objectFit="cover" />
                 </CardMedia>
                 <CardContent sx={styles(theme).content}>
-                    <Collapse in={collapse} collapsedSize={height} sx={styles(theme).collapse}>
-                        <Grid item sx={styles(theme).titleGrid} ref={HeightRef}>
+                    <Collapse in={collapse} collapsedSize={150} sx={styles(theme).collapse}>
+                        <Grid item sx={styles(theme).titleGrid}>
                             <Typography sx={collapse ? { ...styles(theme).title, ...styles(theme).titleOpen } : styles(theme).title}>{collection.name}</Typography>
                             <StarRounded sx={favorite.includes(collection.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClickFavorite(e)} />
                         </Grid>

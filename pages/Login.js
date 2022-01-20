@@ -8,7 +8,6 @@ import { useAuth } from "../context/AuthContext";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { auth } from "../helpers/firebase";
 import firebase from "firebase/compat/app";
-import Router from "next/router";
 
 const styles = (theme) => ({
     loginButton: {
@@ -117,7 +116,6 @@ function Login() {
         try {
             setLoading(true);
             await login(email, password);
-            Router.push("/");
         } catch (error) {
             console.error(error.message);
         }

@@ -1,14 +1,5 @@
 import React from "react";
-import {
-    useTheme,
-    Drawer,
-    List,
-    ListItem,
-    ButtonBase,
-    Divider,
-    IconButton,
-    darken,
-} from "@mui/material";
+import { useTheme, Drawer, List, ListItem, ButtonBase, Divider, IconButton, darken } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import Footer from "./footer";
 import logo from "../../public/LogoS.png";
@@ -76,31 +67,13 @@ const styles = (theme) => ({
 
 const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
     const theme = useTheme();
-    const pages = [
-        "About Us",
-        "News",
-        "Collections",
-        "Collectors",
-        "Publishers",
-        "Chat",
-        "Swap",
-    ];
+    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat"];
 
     return (
-        <Drawer
-            variant="persistent"
-            anchor="left"
-            open={drawerStatus}
-            sx={styles(theme).drawer}
-        >
+        <Drawer variant="persistent" anchor="left" open={drawerStatus} sx={styles(theme).drawer}>
             <div style={styles(theme).header}>
                 <div style={styles(theme).logo}>
-                    <Image
-                        src={logo}
-                        layout="fill"
-                        alt="GGN"
-                        objectFit="contain"
-                    />
+                    <Image src={logo} layout="fill" alt="GGN" objectFit="contain" />
                 </div>
                 <IconButton onClick={() => closeDrawer()}>
                     <CloseRounded sx={styles(theme).closeIcon} />
@@ -110,15 +83,9 @@ const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
             <List>
                 {pages.map((page) => (
                     <div key={page}>
-                        <Link
-                            href={{ pathname: "/[page]" }}
-                            as={`/${page.replace(/\s+/g, "")}`}
-                            passHref
-                        >
+                        <Link href={{ pathname: "/[page]" }} as={`/${page.replace(/\s+/g, "")}`} passHref>
                             <ListItem button sx={styles(theme).pageButton}>
-                                <span style={styles(theme).pageName}>
-                                    {page}
-                                </span>
+                                <span style={styles(theme).pageName}>{page}</span>
                             </ListItem>
                         </Link>
                         <Divider sx={styles(theme).divider} />

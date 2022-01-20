@@ -72,7 +72,7 @@ const styles = (theme) => ({
         position: "relative",
     },
 });
-function FilterCollections({ setCategory, setPublisher, publisher, category, collections, setFilteredCollections }) {
+function FilterCollections({ setCategory, setPublisher, publisher, category, collections, setFilteredCollections, setSearchCollections }) {
     const theme = useTheme();
     const allData = collections;
     const [expand, setExpand] = useState(false);
@@ -157,7 +157,7 @@ function FilterCollections({ setCategory, setPublisher, publisher, category, col
             <Collapse in={expand} sx={{ width: "100%", overflow: "hidden" }}>
                 <Grid item container sx={styles(theme).container}>
                     <Grid sx={styles(theme).searchGrid}>
-                        <Search itemsToFilter={allData} setFilteredItems={setFilteredCollections} propertiesToSearch={["name", "publisher"]} />
+                        <Search itemsToFilter={allData} setFilteredItems={setSearchCollections} propertiesToSearch={["name", "publisher"]} />
                     </Grid>
                     <Grid container item spacing={6} sx={styles(theme).formControlGrid} xs={12}>
                         <FormControl variant="filled" sx={styles(theme).select}>

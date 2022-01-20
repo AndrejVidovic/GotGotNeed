@@ -9,10 +9,16 @@ import Footer from "../components/Layout/footer";
 
 const styles = (theme) => ({
     glass: {
-        height: "760px",
         width: "100%",
         display: "flex",
         alignItems: "flex-start",
+        justifyContent: "space-around",
+        padding: "3rem",
+        marginBottom: "5rem",
+        [theme.breakpoints.down("md")]: {
+            padding: "3rem 1rem",
+            marginBottom: "0",
+        },
     },
     container: {
         display: "flex",
@@ -29,11 +35,11 @@ const styles = (theme) => ({
         alignItems: "flex-start",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "3rem",
         width: "100%",
+        marginTop: "1rem",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
-            marginTop: "2rem",
+            marginTop: "0",
         },
     },
     containerMessages: {
@@ -41,12 +47,11 @@ const styles = (theme) => ({
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "3rem",
         marginLeft: "2.5rem",
         width: "100%",
         [theme.breakpoints.down("md")]: {
             alignItems: "center",
-            marginTop: "1rem",
+            marginTop: "0",
             marginLeft: 0,
         },
     },
@@ -96,7 +101,7 @@ function Chat() {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Grid item xl={8} lg={8} xs={10}>
+                <Grid item xl={8} lg={10} xs={11}>
                     <Glass color={0} styling={styles(theme).glass}>
                         <Grid item md={4} xs={12} sx={styles(theme).containerConversations} ref={RefConversation}>
                             {index === 1 ? (

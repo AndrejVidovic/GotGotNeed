@@ -67,7 +67,7 @@ const theme = createTheme({
                     background: "rgba(219, 219, 219, 0.08)" /*0 sivo*/,
                     backdropFilter: "blur(10px)",
                     "@media (min-width: 0px) and (max-width: 900px)": {
-                        fontSize: "0.75rem",
+                        fontSize: "0.8rem",
                     },
                     "@media (min-width: 900px) and (max-width: 1536px)": {
                         fontSize: "0.875rem",

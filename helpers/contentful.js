@@ -75,6 +75,7 @@ class DataSourceAPI {
                                 }
                             }
                         }
+                        slug
                         description
                         location
                         locationIconUri
@@ -182,27 +183,62 @@ class DataSourceAPI {
 
         return collections;
     }
-    // collectionCollection{
-    //     collections: items{
-    //       name
-    //       id
-    //       stickers
-    //       coverPhoto{url}
-    //       releaseYear
-    //       numberOfStickers
-    //       publisher{
-    //         id
-    //         name
-    //         logo{url}
-    //       }
-    //       categories:categoriesCollection{
-    //         items{
-    //           name
-    //         }
-    //       }
 
-    //     }
-    //   }
+    static async getPublisherSlugs({ preview = false } = {}) {
+        const query = gql`
+            query getSlugs($preview: Boolean!) {
+                publisherCollection(preview: $preview) {
+                    publishers: items {
+                        slug
+                    }
+                }
+            }
+        `;
+
+        const variables = { preview };
+        const response = await this.queryContentful(query, variables);
+        const { publishers } = response?.publisherCollection;
+        const slugs = publishers.map((publisher) => publisher.slug);
+
+        return slugs;
+    }
+
+    static async getPublisher({ slug, preview = false } = {}) {
+        console.log(slug);
+        const query = gql`
+            query getPublisher($slug: String!, $preview: Boolean!) {
+                publisherCollection(preview: $preview, where: { slug: $slug }) {
+                    publishers: items {
+                        id
+                        name
+                        logo {
+                            url
+                        }
+                        collections: collectionsCollection(limit: 15) {
+                            items {
+                                categories: categoriesCollection(limit: 5) {
+                                    items {
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                        description
+                        location
+                        locationIconUri
+                        founded
+                    }
+                }
+            }
+        `;
+
+        const variables = { slug, preview };
+        const response = await this.queryContentful(query, variables);
+        const publisher = response?.publisherCollection?.publishers?.pop();
+        console.log(publisher);
+
+        return publisher;
+    }
 }
 
 export default DataSourceAPI;

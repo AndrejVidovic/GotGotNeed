@@ -1,4 +1,4 @@
-import { Grid, Typography, useTheme, Chip, Pagination, ListItem } from "@mui/material";
+import { Grid, useTheme, Pagination } from "@mui/material";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import DataSourceAPI from "../../helpers/contentful";
@@ -32,10 +32,8 @@ const styles = (theme) => ({
 
 const News = ({ newsData }) => {
     const theme = useTheme();
-    const allNews = newsData;
+    const allNews = newsData; //samo radi lakšeg razumijevanja koda
     const newsLimitPerPage = 3;
-
-    console.log(allNews.length);
 
     const [chipsNews, setChipsNews] = useState(() => newsData);
     const [searchNews, setSearchNews] = useState(() => newsData);
@@ -108,9 +106,11 @@ const News = ({ newsData }) => {
                     ))}
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} sx={styles(theme).cards}>
-                    {getDisplayedNews().map((blog) => (
-                        <BlogCard key={blog.slug} id={blog.slug} slug={blog.slug} author={blog.author} image={blog.cardImage.url} title={blog.title} types={blog.types.items} description={blog.description} date={blog.date} />
-                    ))}
+                    {getDisplayedNews().length > 0 ? (
+                        getDisplayedNews().map((blog) => <BlogCard key={blog.slug} id={blog.slug} slug={blog.slug} author={blog.author} image={blog.cardImage.url} title={blog.title} types={blog.types.items} description={blog.description} date={blog.date} />)
+                    ) : (
+                        <p style={{ margin: "4rem auto 2rem auto", paddingLeft: "4rem" }}>No results.</p>
+                    )}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
                     <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />

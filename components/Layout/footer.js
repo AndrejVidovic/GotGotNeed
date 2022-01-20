@@ -7,7 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
-const pages = ["About Us", "Collectors", "Collections", "Publishers", "Blog"];
+const pages = ["About Us", "Collectors", "Collections", "Publishers", "News"];
 const styles = (theme) => ({
     exploreText: {
         fontWeight: 700,
@@ -106,12 +106,7 @@ function Footer() {
     const theme = useTheme();
     const date = new Date().getFullYear();
     return (
-        <Grid
-            sx={styles(theme).container}
-            container
-            justifyContent="center"
-            alignItems="flex-end"
-        >
+        <Grid sx={styles(theme).container} container justifyContent="center" alignItems="flex-end">
             <Grid //prvi lijevi blok
                 item
                 container
@@ -122,70 +117,33 @@ function Footer() {
                 xs={7}
             >
                 <Box sx={styles(theme).logo}>
-                    <Image
-                        src={logoFooter}
-                        alt="GGN"
-                        layout="fill"
-                        objectFit="contain"
-                    />
+                    <Image src={logoFooter} alt="GGN" layout="fill" objectFit="contain" />
                 </Box>
                 <Grid container direction="row">
-                    <Grid
-                        item
-                        sx={styles(theme).socialNetworksGrid}
-                        md={6}
-                        xs={12}
-                    >
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
-                            <Icon sx={styles(theme).socialMediaIcon}>
-                                email_icon
-                            </Icon>
+                    <Grid item sx={styles(theme).socialNetworksGrid} md={6} xs={12}>
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
+                            <Icon sx={styles(theme).socialMediaIcon}>email_icon</Icon>
                             gotgotneed@fesb.hr
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
-                            <Icon sx={styles(theme).socialMediaIcon}>
-                                call_icon
-                            </Icon>
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
+                            <Icon sx={styles(theme).socialMediaIcon}>call_icon</Icon>
                             +385 21 508 302
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                             <TwitterIcon sx={styles(theme).socialMediaIcon} />
                             @GotGotNeed
                         </Typography>
                     </Grid>
-                    <Grid
-                        item
-                        sx={styles(theme).socialNetworksGrid}
-                        md={6}
-                        xs={12}
-                    >
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
+                    <Grid item sx={styles(theme).socialNetworksGrid} md={6} xs={12}>
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                             <FacebookIcon sx={styles(theme).socialMediaIcon} />
                             @GotGotNeed
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                             <InstagramIcon sx={styles(theme).socialMediaIcon} />
                             @GotGotNeed
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            sx={styles(theme).socialNetworksText}
-                        >
+                        <Typography variant="body1" sx={styles(theme).socialNetworksText}>
                             <LinkedInIcon sx={styles(theme).socialMediaIcon} />
                             @GotGotNeed
                         </Typography>
@@ -201,15 +159,8 @@ function Footer() {
                         <Typography sx={styles(theme).sites}>Home</Typography>
                     </Link>
                     {pages.map((page, index) => (
-                        <Link
-                            href={{ pathname: "/[page]" }}
-                            as={`/${page.replace(/\s+/g, "")}`}
-                            passHref
-                            key={index}
-                        >
-                            <Typography sx={styles(theme).sites}>
-                                {page}
-                            </Typography>
+                        <Link href={{ pathname: "/[page]" }} as={`/${page.replace(/\s+/g, "")}`} passHref key={index}>
+                            <Typography sx={styles(theme).sites}>{page}</Typography>
                         </Link>
                     ))}
                 </Grid>

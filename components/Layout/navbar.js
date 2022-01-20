@@ -7,7 +7,7 @@ import logo from "../../public/LogoS.png";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
-const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat", "Swap"];
+const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat"];
 
 const styles = (theme) => ({
     appBar: {

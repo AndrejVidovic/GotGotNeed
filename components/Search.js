@@ -52,7 +52,7 @@ const Search = ({ itemsToFilter, setFilteredItems, propertiesToSearch, children 
             tempFilteredItems = itemsToFilter.filter((itemOfSearch) => {
                 let indicator = false;
                 for (let i = 0; i < propertiesToSearch.length; i++) {
-                    if (itemOfSearch[propertiesToSearch[i]].toLowerCase().includes(searchWord.toLowerCase())) indicator = true;
+                    if (itemOfSearch[propertiesToSearch[i]] !== null && itemOfSearch[propertiesToSearch[i]].toLowerCase().includes(searchWord.toLowerCase())) indicator = true;
                 }
                 return indicator;
             });

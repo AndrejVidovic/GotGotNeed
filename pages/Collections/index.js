@@ -3,7 +3,7 @@ import Head from "next/head";
 import Title from "../../components/Title";
 import Glass from "../../components/Glass";
 import FilterCollections from "../../components/Collections/FilterCollections";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../../components/Layout/footer";
 import CollectionsCard from "../../components/Collections/CollectionsCard";
 import filterBackground from "../../public/filterBackground.webp";
@@ -44,9 +44,11 @@ const Collections = ({ collections }) => {
     //data for filtering
     const [publisher, setPublisher] = useState([]);
     const [category, setCategory] = useState([]);
-    const [filteredCollections, setFilteredCollections] = useState(collections);
 
-    const [numberOfPages, setNumberOfPages] = useState(Math.ceil(filteredCollections.length / CollectionsLimitPerPage));
+    const [searchCollections, setSearchCollections] = useState(collections);
+    const [filtersCollections, setFiltersCollections] = useState(collections);
+
+    const [numberOfPages, setNumberOfPages] = useState(Math.ceil(collections.length / CollectionsLimitPerPage));
     const [currentPage, setCurrentPage] = useState(1);
     //favorite collections
     const [favorite, setFavorite] = useState([]);
@@ -56,12 +58,37 @@ const Collections = ({ collections }) => {
         setCurrentPage(value);
     };
 
+    useEffect(() => {
+        setCurrentPage(1);
+
+        let filteredCollections = [];
+        for (let i in filtersCollections) {
+            for (let j in searchCollections) {
+                if (filtersCollections[i].name === searchCollections[j].name) {
+                    filteredCollections.push(filtersCollections[i]);
+                }
+            }
+        }
+        setNumberOfPages(Math.ceil(filteredCollections.length / CollectionsLimitPerPage));
+    }, [filtersCollections, searchCollections]);
+
     const getFilteredCollections = () => {
         const startIndex = CollectionsLimitPerPage * currentPage - CollectionsLimitPerPage;
         let endIndex = CollectionsLimitPerPage + startIndex;
+
+        let filteredCollections = [];
+        for (let i in filtersCollections) {
+            for (let j in searchCollections) {
+                if (filtersCollections[i].name === searchCollections[j].name) {
+                    filteredCollections.push(filtersCollections[i]);
+                }
+            }
+        }
+
         endIndex = endIndex > filteredCollections.length ? filteredCollections.length : endIndex;
         return filteredCollections.slice(startIndex, endIndex);
     };
+
     return (
         <>
             <Head>
@@ -73,14 +100,12 @@ const Collections = ({ collections }) => {
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).glassContainer}>
                     <Glass color={0}>
                         <Grid sx={styles(theme).filterGrid}>
-                            <FilterCollections setCategory={setCategory} setPublisher={setPublisher} publisher={publisher} category={category} collections={collections} setFilteredCollections={setFilteredCollections} />
+                            <FilterCollections setCategory={setCategory} setPublisher={setPublisher} publisher={publisher} category={category} collections={collections} setSearchCollections={setSearchCollections} setFilteredCollections={setFiltersCollections} />
                         </Grid>
                     </Glass>
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} spacing={6}>
-                    {getFilteredCollections().map((data) => (
-                        <CollectionsCard collection={data} key={data.id} favorite={favorite} setFavorite={setFavorite} />
-                    ))}
+                    {getFilteredCollections().length > 0 ? getFilteredCollections().map((data) => <CollectionsCard collection={data} key={data.id} favorite={favorite} setFavorite={setFavorite} />) : <p style={{ margin: "8rem auto 2rem auto", paddingLeft: "4rem" }}>No results.</p>}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
                     <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />
