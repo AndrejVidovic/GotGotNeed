@@ -116,6 +116,7 @@ const styles = (theme) => ({
         "&:hover": {
             transform: "scale(1.2)",
         },
+        zIndex: 12,
     },
     starClicked: {
         color: theme.palette.secondary.light,

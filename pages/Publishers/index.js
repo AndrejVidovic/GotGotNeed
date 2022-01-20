@@ -63,9 +63,6 @@ function Publishers({ publishers }) {
                     <Search itemsToFilter={allPublishers} setFilteredItems={setFilteredPublishers} propertiesToSearch={["name", "location"]} />
                 </Grid>
                 <Grid container item xl={6} md={8} xs={10} spacing={5}>
-                    {getFilteredPublishers().map((publisher) => (
-                        <PublisherCard key={publisher.id} publisher={publisher} favorite={favorite} setFavorite={setFavorite} />
-                    ))}
                     {getFilteredPublishers().length > 0 ? getFilteredPublishers().map((publisher) => <PublisherCard key={publisher.id} publisher={publisher} favorite={favorite} setFavorite={setFavorite} />) : <p style={{ margin: "4rem auto 2rem auto", paddingLeft: "4rem" }}>No results.</p>}
                 </Grid>
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
