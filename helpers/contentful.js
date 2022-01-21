@@ -179,7 +179,6 @@ class DataSourceAPI {
         const variables = { preview };
         const response = await this.queryContentful(query, variables);
         const { collections } = response?.collectionCollection;
-        console.log(collections);
 
         return collections;
     }
@@ -204,7 +203,6 @@ class DataSourceAPI {
     }
 
     static async getPublisher({ slug, preview = false } = {}) {
-        console.log(slug);
         const query = gql`
             query getPublisher($slug: String!, $preview: Boolean!) {
                 publisherCollection(preview: $preview, where: { slug: $slug }) {
@@ -235,7 +233,6 @@ class DataSourceAPI {
         const variables = { slug, preview };
         const response = await this.queryContentful(query, variables);
         const publisher = response?.publisherCollection?.publishers?.pop();
-        console.log(publisher);
 
         return publisher;
     }

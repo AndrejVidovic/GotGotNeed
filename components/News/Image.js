@@ -1,5 +1,6 @@
 import { Grid, Box, useTheme } from "@mui/material";
 import Image from "next/image";
+import loader from "../../helpers/imageLoader";
 
 const styles = (theme) => ({
     root: {
@@ -8,13 +9,13 @@ const styles = (theme) => ({
     imgContainer: {
         position: "relative",
         margin: "auto",
-        height: "400px",
-        width: "80%",
+        width: "85%",
+        aspectRatio: "2",
         [theme.breakpoints.down("lg")]: {
-            height: "300px",
+            width: "90%",
         },
         [theme.breakpoints.down("md")]: {
-            height: "200px",
+            width: "95%",
         },
     },
 });
@@ -25,7 +26,7 @@ export const ImageContainer = (props) => {
     return (
         <Grid item xs={12} sx={styles(theme).root}>
             <Box sx={styles(theme).imgContainer}>
-                <Image layout="fill" objectFit="contain" objectPosition="top" alt={props.alt} quality={70} {...props} />
+                <Image layout="fill" objectPosition="center" loader={loader} objectFit="contain" alt={props.alt} quality={70} {...props} />
             </Box>
         </Grid>
     );

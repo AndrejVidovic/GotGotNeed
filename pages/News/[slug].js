@@ -47,7 +47,7 @@ const BlogPost = ({ post }) => {
     return (
         <>
             <Head>
-                <title>Publishers</title>
+                <title>News | {post.title}</title>
             </Head>
             <Grid container sx={styles(theme).root}>
                 <Grid item container xs={10} md={8} lg={6}>

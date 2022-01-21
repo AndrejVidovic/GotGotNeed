@@ -40,7 +40,7 @@ const styles = (theme) => ({
 
 const Collections = ({ collections }) => {
     const theme = useTheme();
-    const CollectionsLimitPerPage = 3;
+    const CollectionsLimitPerPage = 6;
     //data for filtering
     const [publisher, setPublisher] = useState([]);
     const [category, setCategory] = useState([]);
@@ -62,14 +62,16 @@ const Collections = ({ collections }) => {
         setCurrentPage(1);
 
         let filteredCollections = [];
-        for (let i in filtersCollections) {
-            for (let j in searchCollections) {
+        for (let i = 0; i < filtersCollections.length; i++) {
+            for (let j = 0; j < searchCollections.length; j++) {
                 if (filtersCollections[i].name === searchCollections[j].name) {
                     filteredCollections.push(filtersCollections[i]);
                 }
             }
         }
-        setNumberOfPages(Math.ceil(filteredCollections.length / CollectionsLimitPerPage));
+        let allUniqueCollections = [...new Set(filteredCollections)];
+
+        setNumberOfPages(Math.ceil(allUniqueCollections.length / CollectionsLimitPerPage));
     }, [filtersCollections, searchCollections]);
 
     const getFilteredCollections = () => {
@@ -77,16 +79,17 @@ const Collections = ({ collections }) => {
         let endIndex = CollectionsLimitPerPage + startIndex;
 
         let filteredCollections = [];
-        for (let i in filtersCollections) {
-            for (let j in searchCollections) {
+        for (let i = 0; i < filtersCollections.length; i++) {
+            for (let j = 0; j < searchCollections.length; j++) {
                 if (filtersCollections[i].name === searchCollections[j].name) {
                     filteredCollections.push(filtersCollections[i]);
                 }
             }
         }
+        let allUniqueCollections = [...new Set(filteredCollections)]; // samo jedinstvene vrijednosti
 
-        endIndex = endIndex > filteredCollections.length ? filteredCollections.length : endIndex;
-        return filteredCollections.slice(startIndex, endIndex);
+        endIndex = endIndex > allUniqueCollections.length ? allUniqueCollections.length : endIndex;
+        return allUniqueCollections.slice(startIndex, endIndex);
     };
 
     return (
