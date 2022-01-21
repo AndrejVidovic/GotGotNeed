@@ -25,7 +25,7 @@ export const ImageContainer = (props) => {
     return (
         <Grid item xs={12} sx={styles(theme).root}>
             <Box sx={styles(theme).imgContainer}>
-                <Image layout="fill" objectFit="cover" objectPosition="top" alt={props.alt} quality={70} {...props} />
+                <Image layout="fill" objectFit="contain" objectPosition="top" alt={props.alt} quality={70} {...props} />
             </Box>
         </Grid>
     );
