@@ -1,8 +1,11 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import Glass from "./Glass";
 import Image from "next/image";
-import avatarImg from "../public/maradonaAvatar.jpg";
 import Link from "next/link";
+import avatar1 from "../public/maradonaAvatar.jpg";
+import avatar2 from "../public/ronaldoAvatar.jpg";
+import avatar3 from "../public/berbatovAvatar.jpg";
+import avatar4 from "../public/bestAvatar.jpg";
 
 const styles = (theme) => ({
     glassReview: {
@@ -94,12 +97,13 @@ const styles = (theme) => ({
 
 const Review = ({ review }) => {
     const theme = useTheme();
+    let avatars = [avatar1, avatar2, avatar3, avatar4];
 
     return (
         <Glass color={review.positive + 3} styling={styles(theme).glassReview}>
             <Link href={`/Collectors/${review.username}`} passHref style={{ textDecoration: "none", color: "black" }}>
                 <Box sx={styles(theme).reviewProfilePictureContainer}>
-                    <Image src={avatarImg} alt={review.username + "'s profile picture."} layout="fill" objectFit="cover" />
+                    <Image src={avatars[review.img - 1]} alt={review.username + "'s profile picture."} layout="fill" objectFit="cover" />
                 </Box>
             </Link>
             <Grid container>

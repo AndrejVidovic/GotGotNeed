@@ -2,7 +2,10 @@ import { Box, Grid, useTheme, IconButton, Typography } from "@mui/material";
 import Glass from "../../components/Glass";
 import { Person, LocationOn, Badge, Mail, PersonAdd } from "@mui/icons-material";
 import Image from "next/image";
-import avatarImg from "../../public/maradonaAvatar.jpg";
+import avatar1 from "../../public/maradonaAvatar.jpg";
+import avatar2 from "../../public/ronaldoAvatar.jpg";
+import avatar3 from "../../public/berbatovAvatar.jpg";
+import avatar4 from "../../public/bestAvatar.jpg";
 
 const styles = (theme) => ({
     textField: {
@@ -139,6 +142,7 @@ const styles = (theme) => ({
 
 const ProfileHeader = ({ user }) => {
     const theme = useTheme();
+    let avatars = [avatar1, avatar2, avatar3, avatar4];
 
     return (
         <Glass color={0} styling={styles(theme).glass}>
@@ -154,7 +158,7 @@ const ProfileHeader = ({ user }) => {
                     }
                 ></Box>
                 <Box sx={styles(theme).profilePicture}>
-                    <Image src={avatarImg} alt={user.username + "'s profile picture."} layout="fill" objectFit="cover" />
+                    <Image src={avatars[user.img - 1]} alt={user.username + "'s profile picture."} layout="fill" objectFit="cover" />
                 </Box>
             </Box>
             <Grid container sx={styles(theme).headerContainer}>

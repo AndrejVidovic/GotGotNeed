@@ -7,8 +7,6 @@ import logo from "../../public/LogoS.png";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 
-const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat"];
-
 const styles = (theme) => ({
     appBar: {
         boxShadow: theme.shadows[3],
@@ -70,6 +68,8 @@ const Navbar = ({ openDrawer }) => {
     const [error, setError] = useState("");
     const router = useRouter();
 
+    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers"];
+
     async function handleLogout() {
         setError("");
 
@@ -102,6 +102,13 @@ const Navbar = ({ openDrawer }) => {
                             </Link>
                         </Box>
                     ))}
+                    {currentUser && (
+                        <Box ml={3} key={"Chat"} sx={styles(theme).pageBox}>
+                            <Link href="/Chat" passHref>
+                                <Button sx={router.pathname !== `/Chat` ? styles(theme).navbarButtons : { ...styles(theme).navbarButtons, ...styles(theme).selectedButton }}>Chat</Button>
+                            </Link>
+                        </Box>
+                    )}
                     <Box sx={styles(theme).loginButtonBox}>
                         {currentUser ? (
                             <Button sx={styles(theme).loginButton} onClick={() => handleLogout()}>

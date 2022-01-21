@@ -5,6 +5,7 @@ import Footer from "./footer";
 import logo from "../../public/LogoS.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
 
 const styles = (theme) => ({
     drawer: {
@@ -67,7 +68,8 @@ const styles = (theme) => ({
 
 const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
     const theme = useTheme();
-    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Chat"];
+    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers"];
+    const { currentUser } = useAuth();
 
     return (
         <Drawer variant="persistent" anchor="left" open={drawerStatus} sx={styles(theme).drawer}>
@@ -91,9 +93,19 @@ const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
                         <Divider sx={styles(theme).divider} />
                     </div>
                 ))}
+                {currentUser && (
+                    <div key="Chat" onClick={() => closeDrawer()}>
+                        <Link href="/Chat" passHref>
+                            <ListItem button sx={styles(theme).pageButton}>
+                                <span style={styles(theme).pageName}>Chat</span>
+                            </ListItem>
+                        </Link>
+                        <Divider sx={styles(theme).divider} />
+                    </div>
+                )}
             </List>
             <Link href="/Register" passHref>
-                <ButtonBase sx={styles(theme).signUpButton}>
+                <ButtonBase sx={styles(theme).signUpButton} onClick={() => closeDrawer()}>
                     <div
                         style={{
                             ...styles(theme).pageName,

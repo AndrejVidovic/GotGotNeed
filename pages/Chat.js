@@ -6,6 +6,8 @@ import Messages from "../components/Chat/Messages";
 import Glass from "../components/Glass";
 import dummyConversations from "../fakeData/Chat/Conversation.json";
 import Footer from "../components/Layout/footer";
+import { useAuth } from "../context/AuthContext";
+import Error from "next/error";
 
 const styles = (theme) => ({
     glass: {
@@ -58,6 +60,8 @@ const styles = (theme) => ({
 });
 function Chat() {
     const theme = useTheme();
+    const { currentUser } = useAuth();
+
     const [allConversations, setAllConversations] = useState(dummyConversations.sort((a, b) => b.unread - a.unread || new Date(b.time) - new Date(a.time)));
     const [archivedConversations, setArchivedConversations] = useState([]);
     const [activeConversation, setActiveConversation] = useState(null);
@@ -86,11 +90,15 @@ function Chat() {
     const RefMessage = useRef();
     useEffect(() => {
         if (ConversationIndex != 0 && window.innerWidth < 900) {
-            RefConversation.current.style.display = "none";
-            RefMessage.current.style.display = "flex";
+            if (RefConversation.current !== undefined && RefMessage.current !== undefined) {
+                RefConversation.current.style.display = "none";
+                RefMessage.current.style.display = "flex";
+            }
         } else if (ConversationIndex == 0 && window.innerWidth < 900) {
-            RefConversation.current.style.display = "flex";
-            RefMessage.current.style.display = "none";
+            if (RefConversation.current !== undefined && RefMessage.current !== undefined) {
+                RefConversation.current.style.display = "flex";
+                RefMessage.current.style.display = "none";
+            }
         }
     }, [ConversationIndex]);
 
@@ -100,40 +108,45 @@ function Chat() {
                 <title>Chat</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+
             <Grid container sx={styles(theme).container}>
-                <Grid item xl={8} lg={10} xs={11}>
-                    <Glass color={0} styling={styles(theme).glass}>
-                        <Grid item md={4} xs={12} sx={styles(theme).containerConversations} ref={RefConversation}>
-                            {index === 1 ? (
-                                <Conversations
-                                    activeConversation={activeConversation}
-                                    setActiveConversation={setActiveConversation}
-                                    conversations={allConversations}
-                                    index={index}
-                                    setIndex={setIndex}
-                                    HandleFunction={HandleArchive}
-                                    HandleDelete={HandleDelete}
-                                    setConversationIndex={setConversationIndex}
-                                />
-                            ) : null}
-                            {index === 2 ? (
-                                <Conversations
-                                    activeConversation={activeConversation}
-                                    setActiveConversation={setActiveConversation}
-                                    conversations={archivedConversations}
-                                    index={index}
-                                    setIndex={setIndex}
-                                    HandleFunction={HandleUnarchive}
-                                    HandleDelete={HandleDelete}
-                                    setConversationIndex={setConversationIndex}
-                                />
-                            ) : null}
-                        </Grid>
-                        <Grid item md={7} xs={11} sx={styles(theme).containerMessages} ref={RefMessage}>
-                            {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography sx={{ paddingTop: "19rem" }}>Open conversation to view messages</Typography>}
-                        </Grid>
-                    </Glass>
-                </Grid>
+                {!currentUser ? (
+                    <Error statusCode={403} title="Please login to view your messages" />
+                ) : (
+                    <Grid item xl={8} lg={10} xs={11}>
+                        <Glass color={0} styling={styles(theme).glass}>
+                            <Grid item md={4} xs={12} sx={styles(theme).containerConversations} ref={RefConversation}>
+                                {index === 1 ? (
+                                    <Conversations
+                                        activeConversation={activeConversation}
+                                        setActiveConversation={setActiveConversation}
+                                        conversations={allConversations}
+                                        index={index}
+                                        setIndex={setIndex}
+                                        HandleFunction={HandleArchive}
+                                        HandleDelete={HandleDelete}
+                                        setConversationIndex={setConversationIndex}
+                                    />
+                                ) : null}
+                                {index === 2 ? (
+                                    <Conversations
+                                        activeConversation={activeConversation}
+                                        setActiveConversation={setActiveConversation}
+                                        conversations={archivedConversations}
+                                        index={index}
+                                        setIndex={setIndex}
+                                        HandleFunction={HandleUnarchive}
+                                        HandleDelete={HandleDelete}
+                                        setConversationIndex={setConversationIndex}
+                                    />
+                                ) : null}
+                            </Grid>
+                            <Grid item md={7} xs={11} sx={styles(theme).containerMessages} ref={RefMessage}>
+                                {activeConversation ? <Messages conversation={activeConversation} setConversationIndex={setConversationIndex} /> : <Typography sx={{ paddingTop: "19rem" }}>Open conversation to view messages</Typography>}
+                            </Grid>
+                        </Glass>
+                    </Grid>
+                )}
             </Grid>
             <Footer></Footer>
         </>
