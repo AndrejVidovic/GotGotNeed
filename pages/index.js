@@ -75,7 +75,7 @@ const Home = ({ newsData }) => {
                         </Glass>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} id="smoothScrollTarget">
+                <Grid id="smoothScrollTarget" style={{ width: "100%" }}>
                     <NewsOnGlass newsData={newsData} />
                 </Grid>
             </Grid>

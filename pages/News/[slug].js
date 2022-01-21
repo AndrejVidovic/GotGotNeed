@@ -18,7 +18,7 @@ const styles = (theme) => ({
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: "3rem",
+        marginBottom: "6rem",
     },
     mdx: {
         width: "100%",
