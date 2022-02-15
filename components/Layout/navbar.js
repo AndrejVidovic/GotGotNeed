@@ -68,7 +68,7 @@ const Navbar = ({ openDrawer }) => {
     const [error, setError] = useState("");
     const router = useRouter();
 
-    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers"];
+    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Swap"];
 
     async function handleLogout() {
         setError("");
