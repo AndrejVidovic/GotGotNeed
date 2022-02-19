@@ -112,7 +112,7 @@ function PossibleSwap({ user }) {
         <Box sx={styles(theme).container}>
             <Grid item sx={{ overflow: "auto", width: "100%", height: "100%" }}>
                 {user.swap.map((swap) => (
-                    <Grid container sx={styles(theme).swapContainer}>
+                    <Grid container sx={styles(theme).swapContainer} key={swap.collection}>
                         <Typography variant="body1" sx={styles(theme).collectionName}>
                             {swap.collection}
                         </Typography>
