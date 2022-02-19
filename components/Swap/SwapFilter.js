@@ -82,7 +82,7 @@ const styles = (theme) => ({
 });
 function SwapFilter() {
     const theme = useTheme();
-    const [expand, setExpand] = useState(true);
+    const [expand, setExpand] = useState(false);
     return (
         <>
             <Grid>

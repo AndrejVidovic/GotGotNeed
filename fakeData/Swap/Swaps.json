@@ -1,0 +1,164 @@
+[
+    {
+        "username": "marmar99",
+        "location": "Zadar, Croatia",
+        "name": "Marko Markić",
+        "online": "0",
+        "reviews": [
+            {
+                "id": 1,
+                "positive": 0,
+                "location": "Split, Croatia",
+                "img": 4,
+                "username": "ivjak23",
+                "date": "26/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 2,
+                "positive": 1,
+                "location": "Makarska, Croatia",
+                "img": 3,
+                "username": "krajo123",
+                "date": "20/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 3,
+                "positive": 1,
+                "location": "Imotski, Croatia",
+                "img": 2,
+                "username": "nzup257",
+                "date": "26/05/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            }
+        ],
+        "swap": [
+            { "collection": "UEFA EURO 2020 Tournament Edition", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68, 888, 5555, 777, 4, 5, 7, 8, 8, 8, 9, 89, 7, 9, 79, 7, 9], "have": [1, 3, 12, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] },
+            { "collection": "UEFA EURO 2016", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] }
+        ]
+    },
+    {
+        "username": "ivjak23",
+        "location": "Split, Croatia",
+        "name": "Ivan Jakić",
+        "img": 4,
+        "joined": "26/02/2021",
+        "online": "120",
+        "reviews": [
+            {
+                "id": 4,
+                "positive": 0,
+                "location": "Zadar, Croatia",
+                "img": 1,
+                "username": "marmar99",
+                "date": "26/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 5,
+                "positive": 1,
+                "location": "Makarska, Croatia",
+                "img": 3,
+                "username": "krajo123",
+                "date": "20/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 6,
+                "positive": 1,
+                "username": "nzup257",
+                "img": 2,
+                "location": "Imotski, Croatia",
+                "date": "26/05/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            }
+        ],
+        "swap": [
+            { "collection": "UEFA EURO 2020 Tournament Edition", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] },
+            { "collection": "UEFA EURO 2016", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] }
+        ]
+    },
+    {
+        "username": "krajo123",
+        "location": "Makarska, Croatia",
+        "name": "Kristijan Josa",
+        "img": 3,
+        "joined": "26/02/2021",
+        "online": "12000",
+        "reviews": [
+            {
+                "id": 7,
+                "positive": 0,
+                "location": "Split, Croatia",
+                "img": 4,
+                "username": "ivjak23",
+                "date": "26/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 8,
+                "positive": 1,
+                "location": "Zadar, Croatia",
+                "img": 1,
+                "username": "marmar99",
+                "date": "20/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 9,
+                "positive": 1,
+                "username": "nzup257",
+                "img": 2,
+                "location": "Imotski, Croatia",
+                "date": "26/05/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            }
+        ],
+        "swap": [
+            { "collection": "UEFA EURO 2020 Tournament Edition", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] },
+            { "collection": "UEFA EURO 2016", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] }
+        ]
+    },
+    {
+        "username": "nzup257",
+        "location": "Imotski, Croatia",
+        "name": "Nikola Župić",
+        "img": 2,
+        "joined": "26/02/2021",
+        "online": "12000",
+        "reviews": [
+            {
+                "id": 10,
+                "positive": 1,
+                "location": "Split, Croatia",
+                "img": 4,
+                "username": "ivjak23",
+                "date": "26/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 11,
+                "positive": 1,
+                "location": "Zadar, Croatia",
+                "img": 1,
+                "username": "marmar99",
+                "date": "20/02/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            },
+            {
+                "id": 12,
+                "positive": 1,
+                "img": 3,
+                "username": "krajo123",
+                "date": "26/05/2021",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            }
+        ],
+        "swap": [
+            { "collection": "UEFA EURO 2020 Tournament Edition", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] },
+            { "collection": "UEFA EURO 2016", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] },
+            { "collection": "FIFA World Cup 2018", "need": [1, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68], "have": [1, 3, 2, 14, 15, 17, 18, 20, 23, 25, 27, 28, 30, 35, 40, 50, 57, 68] }
+        ]
+    }
+]

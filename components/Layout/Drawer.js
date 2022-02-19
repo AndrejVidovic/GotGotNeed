@@ -68,7 +68,7 @@ const styles = (theme) => ({
 
 const DrawerMenu = ({ drawerStatus, closeDrawer }) => {
     const theme = useTheme();
-    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers"];
+    const pages = ["About Us", "News", "Collections", "Collectors", "Publishers", "Swap"];
     const { currentUser } = useAuth();
 
     return (
