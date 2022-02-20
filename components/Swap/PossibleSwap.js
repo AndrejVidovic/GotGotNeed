@@ -68,6 +68,7 @@ const styles = (theme) => ({
         [theme.breakpoints.down("md")]: {
             width: "40px",
         },
+        borderRadius: "0 8px 8px 0",
     },
     positive: {
         backgroundColor: "rgba(47, 237, 0, 0.2)",
@@ -79,6 +80,7 @@ const styles = (theme) => ({
         [theme.breakpoints.down("md")]: {
             width: "40px",
         },
+        borderRadius: "8px 0 0 8px",
     },
     GradeGrid: {
         display: "flex",
@@ -138,14 +140,10 @@ function PossibleSwap({ user }) {
             </Button>
             <Grid sx={styles(theme).GradeGrid}>
                 <Box sx={styles(theme).positive}>
-                    <Typography sx={styles(theme).grade} flexWrap>
-                        {user.reviews.filter((review) => review.positive === 1).length}
-                    </Typography>
+                    <Typography sx={styles(theme).grade}>{user.reviews.filter((review) => review.positive === 1).length}</Typography>
                 </Box>
                 <Box sx={styles(theme).negative}>
-                    <Typography sx={styles(theme).grade} flexWrap>
-                        {user.reviews.filter((review) => review.positive === 0).length}
-                    </Typography>
+                    <Typography sx={styles(theme).grade}>{user.reviews.filter((review) => review.positive === 0).length}</Typography>
                 </Box>
             </Grid>
         </Box>

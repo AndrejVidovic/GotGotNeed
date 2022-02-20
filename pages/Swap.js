@@ -1,4 +1,4 @@
-import { Grid, useTheme, Box } from "@mui/material";
+import { Grid, useTheme, Pagination } from "@mui/material";
 import Head from "next/head";
 import Title from "../components/Title";
 import Glass from "../components/Glass";
@@ -6,8 +6,9 @@ import SwapFilter from "../components/Swap/SwapFilter";
 import filterBackground from "../public/filterBackground.webp";
 import Footer from "../components/Layout/footer";
 import UserSwap from "../components/Swap/UserSwap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import allSwapUsers from "../fakeData/Swap/Swaps.json";
+
 const styles = (theme) => ({
     container: {
         display: "flex",
@@ -36,6 +37,27 @@ const styles = (theme) => ({
 function Swap() {
     const theme = useTheme();
     const allUsers = allSwapUsers;
+    const UsersPerPage = 10;
+
+    const [currentPage, setCurrentPage] = useState(() => 1);
+    const [numberOfPages, setNumberOfPages] = useState(Math.ceil(allUsers.length / UsersPerPage));
+
+    useEffect(() => {
+        setCurrentPage(1);
+        setNumberOfPages(Math.ceil(allUsers.length / UsersPerPage));
+    }, [allUsers]);
+
+    const handlePageChange = (event, value) => {
+        event.preventDefault();
+        setCurrentPage(value);
+    };
+    const getDisplayedUsers = () => {
+        const startIndex = UsersPerPage * currentPage - UsersPerPage;
+        let endIndex = UsersPerPage + startIndex;
+        endIndex = endIndex > allUsers.length ? allUsers.length : endIndex;
+
+        return allUsers.slice(startIndex, endIndex);
+    };
     return (
         <>
             <Head>
@@ -43,7 +65,7 @@ function Swap() {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Grid container sx={styles(theme).container}>
-                <Title title="Swap" subtitle="Find your ideal swap" />
+                <Title title="Swap" subtitle="Find your ideal swap." />
                 <Grid item xl={6} md={8} xs={10} sx={styles(theme).glassContainer}>
                     <Glass color={0}>
                         <Grid sx={styles(theme).filterGrid}>
@@ -52,9 +74,12 @@ function Swap() {
                     </Glass>
                 </Grid>
                 <Grid item container xl={6} md={8} xs={10}>
-                    {allUsers.map((user) => (
+                    {getDisplayedUsers().map((user) => (
                         <UserSwap user={user} key={user.username} />
                     ))}
+                </Grid>
+                <Grid item xl={6} md={8} xs={10} sx={styles(theme).pagination}>
+                    <Pagination page={currentPage} count={numberOfPages} onChange={handlePageChange} />
                 </Grid>
             </Grid>
             <Footer></Footer>
