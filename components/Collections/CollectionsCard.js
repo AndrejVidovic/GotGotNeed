@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardContent, CardMedia, useTheme, Grid, Box, Typography, IconButton, Collapse } from "@mui/material";
+import { Card, CardContent, CardMedia, useTheme, Grid, Box, Typography, IconButton, Collapse, Link } from "@mui/material";
 import Image from "next/image";
 import { ExpandCircleDown, StarRounded } from "@mui/icons-material";
 import { useState, useEffect, useRef } from "react";
@@ -140,50 +140,52 @@ function CollectionsCard({ collection, favorite, setFavorite }) {
     const handleCollapse = () => {
         setCollapse(!collapse);
     };
-
+    console.log(collection.slug);
     return (
         <Grid item xl={4} md={6} xs={12}>
-            <Card sx={styles(theme).root}>
-                <CardMedia sx={styles(theme).media}>
-                    <Image src={collection.coverPhoto.url} alt="collection" layout="fill" objectFit="cover" />
-                </CardMedia>
-                <CardContent sx={styles(theme).content}>
-                    <Collapse in={collapse} collapsedSize={150} sx={styles(theme).collapse}>
-                        <Grid item sx={styles(theme).titleGrid}>
-                            <Typography sx={collapse ? { ...styles(theme).title, ...styles(theme).titleOpen } : styles(theme).title}>{collection.name}</Typography>
-                            <StarRounded sx={favorite.includes(collection.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClickFavorite(e)} />
-                        </Grid>
-                        <Grid item xs={12} sx={styles(theme).moreInfo}>
-                            <Typography sx={styles(theme).info}>Release Year:</Typography>
-                            <Typography sx={styles(theme).infoValues}>{collection.releaseYear}</Typography>
-                        </Grid>
-                        <Grid item xs={12} sx={styles(theme).moreInfo}>
-                            <Typography sx={styles(theme).info}>Number of stickers:</Typography>
-                            <Typography sx={styles(theme).infoValues}>{collection.numberOfStickers}</Typography>
-                        </Grid>
-                        <Grid item xs={12} sx={styles(theme).moreInfo}>
-                            <Typography sx={styles(theme).info}>Publisher:</Typography>
-                            <Typography sx={styles(theme).infoValues}>{collection.publisher}</Typography>
-                        </Grid>
-                        <Grid item xs={12} sx={styles(theme).moreInfo}>
-                            <Typography sx={styles(theme).info}>Categories:</Typography>
-                            <Typography sx={styles(theme).infoValues}>{collection.categories.map((category) => category).join(", ")}</Typography>
-                        </Grid>
-                    </Collapse>
+            <Link href={`Collections/${collection.slug}`} passHref>
+                <Card sx={styles(theme).root}>
+                    <CardMedia sx={styles(theme).media}>
+                        <Image src={collection.coverPhoto.url} alt="collection" layout="fill" objectFit="cover" />
+                    </CardMedia>
+                    <CardContent sx={styles(theme).content}>
+                        <Collapse in={collapse} collapsedSize={150} sx={styles(theme).collapse}>
+                            <Grid item sx={styles(theme).titleGrid}>
+                                <Typography sx={collapse ? { ...styles(theme).title, ...styles(theme).titleOpen } : styles(theme).title}>{collection.name}</Typography>
+                                <StarRounded sx={favorite.includes(collection.id) ? { ...styles(theme).star, ...styles(theme).starClicked } : styles(theme).star} onClick={(e) => handleClickFavorite(e)} />
+                            </Grid>
+                            <Grid item xs={12} sx={styles(theme).moreInfo}>
+                                <Typography sx={styles(theme).info}>Release Year:</Typography>
+                                <Typography sx={styles(theme).infoValues}>{collection.releaseYear}</Typography>
+                            </Grid>
+                            <Grid item xs={12} sx={styles(theme).moreInfo}>
+                                <Typography sx={styles(theme).info}>Number of stickers:</Typography>
+                                <Typography sx={styles(theme).infoValues}>{collection.numberOfStickers}</Typography>
+                            </Grid>
+                            <Grid item xs={12} sx={styles(theme).moreInfo}>
+                                <Typography sx={styles(theme).info}>Publisher:</Typography>
+                                <Typography sx={styles(theme).infoValues}>{collection.publisher}</Typography>
+                            </Grid>
+                            <Grid item xs={12} sx={styles(theme).moreInfo}>
+                                <Typography sx={styles(theme).info}>Categories:</Typography>
+                                <Typography sx={styles(theme).infoValues}>{collection.categories.map((category) => category).join(", ")}</Typography>
+                            </Grid>
+                        </Collapse>
 
-                    <Grid container sx={styles(theme).halfCircle}>
-                        <Image src="/decoCircle.png" width={75} height={75} alt="circle" />
-                    </Grid>
-                    <Grid container sx={styles(theme).triangleBottom}>
-                        <Image src="/decoTriangle.png" width={95} height={95} alt="triangle" />
-                    </Grid>
-                    <Box sx={styles(theme).iconButtonBox}>
-                        <IconButton sx={styles(theme).iconButton} onClick={handleCollapse}>
-                            <ExpandCircleDown sx={collapse ? { ...styles(theme).expandIcon } : { ...styles(theme).expandIcon, transform: "rotate(180deg)" }} />
-                        </IconButton>
-                    </Box>
-                </CardContent>
-            </Card>
+                        <Grid container sx={styles(theme).halfCircle}>
+                            <Image src="/decoCircle.png" width={75} height={75} alt="circle" />
+                        </Grid>
+                        <Grid container sx={styles(theme).triangleBottom}>
+                            <Image src="/decoTriangle.png" width={95} height={95} alt="triangle" />
+                        </Grid>
+                        <Box sx={styles(theme).iconButtonBox}>
+                            <IconButton sx={styles(theme).iconButton} onClick={handleCollapse}>
+                                <ExpandCircleDown sx={collapse ? { ...styles(theme).expandIcon } : { ...styles(theme).expandIcon, transform: "rotate(180deg)" }} />
+                            </IconButton>
+                        </Box>
+                    </CardContent>
+                </Card>
+            </Link>
         </Grid>
     );
 }

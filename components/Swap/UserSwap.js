@@ -147,7 +147,7 @@ function UserSwap({ user }) {
                         <Image src={avatar} alt={"UserPicture"} layout="fill" objectFit="cover"></Image>
                     </Box>
                 </Grid>
-                <Grid lg={5} sx={styles(theme).userInfo}>
+                <Grid item lg={6} sx={styles(theme).userInfo}>
                     <Typography sx={styles(theme).username} variant="body1">
                         {user.username}
                     </Typography>

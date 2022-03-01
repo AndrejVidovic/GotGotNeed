@@ -171,6 +171,7 @@ class DataSourceAPI {
                                 name
                             }
                         }
+                        slug
                     }
                 }
             }
