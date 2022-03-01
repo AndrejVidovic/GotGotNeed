@@ -78,7 +78,9 @@ function CollectionInfo({ collection }) {
                 </Typography>
                 <Grid item sx={{ display: "flex", flexWrap: "wrap" }}>
                     {collection.categories.map((category) => (
-                        <Typography sx={styles(theme).infoValues}>{category}</Typography>
+                        <Typography sx={styles(theme).infoValues} key={category}>
+                            {category}
+                        </Typography>
                     ))}
                 </Grid>
             </Grid>
